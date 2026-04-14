@@ -11,11 +11,8 @@
 # =============================================
 
 backend:
-  name: github
-  repo: Bobs-Personal-Zappix/allnighters-softball
+  name: git-gateway
   branch: main
-  auth_type: pkce
-  app_id: Ov23liBWSCAUWihwv9Nd
 
 # Where CMS-uploaded media files get saved
 media_folder: images/gallery
