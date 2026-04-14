@@ -1,0 +1,31 @@
+{
+  "season": "2026",
+  "last_updated": "2026-05-01",
+  "players": [
+    { "number": "1",  "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "2",  "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "3",  "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "4",  "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "5",  "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "6",  "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "7",  "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "8",  "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "9",  "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "10", "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "11", "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "12", "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "13", "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "14", "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "15", "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "16", "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "17", "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "18", "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "19", "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "20", "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "21", "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "22", "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "23", "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "24", "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 },
+    { "number": "25", "name": "Player Name", "gp": 0, "ab": 0, "h": 0, "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0 }
+  ]
+}

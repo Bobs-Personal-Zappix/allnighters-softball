@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pro Shop | Allnighters Softball</title>
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--card);
+      border: 1px solid var(--gold-dark);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 480px;
+      width: 100%;
+    }
+    .modal h3 { font-family:'Oswald',sans-serif; color:var(--gold); font-size:1.3rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; }
+    .form-group { margin-bottom:1rem; }
+    .form-group label { display:block; font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem; }
+    .form-group input, .form-group select, .form-group textarea {
+      width:100%; padding:0.65rem 0.9rem; background:var(--dark); border:1px solid var(--border); border-radius:6px;
+      color:var(--text); font-family:'Open Sans',sans-serif; font-size:0.9rem; transition:border-color 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline:none; border-color:var(--gold-dark);
+    }
+    .form-group textarea { resize:vertical; min-height:80px; }
+    select option { background:var(--dark); }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-brand">
+      <img src="/images/logo.png" alt="Allnighters Logo">
+      <div class="nav-brand-text">Allnighters<span>Softball · Est. 1992</span></div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/schedule.html">Schedule</a></li>
+      <li><a href="/roster.html">Roster</a></li>
+      <li><a href="/stats.html">Stats</a></li>
+      <li><a href="/gallery.html">Gallery</a></li>
+      <li><a href="/history.html">History</a></li>
+      <li><a href="/proshop.html">Pro Shop</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="page-content">
+  <div class="page-header">
+    <h1 class="page-header-title">Pro Shop</h1>
+    <p class="page-header-sub">Official Allnighters Branded Gear · Est. 1992</p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="alert">
+        🛍️ <strong>How to Order:</strong> Click "Request to Buy" on any item, fill out the form, and we'll follow up with you directly to complete your order.
+      </div>
+
+      <div class="shop-grid">
+
+        <!-- T-Shirt -->
+        <div class="shop-card">
+          <img src="/images/logo.png" alt="Allnighters T-Shirt" class="shop-card-img">
+          <div class="shop-card-body">
+            <div class="shop-card-name">Allnighters Classic T-Shirt</div>
+            <div class="shop-card-desc">Featuring the iconic Allnighters "circa 1992" logo on the front. Black tee, gold print. Soft cotton blend. Built for the diamond and the bar after.</div>
+            <div class="shop-card-price">$25 <span>per shirt</span></div>
+            <div class="shop-card-tags">
+              <span class="shop-tag">S</span><span class="shop-tag">M</span><span class="shop-tag">L</span>
+              <span class="shop-tag">XL</span><span class="shop-tag">2XL</span><span class="shop-tag">3XL</span>
+            </div>
+            <button class="btn btn-gold" style="width:100%;" onclick="openModal('Allnighters Classic T-Shirt', '$25', ['S','M','L','XL','2XL','3XL'])">Request to Buy</button>
+          </div>
+        </div>
+
+        <!-- Hat -->
+        <div class="shop-card">
+          <div class="shop-card-img" style="display:flex;align-items:center;justify-content:center;height:240px;background:#141414;font-size:5rem;">🧢</div>
+          <div class="shop-card-body">
+            <div class="shop-card-name">Allnighters Snapback Hat</div>
+            <div class="shop-card-desc">Black snapback with embroidered gold Allnighters logo. One size fits most. Represent on and off the field.</div>
+            <div class="shop-card-price">$30 <span>per hat</span></div>
+            <div class="shop-card-tags">
+              <span class="shop-tag">One Size Fits Most</span>
+            </div>
+            <button class="btn btn-gold" style="width:100%;" onclick="openModal('Allnighters Snapback Hat', '$30', ['One Size'])">Request to Buy</button>
+          </div>
+        </div>
+
+        <!-- Jersey -->
+        <div class="shop-card">
+          <div class="shop-card-img" style="display:flex;align-items:center;justify-content:center;height:240px;background:#141414;font-size:5rem;">⚾</div>
+          <div class="shop-card-body">
+            <div class="shop-card-name">Allnighters Game Jersey</div>
+            <div class="shop-card-desc">Official team jersey with player number and name on back. Black with gold lettering. Moisture-wicking performance fabric. Custom name/number available.</div>
+            <div class="shop-card-price">$55 <span>per jersey</span></div>
+            <div class="shop-card-tags">
+              <span class="shop-tag">S</span><span class="shop-tag">M</span><span class="shop-tag">L</span>
+              <span class="shop-tag">XL</span><span class="shop-tag">2XL</span><span class="shop-tag">3XL</span>
+            </div>
+            <button class="btn btn-gold" style="width:100%;" onclick="openModal('Allnighters Game Jersey', '$55', ['S','M','L','XL','2XL','3XL'])">Request to Buy</button>
+          </div>
+        </div>
+
+        <!-- Hoodie -->
+        <div class="shop-card">
+          <div class="shop-card-img" style="display:flex;align-items:center;justify-content:center;height:240px;background:#141414;font-size:5rem;">🏆</div>
+          <div class="shop-card-body">
+            <div class="shop-card-name">Allnighters Hoodie</div>
+            <div class="shop-card-desc">Premium pullover hoodie in team black. Large logo on front, "Allnighters Softball · Since 1992" on back. Perfect for those late-season night games.</div>
+            <div class="shop-card-price">$45 <span>per hoodie</span></div>
+            <div class="shop-card-tags">
+              <span class="shop-tag">S</span><span class="shop-tag">M</span><span class="shop-tag">L</span>
+              <span class="shop-tag">XL</span><span class="shop-tag">2XL</span><span class="shop-tag">3XL</span>
+            </div>
+            <button class="btn btn-gold" style="width:100%;" onclick="openModal('Allnighters Hoodie', '$45', ['S','M','L','XL','2XL','3XL'])">Request to Buy</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Custom order note -->
+      <div style="margin-top:3rem;text-align:center;padding:2rem;background:var(--card);border-radius:var(--radius);border:1px solid var(--border);">
+        <div style="font-size:1.5rem;margin-bottom:0.5rem;">✉️</div>
+        <div style="font-family:'Oswald',sans-serif;color:var(--gold);font-size:1rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem;">Questions or Custom Orders?</div>
+        <div style="font-size:0.85rem;color:var(--text-muted);">Looking for a bulk order, custom item, or have a question? Use the request form on any item above and mention it in the notes.</div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- Order Request Modal -->
+<div class="modal-overlay" id="orderModal">
+  <div class="modal">
+    <h3 id="modalTitle">Request to Buy</h3>
+    <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1.25rem;">Fill out this form and we'll contact you to complete the order.</p>
+    <div class="form-group">
+      <label>Item</label>
+      <input type="text" id="modalItem" readonly style="opacity:0.7;">
+    </div>
+    <div class="form-group">
+      <label>Your Name *</label>
+      <input type="text" id="modalName" placeholder="First &amp; Last Name">
+    </div>
+    <div class="form-group">
+      <label>Email Address *</label>
+      <input type="email" id="modalEmail" placeholder="you@email.com">
+    </div>
+    <div class="form-group">
+      <label>Phone (optional)</label>
+      <input type="tel" id="modalPhone" placeholder="(555) 555-5555">
+    </div>
+    <div class="form-group">
+      <label>Size</label>
+      <select id="modalSize"></select>
+    </div>
+    <div class="form-group">
+      <label>Quantity</label>
+      <select id="modalQty">
+        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Notes (player number, name, etc.)</label>
+      <textarea id="modalNotes" placeholder="Any special requests..."></textarea>
+    </div>
+    <div style="display:flex;gap:0.75rem;margin-top:1.25rem;">
+      <button class="btn btn-gold" style="flex:1;" onclick="submitOrder()">Send Request</button>
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+    </div>
+    <div id="modalConfirm" style="display:none;text-align:center;padding:1.5rem 0 0;">
+      <div style="font-size:2rem;margin-bottom:0.5rem;">✅</div>
+      <div style="font-family:'Oswald',sans-serif;color:var(--gold);font-size:1rem;text-transform:uppercase;letter-spacing:0.08em;">Request Sent!</div>
+      <div style="font-size:0.82rem;color:var(--text-muted);margin-top:0.5rem;">We'll be in touch soon.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="/images/logo.png" alt="Allnighters">
+      <div class="footer-brand-name">Allnighters Softball</div>
+      <div class="footer-tagline">Peabody, MA · Est. 1992</div>
+    </div>
+    <div class="footer-nav">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/schedule.html">Schedule &amp; Results</a></li>
+        <li><a href="/roster.html">Roster</a></li>
+        <li><a href="/stats.html">Player Stats</a></li>
+        <li><a href="/gallery.html">Photo Gallery</a></li>
+        <li><a href="/history.html">Team History</a></li>
+        <li><a href="/proshop.html">Pro Shop</a></li>
+      </ul>
+    </div>
+    <div class="footer-info">
+      <h4>Pro Shop</h4>
+      <p>All orders are handled personally. Submit a request and we'll follow up to confirm your order and arrange payment.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; <span id="yr"></span> Allnighters Softball · allnighterssoftball.com</p>
+    <p class="est">EST. 1992</p>
+  </div>
+</footer>
+
+<script src="/js/utils.js"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+function openModal(itemName, price, sizes) {
+  document.getElementById('modalItem').value = `${itemName} — ${price}`;
+  document.getElementById('modalTitle').textContent = `Request: ${itemName}`;
+  const sizeEl = document.getElementById('modalSize');
+  sizeEl.innerHTML = sizes.map(s => `<option>${s}</option>`).join('');
+  document.getElementById('modalConfirm').style.display = 'none';
+  document.getElementById('orderModal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('orderModal').classList.remove('open');
+}
+function submitOrder() {
+  const name  = document.getElementById('modalName').value.trim();
+  const email = document.getElementById('modalEmail').value.trim();
+  if (!name || !email) { alert('Please enter your name and email.'); return; }
+
+  // Build mailto link
+  const item  = document.getElementById('modalItem').value;
+  const size  = document.getElementById('modalSize').value;
+  const qty   = document.getElementById('modalQty').value;
+  const phone = document.getElementById('modalPhone').value;
+  const notes = document.getElementById('modalNotes').value;
+  const body  = `Order Request\n\nItem: ${item}\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nSize: ${size}\nQuantity: ${qty}\nNotes: ${notes}`;
+  window.location.href = `mailto:allnighterssoftball@gmail.com?subject=Pro Shop Order: ${encodeURIComponent(item)}&body=${encodeURIComponent(body)}`;
+
+  document.getElementById('modalConfirm').style.display = 'block';
+  setTimeout(closeModal, 3000);
+}
+document.getElementById('orderModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+</script>
+</body>
+</html>
