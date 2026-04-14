@@ -1,0 +1,205 @@
+# =============================================
+# Allnighters Softball — Decap CMS Config
+# =============================================
+# SETUP REQUIRED:
+#   1. Replace YOUR_GITHUB_OAUTH_APP_ID below with your actual GitHub OAuth App ID
+#   2. The repo must be: Bobs-Personal-Zappix/allnighters-softball
+#   3. Set up GitHub OAuth App at: github.com/settings/developers
+#      - Application Name: Allnighters CMS
+#      - Homepage URL: https://allnighterssoftball.com
+#      - Authorization callback URL: https://allnighterssoftball.com/admin/
+# =============================================
+
+backend:
+  name: github
+  repo: Bobs-Personal-Zappix/allnighters-softball
+  branch: main
+  auth_type: pkce
+  app_id: YOUR_GITHUB_OAUTH_APP_ID    # <-- REPLACE THIS after GitHub OAuth App setup
+
+# Where CMS-uploaded media files get saved
+media_folder: images/gallery
+public_folder: /images/gallery
+
+# Cloudflare Pages auto-deploys on every GitHub commit, so no publish workflow needed
+publish_mode: simple
+
+# ─────────────────────────────────────────────
+# COLLECTIONS
+# ─────────────────────────────────────────────
+
+collections:
+
+  # ── 1. News & Events ───────────────────────
+  - name: news
+    label: News & Events
+    label_singular: News Post
+    folder: content/news
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}} — {{date}}"
+    fields:
+      - { label: Title,    name: title,    widget: string }
+      - { label: Date,     name: date,     widget: datetime, date_format: "YYYY-MM-DD", time_format: false }
+      - { label: Category, name: category, widget: select,
+          options: [Season News, Team Announcement, Game Recap, Event, Other],
+          default: Season News }
+      - { label: Featured Image, name: image, widget: image, required: false }
+      - { label: Summary (shown on homepage), name: summary, widget: text, required: false }
+      - { label: Body, name: body, widget: markdown }
+      - { label: Featured on Homepage, name: featured, widget: boolean, default: false }
+
+  # ── 2. 2026 Schedule Results ────────────────
+  - name: schedule
+    label: Schedule & Results
+    files:
+      - label: "2026 Season Schedule"
+        name: schedule_2026
+        file: data/schedule-2026.json
+        fields:
+          - label: Season
+            name: season
+            widget: hidden
+            default: "2026"
+          - label: Games
+            name: games
+            widget: list
+            summary: "Game {{fields.id}}: {{fields.day}} {{fields.date}} vs {{fields.opponent}}"
+            fields:
+              - { label: "Game #",    name: id,         widget: number }
+              - { label: Date,        name: date,        widget: date, format: "YYYY-MM-DD" }
+              - { label: Day,         name: day,         widget: string }
+              - { label: Opponent,    name: opponent,    widget: string }
+              - { label: Home / Away, name: home_away,   widget: select,
+                  options: [Home, Away, TBD, ""] }
+              - { label: Field,       name: field,       widget: string }
+              - { label: Time,        name: time,        widget: string }
+              - { label: "Result (leave blank if not played yet)",
+                  name: result,
+                  widget: select,
+                  required: false,
+                  default: "",
+                  options:
+                    - { label: "— Not Played —", value: "" }
+                    - { label: "W — Win",         value: W }
+                    - { label: "L — Loss",        value: L }
+                    - { label: "T — Tie",         value: T }
+                    - { label: "No Game",         value: "No Game" }
+                    - { label: "Postponed",       value: Postponed } }
+              - { label: Our Score,   name: score_us,   widget: number, required: false }
+              - { label: Their Score, name: score_them, widget: number, required: false }
+              - { label: Notes,       name: notes,      widget: string, required: false }
+
+  # ── 3. Player Stats ─────────────────────────
+  - name: stats
+    label: Player Stats
+    files:
+      - label: "2026 Season Stats"
+        name: stats_2026
+        file: data/stats-2026.json
+        fields:
+          - { label: Season,        name: season,       widget: hidden, default: "2026" }
+          - { label: Last Updated,  name: last_updated, widget: date, format: "YYYY-MM-DD" }
+          - label: Players
+            name: players
+            widget: list
+            summary: "#{{fields.number}} {{fields.name}} — AVG TBD"
+            fields:
+              - { label: "#",        name: number,  widget: string }
+              - { label: Name,       name: name,    widget: string }
+              - { label: GP (Games Played),  name: gp,      widget: number, value_type: int, default: 0 }
+              - { label: AB (At Bats),       name: ab,      widget: number, value_type: int, default: 0 }
+              - { label: H (Hits),           name: h,       widget: number, value_type: int, default: 0 }
+              - { label: BB (Walks),         name: bb,      widget: number, value_type: int, default: 0 }
+              - { label: K (Strikeouts),     name: k,       widget: number, value_type: int, default: 0 }
+              - { label: "1B (Singles)",     name: singles, widget: number, value_type: int, default: 0 }
+              - { label: "2B (Doubles)",     name: doubles, widget: number, value_type: int, default: 0 }
+              - { label: "3B (Triples)",     name: triples, widget: number, value_type: int, default: 0 }
+              - { label: HR (Home Runs),     name: hr,      widget: number, value_type: int, default: 0 }
+              - { label: GS (Grand Slams),   name: gs,      widget: number, value_type: int, default: 0 }
+
+  # ── 4. Roster ───────────────────────────────
+  - name: roster
+    label: Roster
+    files:
+      - label: "2026 Roster"
+        name: roster_2026
+        file: data/roster-2026.json
+        fields:
+          - { label: Year, name: year, widget: hidden, default: 2026 }
+          - label: Players
+            name: players
+            widget: list
+            summary: "#{{fields.number}} {{fields.name}}"
+            fields:
+              - { label: "#",           name: number,       widget: string }
+              - { label: Name,          name: name,         widget: string }
+              - { label: Nickname,      name: nickname,     widget: string,  required: false }
+              - { label: Positions,     name: positions,    widget: string }
+              - { label: Fun Details,   name: details,      widget: text,    required: false }
+              - { label: Years on Team, name: years_on_team, widget: number, required: false, default: 1 }
+              - { label: Photo,         name: photo,        widget: image,   required: false }
+
+  # ── 5. Photo Gallery ────────────────────────
+  - name: gallery
+    label: Photo Gallery
+    label_singular: Gallery Item
+    folder: content/gallery
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}} — {{date}}"
+    fields:
+      - { label: Title,       name: title,       widget: string }
+      - { label: Date,        name: date,        widget: date, format: "YYYY-MM-DD" }
+      - { label: Type,        name: type,        widget: select,
+          options: [Photo, Video], default: Photo }
+      - { label: Photo,       name: image,       widget: image,  required: false }
+      - { label: Video URL (YouTube embed URL), name: video_url, widget: string, required: false }
+      - { label: Description, name: description, widget: text,   required: false }
+      - { label: Year Tag,    name: year_tag,    widget: select,
+          options: ["2026","2025","2024","2023","2022","2021","Earlier"], default: "2026" }
+
+  # ── 6. Pro Shop ─────────────────────────────
+  - name: proshop
+    label: Pro Shop Items
+    label_singular: Shop Item
+    folder: content/proshop
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}} — ${{fields.price}}"
+    fields:
+      - { label: Product Name,  name: title,        widget: string }
+      - { label: Description,   name: description,  widget: text }
+      - { label: Price ($),     name: price,        widget: number }
+      - { label: Product Image, name: image,        widget: image,  required: false }
+      - { label: Sizes Available, name: sizes,      widget: list,   required: false }
+      - { label: In Stock,      name: in_stock,     widget: boolean, default: true }
+      - { label: Featured,      name: featured,     widget: boolean, default: false }
+
+  # ── 7. Sponsors ─────────────────────────────
+  - name: sponsors
+    label: Sponsors
+    files:
+      - label: Sponsors
+        name: sponsors
+        file: data/sponsors.json
+        fields:
+          - label: Sponsors
+            name: sponsors
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: Name,             name: name,      widget: string }
+              - { label: Website URL,      name: url,       widget: string }
+              - { label: Logo Image,       name: logo,      widget: image }
+              - { label: Dark Logo (show on white card background),
+                  name: dark_logo, widget: boolean, default: false }
+              - { label: Description,      name: description, widget: text, required: false }
+              - { label: Active (show on site), name: active, widget: boolean, default: true }
+              - { label: Placeholder slot, name: placeholder, widget: boolean, default: false, required: false }

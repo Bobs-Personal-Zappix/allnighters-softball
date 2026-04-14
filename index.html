@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Allnighters Softball | Peabody, MA · Est. 1992</title>
+  <meta name="description" content="Official home of the Allnighters Softball team — Peabody Men's Intramural Softball League. Est. 1992.">
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<!-- ── Navigation ─────────────────────────── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-brand">
+      <img src="/images/logo.png" alt="Allnighters Logo">
+      <div class="nav-brand-text">
+        Allnighters
+        <span>Softball · Est. 1992</span>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/schedule.html">Schedule</a></li>
+      <li><a href="/roster.html">Roster</a></li>
+      <li><a href="/stats.html">Stats</a></li>
+      <li><a href="/gallery.html">Gallery</a></li>
+      <li><a href="/history.html">History</a></li>
+      <li><a href="/proshop.html">Pro Shop</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ───────────────────────────────── -->
+<div class="page-content">
+  <section class="hero">
+    <div style="position:relative;z-index:1;">
+      <img src="/images/logo.png" alt="Allnighters Softball" class="hero-logo">
+      <h1 class="hero-title">Allnighters</h1>
+      <p class="hero-subtitle">Softball · Peabody, MA · Est. 1992</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num">34+</div>
+          <div class="lbl">Years Strong</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">25</div>
+          <div class="lbl">Roster Players</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num" id="heroGames">22</div>
+          <div class="lbl">2026 Games</div>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="/schedule.html" class="btn btn-gold">⚾ 2026 Schedule</a>
+        <a href="/roster.html" class="btn btn-outline">Meet the Team</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Next Game Banner ──────────────────── -->
+  <section class="section-sm" style="background:var(--dark);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div id="nextGameBanner" style="text-align:center;">
+        <div class="loading"><div class="spinner"></div>Loading schedule...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── News & Events ─────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">News &amp; Events</h2>
+      <div class="news-grid" id="newsGrid">
+        <!-- Sample news cards — replace via CMS -->
+        <div class="card news-card">
+          <div style="width:100%;height:200px;background:linear-gradient(135deg,#1a1400,#111);display:flex;align-items:center;justify-content:center;font-size:3rem;">⚾</div>
+          <div class="card-body">
+            <div class="card-meta">📅 May 11, 2026 &nbsp;·&nbsp; Season News</div>
+            <div class="card-title">2026 Season Kicks Off!</div>
+            <p style="font-size:0.88rem;color:var(--text-muted);margin:0;">The Allnighters are back on the diamond for another season in the Peabody Men's Intramural Softball League. First game is Monday May 11th vs. Franchise at Marrs Park — 7:45 PM. Let's go Allnighters!</p>
+          </div>
+        </div>
+        <div class="card news-card">
+          <div style="width:100%;height:200px;background:linear-gradient(135deg,#001a0a,#111);display:flex;align-items:center;justify-content:center;font-size:3rem;">🏆</div>
+          <div class="card-body">
+            <div class="card-meta">📅 April 2026 &nbsp;·&nbsp; Team Announcement</div>
+            <div class="card-title">2026 Roster Finalized</div>
+            <p style="font-size:0.88rem;color:var(--text-muted);margin:0;">Welcome to the 2026 squad! The roster is set with 25 players ready to hit the field. Check out the Roster page to see the full lineup and player profiles.</p>
+          </div>
+        </div>
+        <div class="card news-card">
+          <div style="width:100%;height:200px;background:linear-gradient(135deg,#1a0a00,#111);display:flex;align-items:center;justify-content:center;font-size:3rem;">👕</div>
+          <div class="card-body">
+            <div class="card-meta">📅 March 2026 &nbsp;·&nbsp; Pro Shop</div>
+            <div class="card-title">New Gear Available!</div>
+            <p style="font-size:0.88rem;color:var(--text-muted);margin:0;">Rep the Allnighters! New branded merchandise is available in the Pro Shop. T-shirts, hats, and more — all featuring our iconic circa 1992 logo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Sponsors ───────────────────────────── -->
+  <section class="sponsors-section">
+    <div class="container">
+      <div class="sponsors-label">Proud Sponsors of the Allnighters</div>
+      <div class="sponsors-grid" id="sponsorsBar"></div>
+    </div>
+  </section>
+
+  <!-- ── Quick Links ────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title centered" style="text-align:center;">Quick Links</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-top:1rem;">
+        <a href="/schedule.html" class="card" style="text-decoration:none;padding:1.5rem;text-align:center;">
+          <div style="font-size:2.2rem;margin-bottom:0.5rem;">📅</div>
+          <div class="card-title" style="font-size:0.95rem;">Schedule & Results</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);">2026 Season</div>
+        </a>
+        <a href="/roster.html" class="card" style="text-decoration:none;padding:1.5rem;text-align:center;">
+          <div style="font-size:2.2rem;margin-bottom:0.5rem;">👥</div>
+          <div class="card-title" style="font-size:0.95rem;">Roster</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);">Current & Past Rosters</div>
+        </a>
+        <a href="/stats.html" class="card" style="text-decoration:none;padding:1.5rem;text-align:center;">
+          <div style="font-size:2.2rem;margin-bottom:0.5rem;">📊</div>
+          <div class="card-title" style="font-size:0.95rem;">Player Stats</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);">2026 Season Stats</div>
+        </a>
+        <a href="/gallery.html" class="card" style="text-decoration:none;padding:1.5rem;text-align:center;">
+          <div style="font-size:2.2rem;margin-bottom:0.5rem;">📸</div>
+          <div class="card-title" style="font-size:0.95rem;">Photo Gallery</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);">Photos & Videos</div>
+        </a>
+        <a href="/history.html" class="card" style="text-decoration:none;padding:1.5rem;text-align:center;">
+          <div style="font-size:2.2rem;margin-bottom:0.5rem;">📜</div>
+          <div class="card-title" style="font-size:0.95rem;">Team History</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);">Est. 1992</div>
+        </a>
+        <a href="/proshop.html" class="card" style="text-decoration:none;padding:1.5rem;text-align:center;">
+          <div style="font-size:2.2rem;margin-bottom:0.5rem;">🛍️</div>
+          <div class="card-title" style="font-size:0.95rem;">Pro Shop</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);">Branded Gear</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end page-content -->
+
+<!-- ── Footer ─────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="/images/logo.png" alt="Allnighters">
+      <div class="footer-brand-name">Allnighters Softball</div>
+      <div class="footer-tagline">Peabody, MA · Est. 1992</div>
+    </div>
+    <div class="footer-nav">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/schedule.html">Schedule &amp; Results</a></li>
+        <li><a href="/roster.html">Roster</a></li>
+        <li><a href="/stats.html">Player Stats</a></li>
+        <li><a href="/gallery.html">Photo Gallery</a></li>
+        <li><a href="/history.html">Team History</a></li>
+        <li><a href="/proshop.html">Pro Shop</a></li>
+      </ul>
+    </div>
+    <div class="footer-info">
+      <h4>League Info</h4>
+      <p>Peabody Men's Intramural<br>Softball League — Division 3<br>Peabody, Massachusetts</p>
+      <p>☔ Rainouts: <a href="tel:9789772591">(978) 977-2591</a><br>
+         <span style="font-size:0.75rem;">Call after 5:00 PM</span></p>
+      <p><a href="https://www.peabodymensintracitysoftballeague.com" target="_blank" rel="noopener">League Website ↗</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; <span id="yr"></span> Allnighters Softball · allnighterssoftball.com</p>
+    <p class="est">EST. 1992</p>
+  </div>
+</footer>
+
+<script src="/js/utils.js"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Load next game banner
+async function loadNextGame() {
+  try {
+    const res  = await fetch('/data/schedule-2026.json');
+    const data = await res.json();
+    const today = new Date(); today.setHours(0,0,0,0);
+
+    // Find next game
+    const upcoming = data.games.filter(g => {
+      if (g.result === 'No Game') return false;
+      const [y,m,d] = g.date.split('-').map(Number);
+      return new Date(y, m-1, d) >= today;
+    });
+
+    const banner = document.getElementById('nextGameBanner');
+    if (!upcoming.length) {
+      banner.innerHTML = `<p style="color:var(--text-muted);font-size:0.9rem;letter-spacing:0.1em;text-transform:uppercase;">Season Complete — See you next year! ⚾</p>`;
+      return;
+    }
+    const g = upcoming[0];
+    const [y,m,d] = g.date.split('-').map(Number);
+    const dt = new Date(y, m-1, d);
+    const isToday = dt.getTime() === today.getTime();
+    const dateStr = dt.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' });
+    const tag = isToday ? '🔴 GAME DAY' : '⚾ NEXT GAME';
+    banner.innerHTML = `
+      <div style="display:inline-flex;align-items:center;gap:2rem;flex-wrap:wrap;justify-content:center;background:var(--card);border:1px solid var(--gold-dark);border-radius:10px;padding:1.25rem 2rem;">
+        <div style="font-family:'Oswald',sans-serif;font-size:0.75rem;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;">${tag}</div>
+        <div>
+          <div style="font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:700;color:var(--text);">vs. ${g.opponent}</div>
+          <div style="font-size:0.82rem;color:var(--text-muted);margin-top:0.2rem;">${dateStr} &nbsp;·&nbsp; ${g.time} &nbsp;·&nbsp; ${g.field} &nbsp;·&nbsp; <span style="color:${g.home_away==='Home'?'var(--gold)':'#8888cc'}">${g.home_away}</span></div>
+        </div>
+        <a href="/schedule.html" class="btn btn-outline" style="padding:0.5rem 1.2rem;font-size:0.78rem;">Full Schedule</a>
+      </div>`;
+  } catch(e) {
+    document.getElementById('nextGameBanner').innerHTML = '';
+  }
+}
+
+loadNextGame();
+loadSponsors('sponsorsBar');
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{
+  "sponsors": [
+    {
+      "id": 1,
+      "name": "Birch & Beam Construction",
+      "url": "https://www.birchandbeamconstruction.com/",
+      "logo": "/images/sponsors/birch-beam.png",
+      "dark_logo": true,
+      "description": "Quality construction services on the North Shore",
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "Building Center - Gloucester & Essex",
+      "url": "https://bcgloucester.com/",
+      "logo": "/images/sponsors/building-center.png",
+      "dark_logo": false,
+      "description": "Your local building supply source in Gloucester and Essex",
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "Zappix",
+      "url": "https://www.zappix.com",
+      "logo": "/images/sponsors/zappix.png",
+      "dark_logo": false,
+      "description": "Visual IVR and conversational AI for contact centers",
+      "active": true
+    },
+    {
+      "id": 4,
+      "name": "Coming Soon",
+      "url": "#",
+      "logo": "",
+      "dark_logo": false,
+      "description": "Sponsor placeholder",
+      "active": false,
+      "placeholder": true
+    }
+  ]
+}

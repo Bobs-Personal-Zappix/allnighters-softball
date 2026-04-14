@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Stats | Allnighters Softball</title>
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-brand">
+      <img src="/images/logo.png" alt="Allnighters Logo">
+      <div class="nav-brand-text">Allnighters<span>Softball · Est. 1992</span></div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/schedule.html">Schedule</a></li>
+      <li><a href="/roster.html">Roster</a></li>
+      <li><a href="/stats.html">Stats</a></li>
+      <li><a href="/gallery.html">Gallery</a></li>
+      <li><a href="/history.html">History</a></li>
+      <li><a href="/proshop.html">Pro Shop</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="page-content">
+  <div class="page-header">
+    <h1 class="page-header-title">Player Stats</h1>
+    <p class="page-header-sub">Season Batting Statistics · Updated Weekly</p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- Season Selector -->
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:2rem;flex-wrap:wrap;">
+        <span style="font-family:'Oswald',sans-serif;font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.12em;">Season:</span>
+        <div class="year-selector" id="statsSeasonSelector">
+          <button class="year-btn active" data-season="2026">2026</button>
+        </div>
+      </div>
+
+      <!-- Last Updated -->
+      <div style="margin-bottom:1.5rem;font-size:0.8rem;color:var(--text-muted);" id="lastUpdated"></div>
+
+      <!-- Team Totals -->
+      <div id="teamTotals" style="margin-bottom:2rem;"></div>
+
+      <!-- Stats Table -->
+      <div class="stats-wrapper">
+        <div id="statsTable">
+          <div class="loading"><div class="spinner"></div>Loading stats...</div>
+        </div>
+      </div>
+
+      <!-- Stat Key -->
+      <div style="margin-top:1.5rem;padding:1.25rem;background:var(--card);border-radius:var(--radius);border:1px solid var(--border);">
+        <div style="font-family:'Oswald',sans-serif;font-size:0.75rem;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem;">Stat Key</div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;font-size:0.78rem;color:var(--text-muted);">
+          <span><strong style="color:var(--text);">GP</strong> — Games Played</span>
+          <span><strong style="color:var(--text);">AB</strong> — At Bats</span>
+          <span><strong style="color:var(--text);">H</strong> — Hits</span>
+          <span><strong style="color:var(--text);">BB</strong> — Walks</span>
+          <span><strong style="color:var(--text);">K</strong> — Strikeouts</span>
+          <span><strong style="color:var(--text);">1B</strong> — Singles</span>
+          <span><strong style="color:var(--text);">2B</strong> — Doubles</span>
+          <span><strong style="color:var(--text);">3B</strong> — Triples</span>
+          <span><strong style="color:var(--text);">HR</strong> — Home Runs</span>
+          <span><strong style="color:var(--text);">GS</strong> — Grand Slams</span>
+          <span><strong style="color:var(--gold);">AVG</strong> — Batting Average (H ÷ AB)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="/images/logo.png" alt="Allnighters">
+      <div class="footer-brand-name">Allnighters Softball</div>
+      <div class="footer-tagline">Peabody, MA · Est. 1992</div>
+    </div>
+    <div class="footer-nav">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/schedule.html">Schedule &amp; Results</a></li>
+        <li><a href="/roster.html">Roster</a></li>
+        <li><a href="/stats.html">Player Stats</a></li>
+        <li><a href="/gallery.html">Photo Gallery</a></li>
+        <li><a href="/history.html">Team History</a></li>
+        <li><a href="/proshop.html">Pro Shop</a></li>
+      </ul>
+    </div>
+    <div class="footer-info">
+      <h4>Stats Info</h4>
+      <p>Stats are updated manually each week during the season. Batting Average is auto-calculated (H ÷ AB).</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; <span id="yr"></span> Allnighters Softball · allnighterssoftball.com</p>
+    <p class="est">EST. 1992</p>
+  </div>
+</footer>
+
+<script src="/js/utils.js"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+let currentSort = { col: 'ba', dir: 'desc' };
+
+async function loadStats(season) {
+  const tableDiv = document.getElementById('statsTable');
+  tableDiv.innerHTML = '<div class="loading"><div class="spinner"></div>Loading stats...</div>';
+  document.getElementById('teamTotals').innerHTML = '';
+  document.getElementById('lastUpdated').textContent = '';
+
+  try {
+    const res  = await fetch(`/data/stats-${season}.json`);
+    if (!res.ok) throw new Error('Not found');
+    const data = await res.json();
+
+    if (data.last_updated) {
+      document.getElementById('lastUpdated').textContent =
+        `Last updated: ${formatDate(data.last_updated)}`;
+    }
+
+    renderStats(data.players);
+  } catch(e) {
+    tableDiv.innerHTML = '<div class="loading">Stats not available for this season yet.</div>';
+  }
+}
+
+function renderStats(players, sortCol = currentSort.col, sortDir = currentSort.dir) {
+  currentSort = { col: sortCol, dir: sortDir };
+
+  // Add computed BA
+  const enriched = players.map(p => ({
+    ...p,
+    ba: p.ab > 0 ? p.h / p.ab : 0,
+    baStr: calcBA(p.h, p.ab)
+  }));
+
+  // Sort
+  enriched.sort((a, b) => {
+    let av = a[sortCol], bv = b[sortCol];
+    if (typeof av === 'string') { av = av.toLowerCase(); bv = bv.toLowerCase(); }
+    if (av === bv) return 0;
+    const cmp = av < bv ? -1 : 1;
+    return sortDir === 'asc' ? cmp : -cmp;
+  });
+
+  // Team totals
+  const totals = enriched.reduce((acc, p) => ({
+    gp: Math.max(acc.gp, p.gp), ab: acc.ab+p.ab, h: acc.h+p.h,
+    bb: acc.bb+p.bb, k: acc.k+p.k,
+    hr: acc.hr+p.hr, gs: acc.gs+p.gs,
+    singles: acc.singles+p.singles, doubles: acc.doubles+p.doubles, triples: acc.triples+p.triples
+  }), {gp:0,ab:0,h:0,bb:0,k:0,hr:0,gs:0,singles:0,doubles:0,triples:0});
+
+  document.getElementById('teamTotals').innerHTML = `
+    <div class="record-banner">
+      <div class="record-item"><div class="num" style="font-size:2rem;color:var(--text);">${totals.ab}</div><div class="lbl">Team AB</div></div>
+      <div class="record-item"><div class="num" style="font-size:2rem;color:var(--text);">${totals.h}</div><div class="lbl">Team Hits</div></div>
+      <div class="record-item"><div class="num" style="font-size:2rem;color:var(--gold);">${calcBA(totals.h, totals.ab)}</div><div class="lbl">Team AVG</div></div>
+      <div class="record-item"><div class="num" style="font-size:2rem;color:#ee9090;">${totals.hr}</div><div class="lbl">Home Runs</div></div>
+      <div class="record-item"><div class="num" style="font-size:2rem;color:#ee9090;">${totals.gs}</div><div class="lbl">Grand Slams</div></div>
+    </div>`;
+
+  function thClass(col) {
+    if (col !== sortCol) return '';
+    return sortDir === 'asc' ? ' sorted-asc' : ' sorted-desc';
+  }
+
+  const rows = enriched.map((p, i) => `
+    <tr>
+      <td style="text-align:left;"><span class="player-num">#${p.number}</span><span class="player-name">${p.name}</span></td>
+      <td>${p.gp}</td>
+      <td>${p.ab}</td>
+      <td>${p.h}</td>
+      <td>${p.bb}</td>
+      <td>${p.k}</td>
+      <td>${p.singles}</td>
+      <td>${p.doubles}</td>
+      <td>${p.triples}</td>
+      <td style="color:#ee9090;">${p.hr}</td>
+      <td style="color:#ee9090;font-weight:700;">${p.gs}</td>
+      <td class="ba-cell">${p.baStr}</td>
+    </tr>`).join('');
+
+  document.getElementById('statsTable').innerHTML = `
+    <table class="stats-table">
+      <thead>
+        <tr>
+          <th style="text-align:left;" data-col="name" class="${thClass('name')}">Player</th>
+          <th data-col="gp" class="${thClass('gp')}">GP</th>
+          <th data-col="ab" class="${thClass('ab')}">AB</th>
+          <th data-col="h" class="${thClass('h')}">H</th>
+          <th data-col="bb" class="${thClass('bb')}">BB</th>
+          <th data-col="k" class="${thClass('k')}">K</th>
+          <th data-col="singles" class="${thClass('singles')}">1B</th>
+          <th data-col="doubles" class="${thClass('doubles')}">2B</th>
+          <th data-col="triples" class="${thClass('triples')}">3B</th>
+          <th data-col="hr" class="${thClass('hr')}">HR</th>
+          <th data-col="gs" class="${thClass('gs')}">GS</th>
+          <th data-col="ba" class="${thClass('ba')}">AVG</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+
+  // Sort on header click
+  document.querySelectorAll('.stats-table th[data-col]').forEach(th => {
+    th.addEventListener('click', function() {
+      const col = this.dataset.col;
+      const dir = (currentSort.col === col && currentSort.dir === 'desc') ? 'asc' : 'desc';
+      renderStats(enriched, col, dir);
+    });
+  });
+}
+
+// Season selector
+document.querySelectorAll('.year-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('#statsSeasonSelector .year-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    loadStats(this.dataset.season);
+  });
+});
+
+loadStats('2026');
+</script>
+</body>
+</html>

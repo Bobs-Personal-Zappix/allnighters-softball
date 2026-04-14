@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schedule & Results | Allnighters Softball</title>
+  <meta name="description" content="2026 Season Schedule and Results for the Allnighters Softball team — Peabody MISL.">
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-brand">
+      <img src="/images/logo.png" alt="Allnighters Logo">
+      <div class="nav-brand-text">Allnighters<span>Softball · Est. 1992</span></div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/schedule.html">Schedule</a></li>
+      <li><a href="/roster.html">Roster</a></li>
+      <li><a href="/stats.html">Stats</a></li>
+      <li><a href="/gallery.html">Gallery</a></li>
+      <li><a href="/history.html">History</a></li>
+      <li><a href="/proshop.html">Pro Shop</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="page-content">
+  <div class="page-header">
+    <h1 class="page-header-title">Schedule &amp; Results</h1>
+    <p class="page-header-sub">2026 Season · Peabody Men's Intramural Softball League · Division 3</p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- Season Selector -->
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:2rem;flex-wrap:wrap;">
+        <span style="font-family:'Oswald',sans-serif;font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.12em;">Season:</span>
+        <div class="year-selector" id="seasonSelector">
+          <button class="year-btn active" data-season="2026">2026</button>
+        </div>
+      </div>
+
+      <!-- Record Banner -->
+      <div class="record-banner" id="recordBanner">
+        <div class="loading"><div class="spinner"></div></div>
+      </div>
+
+      <!-- League Info Alert -->
+      <div class="alert">
+        ☔ <strong>Rainout Line:</strong> <a href="tel:9789772591">(978) 977-2591</a> — Call after 5:00 PM &nbsp;·&nbsp;
+        <a href="https://www.peabodymensintracitysoftballeague.com" target="_blank" rel="noopener">League Website ↗</a>
+      </div>
+
+      <!-- Schedule Table -->
+      <div class="stats-wrapper">
+        <div id="scheduleTable">
+          <div class="loading"><div class="spinner"></div>Loading schedule...</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="/images/logo.png" alt="Allnighters">
+      <div class="footer-brand-name">Allnighters Softball</div>
+      <div class="footer-tagline">Peabody, MA · Est. 1992</div>
+    </div>
+    <div class="footer-nav">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/schedule.html">Schedule &amp; Results</a></li>
+        <li><a href="/roster.html">Roster</a></li>
+        <li><a href="/stats.html">Player Stats</a></li>
+        <li><a href="/gallery.html">Photo Gallery</a></li>
+        <li><a href="/history.html">Team History</a></li>
+        <li><a href="/proshop.html">Pro Shop</a></li>
+      </ul>
+    </div>
+    <div class="footer-info">
+      <h4>League Info</h4>
+      <p>Peabody Men's Intramural<br>Softball League — Division 3</p>
+      <p>☔ Rainouts: <a href="tel:9789772591">(978) 977-2591</a><br>
+         <span style="font-size:0.75rem;">Call after 5:00 PM</span></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; <span id="yr"></span> Allnighters Softball · allnighterssoftball.com</p>
+    <p class="est">EST. 1992</p>
+  </div>
+</footer>
+
+<script src="/js/utils.js"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+async function loadSchedule(season) {
+  const tableDiv = document.getElementById('scheduleTable');
+  const recordDiv = document.getElementById('recordBanner');
+  tableDiv.innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+
+  try {
+    const res  = await fetch(`/data/schedule-${season}.json`);
+    if (!res.ok) throw new Error('Not found');
+    const data = await res.json();
+    const today = new Date(); today.setHours(0,0,0,0);
+
+    // Calculate record from results
+    let wins=0, losses=0, ties=0;
+    data.games.forEach(g => {
+      if (g.result === 'W') wins++;
+      else if (g.result === 'L') losses++;
+      else if (g.result === 'T') ties++;
+    });
+    const gp = wins + losses + ties;
+    const pct = gp > 0 ? (wins / gp).toFixed(3).replace('0.', '.') : '.000';
+
+    recordDiv.innerHTML = `
+      <div class="record-item record-wins"><div class="num">${wins}</div><div class="lbl">Wins</div></div>
+      <div class="record-item record-losses"><div class="num">${losses}</div><div class="lbl">Losses</div></div>
+      <div class="record-item record-ties"><div class="num">${ties}</div><div class="lbl">Ties</div></div>
+      <div class="record-item record-pct"><div class="num">${pct}</div><div class="lbl">Win Pct</div></div>
+      <div class="record-item" style="color:var(--text-muted);">
+        <div class="num" style="font-size:1.8rem;color:var(--text-muted);">${gp}</div>
+        <div class="lbl">Games Played</div>
+      </div>`;
+
+    // Build table
+    const rows = data.games.map(g => {
+      const isNoGame = g.result === 'No Game';
+      if (isNoGame) {
+        return `
+          <tr>
+            <td style="color:var(--text-muted);font-size:0.82rem;">${formatDate(g.date)}</td>
+            <td colspan="6" class="no-game">${g.notes || 'No Game Scheduled'}</td>
+          </tr>`;
+      }
+
+      const [y,m,d] = g.date.split('-').map(Number);
+      const gameDate = new Date(y, m-1, d);
+      const isCurrent = gameDate.getTime() === today.getTime();
+      const past = gameDate < today;
+      const rowClass = isCurrent ? 'current-game' : (past ? 'past-game' : '');
+
+      const haBadge = g.home_away === 'Home'
+        ? '<span class="badge badge-home">Home</span>'
+        : g.home_away === 'Away'
+          ? '<span class="badge badge-away">Away</span>'
+          : '<span class="badge badge-tbd">TBD</span>';
+
+      let resultCell = '<span style="color:var(--text-dim);font-size:0.8rem;">—</span>';
+      if (g.result === 'W') {
+        resultCell = `<span class="badge badge-win">W &nbsp;${g.score_us}–${g.score_them}</span>`;
+      } else if (g.result === 'L') {
+        resultCell = `<span class="badge badge-loss">L &nbsp;${g.score_us}–${g.score_them}</span>`;
+      } else if (g.result === 'T') {
+        resultCell = `<span class="badge badge-tie">T &nbsp;${g.score_us}–${g.score_them}</span>`;
+      } else if (g.result === 'Postponed') {
+        resultCell = `<span class="badge badge-tbd">Postponed</span>`;
+      } else if (isCurrent) {
+        resultCell = `<span style="color:var(--gold);font-family:'Oswald',sans-serif;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;animation:pulse 1.5s ease-in-out infinite;">● TONIGHT</span>`;
+      }
+
+      const opponent = g.opponent === 'Makeups / Playoffs'
+        ? `<em style="color:var(--text-muted);">${g.opponent}</em>`
+        : `<strong>${g.opponent}</strong>`;
+
+      return `
+        <tr class="${rowClass}">
+          <td style="font-size:0.85rem;white-space:nowrap;color:var(--text-muted);">${formatDate(g.date)}</td>
+          <td>${opponent}</td>
+          <td>${haBadge}</td>
+          <td style="font-size:0.82rem;color:var(--text-muted);white-space:nowrap;">${g.field}</td>
+          <td style="font-size:0.82rem;color:var(--text-muted);white-space:nowrap;">${g.time || '—'}</td>
+          <td class="score-cell">${resultCell}</td>
+        </tr>`;
+    }).join('');
+
+    tableDiv.innerHTML = `
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Opponent</th>
+            <th>H/A</th>
+            <th>Field</th>
+            <th>Time</th>
+            <th style="text-align:center;">Result</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <p style="font-size:0.75rem;color:var(--text-dim);margin-top:1rem;text-align:right;">
+        Game times: 1st 6:30 PM · 2nd 7:45 PM · 3rd 9:00 PM
+      </p>`;
+  } catch(e) {
+    recordDiv.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:1rem;">No record data available</div>';
+    tableDiv.innerHTML = '<div class="loading">Schedule not found for this season.</div>';
+  }
+}
+
+// Season selector
+document.querySelectorAll('.year-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    loadSchedule(this.dataset.season);
+  });
+});
+
+loadSchedule('2026');
+</script>
+<style>
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+</style>
+</body>
+</html>
