@@ -75,24 +75,24 @@ collections:
                   options: [Home, Away, TBD, ""] }
               - { label: Field,       name: field,       widget: string }
               - { label: Time,        name: time,        widget: string }
-              - { label: "Result (leave blank if not played yet)",
-                  name: result,
-                  widget: select,
-                  required: false,
-                  default: "",
-                    options:
-                    - label: "Not Played"
-                      value: ""
-                    - label: "Win"
-                      value: W
-                    - label: "Loss"
-                      value: L
-                    - label: "Tie"
-                      value: T
-                    - label: "No Game"
-                      value: "No Game"
-                    - label: "Postponed"
-                      value: Postponed
+              - label: Result
+                name: result
+                widget: select
+                required: false
+                default: ""
+                options:
+                  - label: Not Played
+                    value: ""
+                  - label: Win
+                    value: W
+                  - label: Loss
+                    value: L
+                  - label: Tie
+                    value: T
+                  - label: No Game
+                    value: No Game
+                  - label: Postponed
+                    value: Postponed
               - { label: Our Score,   name: score_us,   widget: number, required: false }
               - { label: Their Score, name: score_them, widget: number, required: false }
               - { label: Notes,       name: notes,      widget: string, required: false }
