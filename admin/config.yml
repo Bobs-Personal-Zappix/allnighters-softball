@@ -21,8 +21,7 @@ backend:
 media_folder: images/gallery
 public_folder: /images/gallery
 
-# Cloudflare Pages auto-deploys on every GitHub commit, so no publish workflow needed
-publish_mode: simple
+
 
 # ─────────────────────────────────────────────
 # COLLECTIONS
