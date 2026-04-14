@@ -80,13 +80,19 @@ collections:
                   widget: select,
                   required: false,
                   default: "",
-                  options:
-                    - { label: "Not Played", value: "" }
-                    - { label: "W — Win",         value: W }
-                    - { label: "L — Loss",        value: L }
-                    - { label: "T — Tie",         value: T }
-                    - { label: "No Game",         value: "No Game" }
-                    - { label: "Postponed",       value: Postponed } }
+                    options:
+                    - label: "Not Played"
+                      value: ""
+                    - label: "Win"
+                      value: W
+                    - label: "Loss"
+                      value: L
+                    - label: "Tie"
+                      value: T
+                    - label: "No Game"
+                      value: "No Game"
+                    - label: "Postponed"
+                      value: Postponed
               - { label: Our Score,   name: score_us,   widget: number, required: false }
               - { label: Their Score, name: score_them, widget: number, required: false }
               - { label: Notes,       name: notes,      widget: string, required: false }
