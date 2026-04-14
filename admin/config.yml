@@ -81,7 +81,7 @@ collections:
                   required: false,
                   default: "",
                   options:
-                    - { label: "— Not Played —", value: "" }
+                    - { label: "Not Played", value: "" }
                     - { label: "W — Win",         value: W }
                     - { label: "L — Loss",        value: L }
                     - { label: "T — Tie",         value: T }
