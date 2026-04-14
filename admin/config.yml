@@ -1,14 +1,6 @@
 # =============================================
 # Allnighters Softball — Decap CMS Config
 # =============================================
-# SETUP REQUIRED:
-#   1. Replace YOUR_GITHUB_OAUTH_APP_ID below with your actual GitHub OAuth App ID
-#   2. The repo must be: Bobs-Personal-Zappix/allnighters-softball
-#   3. Set up GitHub OAuth App at: github.com/settings/developers
-#      - Application Name: Allnighters CMS
-#      - Homepage URL: https://allnighterssoftball.com
-#      - Authorization callback URL: https://allnighterssoftball.com/admin/
-# =============================================
 
 backend:
   name: git-gateway
@@ -16,15 +8,8 @@ backend:
   identity_url: https://adorable-bienenstitch-ebd60d.netlify.app
   gateway_url: https://adorable-bienenstitch-ebd60d.netlify.app/.netlify/git/github
 
-# Where CMS-uploaded media files get saved
 media_folder: images/gallery
 public_folder: /images/gallery
-
-
-
-# ─────────────────────────────────────────────
-# COLLECTIONS
-# ─────────────────────────────────────────────
 
 collections:
 
@@ -45,7 +30,7 @@ collections:
           options: [Season News, Team Announcement, Game Recap, Event, Other],
           default: Season News }
       - { label: Featured Image, name: image, widget: image, required: false }
-      - { label: Summary (shown on homepage), name: summary, widget: text, required: false }
+      - { label: Summary, name: summary, widget: text, required: false }
       - { label: Body, name: body, widget: markdown }
       - { label: Featured on Homepage, name: featured, widget: boolean, default: false }
 
@@ -66,14 +51,13 @@ collections:
             widget: list
             summary: "Game {{fields.id}}: {{fields.day}} {{fields.date}} vs {{fields.opponent}}"
             fields:
-              - { label: "Game #",    name: id,         widget: number }
-              - { label: Date,        name: date,        widget: date, format: "YYYY-MM-DD" }
-              - { label: Day,         name: day,         widget: string }
-              - { label: Opponent,    name: opponent,    widget: string }
-              - { label: Home / Away, name: home_away,   widget: select,
-                  options: [Home, Away, TBD, ""] }
-              - { label: Field,       name: field,       widget: string }
-              - { label: Time,        name: time,        widget: string }
+              - { label: "Game #",    name: id,        widget: number }
+              - { label: Date,        name: date,       widget: date, format: "YYYY-MM-DD" }
+              - { label: Day,         name: day,        widget: string }
+              - { label: Opponent,    name: opponent,   widget: string }
+              - { label: Home / Away, name: home_away,  widget: select, options: [Home, Away, TBD, ""] }
+              - { label: Field,       name: field,      widget: string }
+              - { label: Time,        name: time,       widget: string }
               - label: Result
                 name: result
                 widget: select
@@ -104,25 +88,25 @@ collections:
         name: stats_2026
         file: data/stats-2026.json
         fields:
-          - { label: Season,        name: season,       widget: hidden, default: "2026" }
-          - { label: Last Updated,  name: last_updated, widget: date, format: "YYYY-MM-DD" }
+          - { label: Season,       name: season,       widget: hidden, default: "2026" }
+          - { label: Last Updated, name: last_updated, widget: date, format: "YYYY-MM-DD" }
           - label: Players
             name: players
             widget: list
-            summary: "#{{fields.number}} {{fields.name}} — AVG TBD"
+            summary: "#{{fields.number}} {{fields.name}}"
             fields:
-              - { label: "#",        name: number,  widget: string }
-              - { label: Name,       name: name,    widget: string }
-              - { label: GP (Games Played),  name: gp,      widget: number, value_type: int, default: 0 }
-              - { label: AB (At Bats),       name: ab,      widget: number, value_type: int, default: 0 }
-              - { label: H (Hits),           name: h,       widget: number, value_type: int, default: 0 }
-              - { label: BB (Walks),         name: bb,      widget: number, value_type: int, default: 0 }
-              - { label: K (Strikeouts),     name: k,       widget: number, value_type: int, default: 0 }
-              - { label: "1B (Singles)",     name: singles, widget: number, value_type: int, default: 0 }
-              - { label: "2B (Doubles)",     name: doubles, widget: number, value_type: int, default: 0 }
-              - { label: "3B (Triples)",     name: triples, widget: number, value_type: int, default: 0 }
-              - { label: HR (Home Runs),     name: hr,      widget: number, value_type: int, default: 0 }
-              - { label: GS (Grand Slams),   name: gs,      widget: number, value_type: int, default: 0 }
+              - { label: "#",             name: number,  widget: string }
+              - { label: Name,            name: name,    widget: string }
+              - { label: GP Games Played, name: gp,      widget: number, value_type: int, default: 0 }
+              - { label: AB At Bats,      name: ab,      widget: number, value_type: int, default: 0 }
+              - { label: H Hits,          name: h,       widget: number, value_type: int, default: 0 }
+              - { label: BB Walks,        name: bb,      widget: number, value_type: int, default: 0 }
+              - { label: K Strikeouts,    name: k,       widget: number, value_type: int, default: 0 }
+              - { label: 1B Singles,      name: singles, widget: number, value_type: int, default: 0 }
+              - { label: 2B Doubles,      name: doubles, widget: number, value_type: int, default: 0 }
+              - { label: 3B Triples,      name: triples, widget: number, value_type: int, default: 0 }
+              - { label: HR Home Runs,    name: hr,      widget: number, value_type: int, default: 0 }
+              - { label: GS Grand Slams,  name: gs,      widget: number, value_type: int, default: 0 }
 
   # ── 4. Roster ───────────────────────────────
   - name: roster
@@ -138,16 +122,16 @@ collections:
             widget: list
             summary: "#{{fields.number}} {{fields.name}}"
             fields:
-              - { label: "#",           name: number,       widget: string }
-              - { label: Name,          name: name,         widget: string }
-              - { label: Nickname,      name: nickname,     widget: string,  required: false }
-              - { label: Positions,     name: positions,    widget: string }
-              - { label: Fun Details,   name: details,      widget: text,    required: false }
+              - { label: "#",           name: number,        widget: string }
+              - { label: Name,          name: name,          widget: string }
+              - { label: Nickname,      name: nickname,      widget: string, required: false }
+              - { label: Positions,     name: positions,     widget: string }
+              - { label: Fun Details,   name: details,       widget: text,   required: false }
               - { label: Years on Team, name: years_on_team, widget: number, required: false, default: 1 }
-              - { label: Photo,         name: photo,        widget: image,   required: false }
+              - { label: Photo,         name: photo,         widget: image,  required: false }
 
   # ── 5. Photo Gallery ────────────────────────
-- name: gallery
+  - name: gallery
     label: Photo Gallery
     files:
       - label: Gallery Photos
@@ -158,12 +142,12 @@ collections:
             name: photos
             widget: list
             fields:
-              - {label: Title, name: title, widget: string}
-              - {label: Type, name: type, widget: select, options: [Photo, Video]}
-              - {label: Image, name: image, widget: image, required: false}
-              - {label: Video URL, name: video_url, widget: string, required: false}
-              - {label: Description, name: description, widget: string, required: false}
-              - {label: Year, name: year, widget: select, options: ["2026","2025","2024","2023"], default: "2026"}
+              - { label: Title,       name: title,       widget: string }
+              - { label: Type,        name: type,        widget: select, options: [Photo, Video] }
+              - { label: Image,       name: image,       widget: image,  required: false }
+              - { label: Video URL,   name: video_url,   widget: string, required: false }
+              - { label: Description, name: description, widget: string, required: false }
+              - { label: Year,        name: year,        widget: select, options: ["2026","2025","2024","2023"], default: "2026" }
 
   # ── 6. Pro Shop ─────────────────────────────
   - name: proshop
@@ -176,13 +160,13 @@ collections:
     format: frontmatter
     summary: "{{title}} — ${{fields.price}}"
     fields:
-      - { label: Product Name,  name: title,        widget: string }
-      - { label: Description,   name: description,  widget: text }
-      - { label: Price ($),     name: price,        widget: number }
-      - { label: Product Image, name: image,        widget: image,  required: false }
-      - { label: Sizes Available, name: sizes,      widget: list,   required: false }
-      - { label: In Stock,      name: in_stock,     widget: boolean, default: true }
-      - { label: Featured,      name: featured,     widget: boolean, default: false }
+      - { label: Product Name,    name: title,       widget: string }
+      - { label: Description,     name: description, widget: text }
+      - { label: Price,           name: price,       widget: number }
+      - { label: Product Image,   name: image,       widget: image,   required: false }
+      - { label: Sizes Available, name: sizes,       widget: list,    required: false }
+      - { label: In Stock,        name: in_stock,    widget: boolean, default: true }
+      - { label: Featured,        name: featured,    widget: boolean, default: false }
 
   # ── 7. Sponsors ─────────────────────────────
   - name: sponsors
@@ -197,11 +181,10 @@ collections:
             widget: list
             summary: "{{fields.name}}"
             fields:
-              - { label: Name,             name: name,      widget: string }
-              - { label: Website URL,      name: url,       widget: string }
-              - { label: Logo Image,       name: logo,      widget: image }
-              - { label: Dark Logo (show on white card background),
-                  name: dark_logo, widget: boolean, default: false }
-              - { label: Description,      name: description, widget: text, required: false }
-              - { label: Active (show on site), name: active, widget: boolean, default: true }
-              - { label: Placeholder slot, name: placeholder, widget: boolean, default: false, required: false }
+              - { label: Name,        name: name,        widget: string }
+              - { label: Website URL, name: url,         widget: string }
+              - { label: Logo Image,  name: logo,        widget: image }
+              - { label: Dark Logo,   name: dark_logo,   widget: boolean, default: false }
+              - { label: Description, name: description, widget: text,    required: false }
+              - { label: Active,      name: active,      widget: boolean, default: true }
+              - { label: Placeholder, name: placeholder, widget: boolean, default: false, required: false }
