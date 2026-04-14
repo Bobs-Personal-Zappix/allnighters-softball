@@ -147,25 +147,23 @@ collections:
               - { label: Photo,         name: photo,        widget: image,   required: false }
 
   # ── 5. Photo Gallery ────────────────────────
-  - name: gallery
+- name: gallery
     label: Photo Gallery
-    label_singular: Gallery Item
-    folder: content/gallery
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    extension: md
-    format: frontmatter
-    summary: "{{title}} — {{date}}"
-    fields:
-      - { label: Title,       name: title,       widget: string }
-      - { label: Date,        name: date,        widget: date, format: "YYYY-MM-DD" }
-      - { label: Type,        name: type,        widget: select,
-          options: [Photo, Video], default: Photo }
-      - { label: Photo,       name: image,       widget: image,  required: false }
-      - { label: Video URL (YouTube embed URL), name: video_url, widget: string, required: false }
-      - { label: Description, name: description, widget: text,   required: false }
-      - { label: Year Tag,    name: year_tag,    widget: select,
-          options: ["2026","2025","2024","2023","2022","2021","Earlier"], default: "2026" }
+    files:
+      - label: Gallery Photos
+        name: gallery
+        file: data/gallery.json
+        fields:
+          - label: Photos
+            name: photos
+            widget: list
+            fields:
+              - {label: Title, name: title, widget: string}
+              - {label: Type, name: type, widget: select, options: [Photo, Video]}
+              - {label: Image, name: image, widget: image, required: false}
+              - {label: Video URL, name: video_url, widget: string, required: false}
+              - {label: Description, name: description, widget: string, required: false}
+              - {label: Year, name: year, widget: select, options: ["2026","2025","2024","2023"], default: "2026"}
 
   # ── 6. Pro Shop ─────────────────────────────
   - name: proshop
