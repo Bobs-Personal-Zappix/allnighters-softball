@@ -7,6 +7,24 @@
       "video_url": "",
       "description": "",
       "year": "2026"
+    },
+    {
+      "year": "2026",
+      "image": "/images/gallery/20250827_230413.jpg",
+      "title": "Championship Beer!",
+      "type": "Photo"
+    },
+    {
+      "year": "2026",
+      "image": "/images/gallery/20250910_200130.jpg",
+      "title": "CHAMPIONS!",
+      "type": "Photo"
+    },
+    {
+      "year": "2026",
+      "video_url": "https://www.youtube.com/embed/CLK_jtpCKyE",
+      "type": "Video",
+      "title": "Allnighters Last Pitch of 2026... CHAMPIONS!"
     }
   ]
 }
