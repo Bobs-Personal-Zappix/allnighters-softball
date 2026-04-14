@@ -1,8 +1,0 @@
-# Cloudflare Pages — Redirect Rules
-# Serves index.html for clean URLs (optional)
-/schedule     /schedule.html    200
-/roster       /roster.html      200
-/stats        /stats.html       200
-/gallery      /gallery.html     200
-/history      /history.html     200
-/proshop      /proshop.html     200
