@@ -15,7 +15,7 @@ backend:
   repo: Bobs-Personal-Zappix/allnighters-softball
   branch: main
   auth_type: pkce
-  app_id: YOUR_GITHUB_OAUTH_APP_ID    # <-- REPLACE THIS after GitHub OAuth App setup
+  app_id: Ov23liBWSCAUWihwv9Nd    # <-- REPLACE THIS after GitHub OAuth App setup
 
 # Where CMS-uploaded media files get saved
 media_folder: images/gallery
