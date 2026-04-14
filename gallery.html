@@ -25,7 +25,6 @@
     .lightbox-close:hover { background: rgba(255,255,255,0.2); }
     .video-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 90vw; width: 100%; }
     .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px; }
-    .gallery-video-badge { position: absolute; top: 0.5rem; left: 0.5rem; background: rgba(0,0,0,0.7); color: var(--gold); font-size: 1.2rem; padding: 0.25rem 0.5rem; border-radius: 4px; }
   </style>
 </head>
 <body>
@@ -61,60 +60,15 @@
       <!-- Filter Tabs -->
       <div class="tab-bar" id="galleryFilters">
         <button class="tab-btn active" data-filter="all">All</button>
-        <button class="tab-btn" data-filter="photo">Photos</button>
-        <button class="tab-btn" data-filter="video">Videos</button>
+        <button class="tab-btn" data-filter="Photo">Photos</button>
+        <button class="tab-btn" data-filter="Video">Videos</button>
         <button class="tab-btn" data-filter="2026">2026</button>
         <button class="tab-btn" data-filter="2025">2025</button>
       </div>
 
       <!-- Gallery Grid -->
       <div class="gallery-grid" id="galleryGrid">
-        <!-- Placeholder slots — replace via CMS -->
-        <div class="gallery-item" data-type="photo" data-year="2026">
-          <div class="gallery-placeholder">
-            <span class="icon">📸</span>
-            <span>Add Photo via CMS</span>
-          </div>
-        </div>
-        <div class="gallery-item" data-type="photo" data-year="2026">
-          <div class="gallery-placeholder">
-            <span class="icon">📸</span>
-            <span>Add Photo via CMS</span>
-          </div>
-        </div>
-        <div class="gallery-item" data-type="video" data-year="2026">
-          <div class="gallery-placeholder">
-            <span class="icon">🎥</span>
-            <span>Add Video via CMS</span>
-          </div>
-        </div>
-        <div class="gallery-item" data-type="photo" data-year="2026">
-          <div class="gallery-placeholder">
-            <span class="icon">📸</span>
-            <span>Add Photo via CMS</span>
-          </div>
-        </div>
-        <div class="gallery-item" data-type="photo" data-year="2026">
-          <div class="gallery-placeholder">
-            <span class="icon">📸</span>
-            <span>Add Photo via CMS</span>
-          </div>
-        </div>
-        <div class="gallery-item" data-type="video" data-year="2026">
-          <div class="gallery-placeholder">
-            <span class="icon">🎥</span>
-            <span>Add Video via CMS</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Upload Info -->
-      <div style="margin-top:2.5rem;padding:1.5rem;background:var(--card);border:1px dashed var(--border);border-radius:var(--radius);text-align:center;">
-        <div style="font-size:2rem;margin-bottom:0.75rem;">📁</div>
-        <div style="font-family:'Oswald',sans-serif;font-size:1rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem;">Add Your Photos &amp; Videos</div>
-        <div style="font-size:0.85rem;color:var(--text-muted);max-width:500px;margin:0 auto;">
-          Use the <strong style="color:var(--text);">CMS Admin Panel</strong> at <code style="color:var(--gold);background:rgba(201,168,76,0.1);padding:0.1rem 0.4rem;border-radius:3px;">/admin</code> to upload and manage gallery photos and videos.
-        </div>
+        <div class="loading"><div class="spinner"></div>Loading gallery...</div>
       </div>
 
     </div>
@@ -150,7 +104,7 @@
     </div>
     <div class="footer-info">
       <h4>Gallery</h4>
-      <p>Photos and videos are managed through the CMS admin panel. Log in at /admin to upload new media.</p>
+      <p>Photos and videos are managed through the CMS admin panel.</p>
     </div>
   </div>
   <div class="footer-bottom">
@@ -163,45 +117,87 @@
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
 
+let allPhotos = [];
+
+async function loadGallery() {
+  const grid = document.getElementById('galleryGrid');
+  try {
+    const res  = await fetch('/data/gallery.json');
+    const data = await res.json();
+    allPhotos  = data.photos || [];
+    renderGallery(allPhotos);
+  } catch(e) {
+    grid.innerHTML = '<div class="loading">No photos yet — check back soon!</div>';
+  }
+}
+
+function renderGallery(photos) {
+  const grid = document.getElementById('galleryGrid');
+  if (!photos.length) {
+    grid.innerHTML = '<div class="loading">No photos yet — check back soon!</div>';
+    return;
+  }
+  grid.innerHTML = photos.map((p, i) => {
+    if (p.type === 'Video' && p.video_url) {
+      return `
+        <div class="gallery-item" data-type="Video" data-year="${p.year}" data-index="${i}">
+          <div class="gallery-placeholder">
+            <span class="icon">🎥</span>
+            <span>${p.title}</span>
+          </div>
+          <div class="gallery-item-overlay">
+            <div style="font-size:0.85rem;font-weight:600;">${p.title}</div>
+            ${p.description ? `<div style="font-size:0.75rem;opacity:0.8;">${p.description}</div>` : ''}
+          </div>
+        </div>`;
+    }
+    return `
+      <div class="gallery-item" data-type="Photo" data-year="${p.year}" data-index="${i}">
+        <img src="${p.image}" alt="${p.title}" loading="lazy">
+        <div class="gallery-item-overlay">
+          <div style="font-size:0.85rem;font-weight:600;">${p.title}</div>
+          ${p.description ? `<div style="font-size:0.75rem;opacity:0.8;">${p.description}</div>` : ''}
+        </div>
+      </div>`;
+  }).join('');
+
+  // Add click handlers for lightbox
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const photo = allPhotos[item.dataset.index];
+      const lb  = document.getElementById('lightbox');
+      const img = document.getElementById('lightboxImg');
+      const vid = document.getElementById('lightboxVideo');
+      const cap = document.getElementById('lightboxCaption');
+      if (photo.type === 'Video' && photo.video_url) {
+        img.style.display = 'none';
+        vid.style.display = 'block';
+        vid.innerHTML = `<iframe src="${photo.video_url}" frameborder="0" allowfullscreen></iframe>`;
+      } else {
+        vid.style.display = 'none';
+        vid.innerHTML = '';
+        img.src = photo.image;
+        img.style.display = 'block';
+      }
+      cap.textContent = photo.title + (photo.description ? ' — ' + photo.description : '');
+      lb.classList.add('open');
+    });
+  });
+}
+
 // Filter tabs
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', function() {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     this.classList.add('active');
     const filter = this.dataset.filter;
-    document.querySelectorAll('.gallery-item').forEach(item => {
-      const typeMatch = filter === 'all' || item.dataset.type === filter;
-      const yearMatch = filter === 'all' || !['2026','2025','2024'].includes(filter) || item.dataset.year === filter;
-      const show = (filter === 'all') ||
-                   (['photo','video'].includes(filter) && item.dataset.type === filter) ||
-                   (['2026','2025','2024'].includes(filter) && item.dataset.year === filter);
-      item.style.display = show ? '' : 'none';
-    });
+    const filtered = filter === 'all' ? allPhotos :
+      allPhotos.filter(p => p.type === filter || p.year === filter);
+    renderGallery(filtered);
   });
 });
 
-// Lightbox
-document.querySelectorAll('.gallery-item[data-src]').forEach(item => {
-  item.addEventListener('click', () => {
-    const lb = document.getElementById('lightbox');
-    const img = document.getElementById('lightboxImg');
-    const vid = document.getElementById('lightboxVideo');
-    const cap = document.getElementById('lightboxCaption');
-    if (item.dataset.type === 'video') {
-      img.style.display = 'none';
-      vid.style.display = 'block';
-      vid.innerHTML = `<iframe src="${item.dataset.src}" frameborder="0" allowfullscreen></iframe>`;
-    } else {
-      vid.style.display = 'none';
-      vid.innerHTML = '';
-      img.src = item.dataset.src;
-      img.style.display = 'block';
-    }
-    cap.textContent = item.dataset.caption || '';
-    lb.classList.add('open');
-  });
-});
-
+// Lightbox close
 document.getElementById('lightboxClose').addEventListener('click', () => {
   document.getElementById('lightbox').classList.remove('open');
   document.getElementById('lightboxVideo').innerHTML = '';
@@ -212,6 +208,8 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
     document.getElementById('lightboxVideo').innerHTML = '';
   }
 });
+
+loadGallery();
 </script>
 </body>
 </html>
