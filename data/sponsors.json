@@ -9,15 +9,15 @@
       "description": "Quality construction services on the North Shore",
       "active": true
     },
-    {
-      "id": 2,
-      "name": "Building Center - Gloucester & Essex",
-      "url": "https://bcgloucester.com/",
-      "logo": "/images/sponsors/building-center.png",
-      "dark_logo": false,
-      "description": "Your local building supply source in Gloucester and Essex",
-      "active": true
-    },
+ {
+  "id": 2,
+  "name": "Bar Crawl Comedy",
+  "url": "https://www.instagram.com/bar_crawl_comedy?igsh=aWttb2Q3amEzZnQ1",
+  "logo": "/images/sponsors/bar-crawl-comedy.png",
+  "dark_logo": false,
+  "description": "Bar Crawl Comedy — Spin the Wheel Comedy Show",
+  "active": true
+},
     {
       "id": 3,
       "name": "Zappix",
