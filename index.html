@@ -40,7 +40,31 @@
 <div class="page-content">
   <section class="hero">
     <div style="position:relative;z-index:1;">
-      <img src="/images/logo.png" alt="Allnighters Softball" class="hero-logo">
+<div style="position:relative;width:min(280px,70vw);margin:0 auto 2rem;">
+        <svg viewBox="0 0 280 280" style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:min(320px,80vw);z-index:2;pointer-events:none;" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <path id="arcPath" d="M 40,160 A 110,110 0 0,1 240,160"/>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- Ribbon shadow -->
+          <path d="M 32,163 A 118,118 0 0,1 248,163" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="22" stroke-linecap="round"/>
+          <!-- Ribbon main gold -->
+          <path d="M 32,163 A 118,118 0 0,1 248,163" fill="none" stroke="#c9a84c" stroke-width="20" stroke-linecap="round"/>
+          <!-- Ribbon highlight -->
+          <path d="M 32,163 A 118,118 0 0,1 248,163" fill="none" stroke="#e8c970" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
+          <!-- Stars -->
+          <text x="22" y="148" font-size="14" fill="#e8c970" filter="url(#glow)">★</text>
+          <text x="244" y="148" font-size="14" fill="#e8c970" filter="url(#glow)">★</text>
+          <!-- Curved text -->
+          <text font-family="Oswald, sans-serif" font-size="13.5" font-weight="700" fill="#080808" letter-spacing="1.5">
+            <textPath href="#arcPath" startOffset="50%" text-anchor="middle">✦ CELEBRATING OUR 35TH SEASON ✦</textPath>
+          </text>
+        </svg>
+        <img src="/images/logo.png" alt="Allnighters Softball" class="hero-logo" style="margin:0;position:relative;z-index:1;">
+      </div>
       <h1 class="hero-title">Allnighters</h1>
       <p class="hero-subtitle">Softball · Peabody, MA · Est. 1992</p>
       <div class="hero-stats">
