@@ -29,6 +29,15 @@
     },
     {
       "id": 4,
+      "name": "Boston Pickleball Association",
+      "url": "https://www.bostonpickleballassociation.org",
+      "logo": "/images/sponsors/boston-pickleball-association.png",
+      "dark_logo": false,
+      "description": "Pikcelball Lessons & Tournaments",
+      "active": true
+    },
+    {
+      "id": 5,
       "name": "Coming Soon",
       "url": "#",
       "logo": "",
