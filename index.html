@@ -40,31 +40,66 @@
 <div class="page-content">
   <section class="hero">
     <div style="position:relative;z-index:1;">
-<div style="position:relative;width:min(280px,70vw);margin:0 auto 2rem;">
-        <svg viewBox="0 0 280 280" style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:min(320px,80vw);z-index:2;pointer-events:none;" xmlns="http://www.w3.org/2000/svg">
+
+<!-- ── 35th Season Bat Badge ── -->
+      <div style="margin:0 auto 1rem;display:flex;justify-content:center;">
+        <svg width="60" height="220" viewBox="0 0 60 220" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <path id="arcPath" d="M 40,160 A 110,110 0 0,1 240,160"/>
-            <filter id="glow">
+            <linearGradient id="batGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#8a6e28;stop-opacity:1"/>
+              <stop offset="30%" style="stop-color:#e8c970;stop-opacity:1"/>
+              <stop offset="50%" style="stop-color:#c9a84c;stop-opacity:1"/>
+              <stop offset="70%" style="stop-color:#e8c970;stop-opacity:1"/>
+              <stop offset="100%" style="stop-color:#8a6e28;stop-opacity:1"/>
+            </linearGradient>
+            <linearGradient id="handleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#6b5020;stop-opacity:1"/>
+              <stop offset="40%" style="stop-color:#c9a84c;stop-opacity:1"/>
+              <stop offset="100%" style="stop-color:#6b5020;stop-opacity:1"/>
+            </linearGradient>
+            <filter id="batGlow">
               <feGaussianBlur stdDeviation="2" result="blur"/>
               <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
+            <path id="batText" d="M 30,195 L 30,30"/>
           </defs>
-          <!-- Ribbon shadow -->
-          <path d="M 32,163 A 118,118 0 0,1 248,163" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="22" stroke-linecap="round"/>
-          <!-- Ribbon main gold -->
-          <path d="M 32,163 A 118,118 0 0,1 248,163" fill="none" stroke="#c9a84c" stroke-width="20" stroke-linecap="round"/>
-          <!-- Ribbon highlight -->
-          <path d="M 32,163 A 118,118 0 0,1 248,163" fill="none" stroke="#e8c970" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
-          <!-- Stars -->
-          <text x="22" y="148" font-size="14" fill="#e8c970" filter="url(#glow)">★</text>
-          <text x="244" y="148" font-size="14" fill="#e8c970" filter="url(#glow)">★</text>
-          <!-- Curved text -->
-          <text font-family="Oswald, sans-serif" font-size="13.5" font-weight="700" fill="#080808" letter-spacing="1.5">
-            <textPath href="#arcPath" startOffset="50%" text-anchor="middle">✦ CELEBRATING OUR 35TH SEASON ✦</textPath>
+
+          <!-- Bat knob -->
+          <ellipse cx="30" cy="208" rx="10" ry="6" fill="url(#handleGrad)" stroke="#6b5020" stroke-width="1"/>
+
+          <!-- Bat handle -->
+          <rect x="24" y="155" width="12" height="58" rx="4" fill="url(#handleGrad)" stroke="#6b5020" stroke-width="0.5"/>
+
+          <!-- Tape wrap lines on handle -->
+          <line x1="24" y1="175" x2="36" y2="175" stroke="#c9a84c" stroke-width="1.5" opacity="0.5"/>
+          <line x1="24" y1="181" x2="36" y2="181" stroke="#c9a84c" stroke-width="1.5" opacity="0.5"/>
+          <line x1="24" y1="187" x2="36" y2="187" stroke="#c9a84c" stroke-width="1.5" opacity="0.5"/>
+
+          <!-- Bat taper -->
+          <path d="M 24,155 Q 22,130 18,100 Q 14,70 12,40" fill="none" stroke="url(#batGrad)" stroke-width="12" stroke-linecap="round"/>
+          <path d="M 36,155 Q 38,130 42,100 Q 46,70 48,40" fill="none" stroke="url(#batGrad)" stroke-width="12" stroke-linecap="round"/>
+          <rect x="24" y="100" width="12" height="55" fill="url(#batGrad)"/>
+
+          <!-- Bat barrel -->
+          <ellipse cx="30" cy="32" rx="18" ry="10" fill="url(#batGrad)" stroke="#8a6e28" stroke-width="1"/>
+          <path d="M 12,32 Q 12,20 30,18 Q 48,20 48,32" fill="url(#batGrad)" stroke="#8a6e28" stroke-width="0.5"/>
+
+          <!-- Barrel end cap -->
+          <ellipse cx="30" cy="20" rx="18" ry="8" fill="#e8c970" stroke="#8a6e28" stroke-width="1"/>
+          <ellipse cx="30" cy="20" rx="14" ry="5" fill="#c9a84c" opacity="0.6"/>
+
+          <!-- Shine highlight on barrel -->
+          <path d="M 16,35 Q 20,25 30,22" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+          <!-- Text along bat -->
+          <text font-family="Oswald, sans-serif" font-size="8.5" font-weight="700" fill="#080808" letter-spacing="0.8" text-anchor="middle">
+            <textPath href="#batText" startOffset="30%">✦ CELEBRATING OUR 35TH SEASON ✦</textPath>
           </text>
         </svg>
-        <img src="/images/logo.png" alt="Allnighters Softball" class="hero-logo" style="margin:0;position:relative;z-index:1;">
       </div>
+      <!-- ── End Bat Badge ── -->
+      <img src="/images/logo.png" alt="Allnighters Softball" class="hero-logo">
+      
       <h1 class="hero-title">Allnighters</h1>
       <p class="hero-subtitle">Softball · Peabody, MA · Est. 1992</p>
       <div class="hero-stats">
