@@ -252,7 +252,7 @@ function submitOrder() {
   const phone = document.getElementById('modalPhone').value;
   const notes = document.getElementById('modalNotes').value;
   const body  = `Order Request\n\nItem: ${item}\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nSize: ${size}\nQuantity: ${qty}\nNotes: ${notes}`;
-  window.location.href = `mailto:allnighterssoftball@gmail.com?subject=Pro Shop Order: ${encodeURIComponent(item)}&body=${encodeURIComponent(body)}`;
+  window.location.href = `mailto:coach@allnighterssoftball.com?subject=Pro Shop Order: ${encodeURIComponent(item)}&body=${encodeURIComponent(body)}`;
 
   document.getElementById('modalConfirm').style.display = 'block';
   setTimeout(closeModal, 3000);
