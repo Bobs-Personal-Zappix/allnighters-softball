@@ -36,8 +36,17 @@
       "description": "Pikcelball Lessons & Tournaments",
       "active": true
     },
-    {
+   {
       "id": 5,
+      "name": "DCHOMES",
+      "url": "https://www.dchomesbuilder.com",
+      "logo": "/images/sponsors/DCHOMES.png",
+      "dark_logo": false,
+      "description": "Local and Experienced Home Builders and Renovations",
+      "active": true
+    },
+    {
+      "id": 6,
       "name": "Coming Soon",
       "url": "#",
       "logo": "",
