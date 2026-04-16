@@ -1,58 +1,60 @@
 {
-  "sponsors": [
+  "season_sponsor": {
+    "name": "Season Sponsor",
+    "url": "#",
+    "logo": "",
+    "description": "Interested in becoming our Season Sponsor? Contact us!",
+    "placeholder": true
+  },
+  "game_sponsors": [
     {
-      "id": 1,
       "name": "Birch & Beam Construction",
       "url": "https://www.birchandbeamconstruction.com/",
       "logo": "/images/sponsors/birch-beam.png",
-      "dark_logo": true,
-      "description": "Quality construction services on the North Shore",
-      "active": true
-    },
- {
-  "id": 2,
-  "name": "Bar Crawl Comedy",
-  "url": "https://www.instagram.com/bar_crawl_comedy?igsh=aWttb2Q3amEzZnQ1",
-  "logo": "/images/sponsors/bar-crawl-comedy.jpg",
-  "dark_logo": false,
-  "description": "Bar Crawl Comedy — Spin the Wheel Comedy Show",
-  "active": true
-},
-    {
-      "id": 3,
-      "name": "Zappix",
-      "url": "https://www.zappix.com",
-      "logo": "/images/sponsors/zappix.png",
-      "dark_logo": false,
-      "description": "Visual IVR and conversational AI for contact centers",
-      "active": true
+      "dark_logo": true
     },
     {
-      "id": 4,
       "name": "Boston Pickleball Association",
-      "url": "https://www.bostonpickleballassociation.org",
-      "logo": "/images/sponsors/boston-pickleball-association.png",
-      "dark_logo": false,
-      "description": "Pikcelball Lessons & Tournaments",
-      "active": true
-    },
-   {
-      "id": 5,
-      "name": "DCHOMES",
-      "url": "https://www.dchomesbuilder.com",
-      "logo": "/images/sponsors/DCHOMES.png",
-      "dark_logo": false,
-      "description": "Local and Experienced Home Builders and Renovations",
-      "active": true
+      "url": "#",
+      "logo": "/images/sponsors/boston-pickleball.png",
+      "dark_logo": false
     },
     {
-      "id": 6,
-      "name": "Coming Soon",
+      "name": "Game Sponsor",
       "url": "#",
       "logo": "",
-      "dark_logo": false,
-      "description": "Sponsor placeholder",
-      "active": false,
+      "placeholder": true
+    }
+  ],
+  "inning_sponsors": [
+    {
+      "name": "DCHomes",
+      "url": "https://dchomesbuilder.com/",
+      "logo": "/images/sponsors/DCHOMES.png",
+      "dark_logo": false
+    },
+    {
+      "name": "Bar Crawl Comedy",
+      "url": "https://www.instagram.com/bar_crawl_comedy?igsh=aWttb2Q3amEzZnQ1",
+      "logo": "/images/sponsors/bar-crawl-comedy.png",
+      "dark_logo": false
+    },
+    {
+      "name": "Inning Sponsor",
+      "url": "#",
+      "logo": "",
+      "placeholder": true
+    },
+    {
+      "name": "Inning Sponsor",
+      "url": "#",
+      "logo": "",
+      "placeholder": true
+    },
+    {
+      "name": "Inning Sponsor",
+      "url": "#",
+      "logo": "",
       "placeholder": true
     }
   ]
