@@ -448,8 +448,8 @@ hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
   filter: brightness(1);
 }
 .sponsor-item img[src*="building-center"] {
-  max-height: 90px;
-  max-width: 90px;
+  max-height: 100px;
+  max-width: 220px;
 }
 .sponsor-item img[src*="bar-crawl-comedy"] {
   max-height: 240px;
@@ -460,6 +460,10 @@ hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
   max-width: 180px;
 }
 .sponsor-item img[src*="boston-pickleball-association"] {
+  max-height: 100px;
+  max-width: 220px;
+   }
+.sponsor-item img[src*="DCHOMES"] {
   max-height: 100px;
   max-width: 220px;
 }
