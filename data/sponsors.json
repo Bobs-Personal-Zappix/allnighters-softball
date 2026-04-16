@@ -3,7 +3,7 @@
     "name": "Season Sponsor",
     "url": "#",
     "logo": "",
-    "description": "Interested in becoming our Season Sponsor? Contact us!",
+    "description": "Interested? Contact us!",
     "placeholder": true
   },
   "game_sponsors": [
@@ -16,7 +16,7 @@
     {
       "name": "Boston Pickleball Association",
       "url": "#",
-      "logo": "/images/sponsors/boston-pickleball.png",
+      "logo": "/images/sponsors/boston-pickleball-association.png",
       "dark_logo": false
     },
     {
@@ -36,7 +36,7 @@
     {
       "name": "Bar Crawl Comedy",
       "url": "https://www.instagram.com/bar_crawl_comedy?igsh=aWttb2Q3amEzZnQ1",
-      "logo": "/images/sponsors/bar-crawl-comedy.png",
+      "logo": "/images/sponsors/bar-crawl-comedy.jpg",
       "dark_logo": false
     },
     {
