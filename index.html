@@ -116,12 +116,40 @@
   </section>
 
   <!-- ── Sponsors ───────────────────────────── -->
-  <section style="background:var(--gold);padding:3.5rem 0;">
+  <section style="background:var(--gold);padding:3.5rem 0;" id="sponsorsSection">
     <div class="container">
-      <h2 style="font-family:'Oswald',sans-serif;font-size:2.2rem;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:0.08em;text-align:center;position:relative;padding-bottom:0.75rem;margin-bottom:0.5rem;">Our Sponsors</h2>
-      <div style="width:60px;height:3px;background:var(--text);margin:0 auto 0.75rem;"></div>
-      <p style="text-align:center;font-size:0.85rem;color:var(--black);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:2rem;opacity:0.7;">PLEASE CHECK OUT OUR SPONSORS WHO ARE THE BEST IN THE AREA!</p>
-      <div class="sponsors-grid" id="sponsorsBar"></div>
+      <h2 style="font-family:'Oswald',sans-serif;font-size:2.2rem;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:0.08em;text-align:center;margin-bottom:0.5rem;">Our Sponsors</h2>
+      <div style="width:60px;height:3px;background:var(--text);margin:0 auto 0.5rem;"></div>
+      <p style="text-align:center;font-size:0.85rem;color:var(--black);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:2.5rem;opacity:0.7;">Supporting the Allnighters in 2026</p>
+
+      <!-- Season Sponsor -->
+      <div style="margin-bottom:2.5rem;">
+        <div style="text-align:center;margin-bottom:1.25rem;">
+          <span style="font-family:'Oswald',sans-serif;font-size:1rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--black);background:rgba(0,0,0,0.12);padding:0.3rem 1.2rem;border-radius:20px;">⭐ Season Sponsor</span>
+        </div>
+        <div id="seasonSponsor" style="display:flex;justify-content:center;"></div>
+      </div>
+
+      <hr style="border:none;border-top:1px solid rgba(0,0,0,0.15);margin:0 0 2.5rem;">
+
+      <!-- Game Sponsors -->
+      <div style="margin-bottom:2.5rem;">
+        <div style="text-align:center;margin-bottom:1.25rem;">
+          <span style="font-family:'Oswald',sans-serif;font-size:0.88rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--black);background:rgba(0,0,0,0.12);padding:0.25rem 1rem;border-radius:20px;">🎯 Game Sponsors</span>
+        </div>
+        <div id="gameSponsors" style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;"></div>
+      </div>
+
+      <hr style="border:none;border-top:1px solid rgba(0,0,0,0.15);margin:0 0 2.5rem;">
+
+      <!-- Inning Sponsors -->
+      <div>
+        <div style="text-align:center;margin-bottom:1.25rem;">
+          <span style="font-family:'Oswald',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--black);background:rgba(0,0,0,0.12);padding:0.2rem 0.9rem;border-radius:20px;">⚾ Inning Sponsors</span>
+        </div>
+        <div id="inningSponsors" style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;"></div>
+      </div>
+
     </div>
   </section>
   
@@ -299,7 +327,60 @@ async function loadNextGame() {
 }
 
 loadNextGame();
-loadSponsors('sponsorsBar');
+// Load tiered sponsors
+async function loadTieredSponsors() {
+  try {
+    const res  = await fetch('/data/sponsors.json');
+    const data = await res.json();
+
+    // Season Sponsor
+    const ss = data.season_sponsor;
+    document.getElementById('seasonSponsor').innerHTML = ss.placeholder
+      ? `<div style="width:280px;height:120px;border:3px dashed rgba(0,0,0,0.2);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;">
+           <div style="font-size:2rem;">⭐</div>
+           <div style="font-family:'Oswald',sans-serif;font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,0,0,0.5);">Your Brand Here</div>
+           <div style="font-size:0.72rem;color:rgba(0,0,0,0.4);">${ss.description}</div>
+         </div>`
+      : `<a href="${ss.url}" target="_blank" rel="noopener"
+           style="display:flex;align-items:center;justify-content:center;padding:1.5rem 2.5rem;background:${ss.dark_logo ? '#fff' : 'rgba(0,0,0,0.08)'};border-radius:12px;border:2px solid rgba(0,0,0,0.1);transition:all 0.2s;"
+           onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+           <img src="${ss.logo}" alt="${ss.name}" style="max-height:100px;max-width:280px;object-fit:contain;">
+         </a>`;
+
+    // Game Sponsors
+    document.getElementById('gameSponsors').innerHTML = data.game_sponsors.map(s =>
+      s.placeholder
+        ? `<div style="width:180px;height:90px;border:2px dashed rgba(0,0,0,0.2);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.3rem;">
+             <div style="font-size:1.5rem;">🎯</div>
+             <div style="font-family:'Oswald',sans-serif;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,0,0,0.4);">Game Sponsor</div>
+           </div>`
+        : `<a href="${s.url}" target="_blank" rel="noopener"
+             style="display:flex;align-items:center;justify-content:center;padding:1rem 1.5rem;background:${s.dark_logo ? '#fff' : 'rgba(0,0,0,0.08)'};border-radius:10px;border:2px solid rgba(0,0,0,0.1);min-width:160px;transition:all 0.2s;"
+             onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+             <img src="${s.logo}" alt="${s.name}" style="max-height:75px;max-width:180px;object-fit:contain;">
+           </a>`
+    ).join('');
+
+    // Inning Sponsors
+    document.getElementById('inningSponsors').innerHTML = data.inning_sponsors.map(s =>
+      s.placeholder
+        ? `<div style="width:130px;height:70px;border:2px dashed rgba(0,0,0,0.2);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.3rem;">
+             <div style="font-size:1.2rem;">⚾</div>
+             <div style="font-family:'Oswald',sans-serif;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(0,0,0,0.4);">Inning Sponsor</div>
+           </div>`
+        : `<a href="${s.url}" target="_blank" rel="noopener"
+             style="display:flex;align-items:center;justify-content:center;padding:0.75rem 1rem;background:${s.dark_logo ? '#fff' : 'rgba(0,0,0,0.08)'};border-radius:8px;border:2px solid rgba(0,0,0,0.1);min-width:120px;transition:all 0.2s;"
+             onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+             <img src="${s.logo}" alt="${s.name}" style="max-height:55px;max-width:140px;object-fit:contain;">
+           </a>`
+    ).join('');
+
+  } catch(e) {
+    console.warn('Could not load sponsors:', e);
+  }
+}
+
+loadTieredSponsors();
 </script>
 </body>
 </html>
