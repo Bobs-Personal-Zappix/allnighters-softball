@@ -3,7 +3,7 @@
   "league": "Peabody Men's Intramural Softball League",
   "division": "Division 3",
   "players": [
-    { "number": "7",  "name": "Bob Barrows",       "nickname": "Baz",    "positions": "Coach, IF, C",      "details": "The Godfather",                                     "years_on_team": 1, "photo": "" },
+    { "number": "7",  "name": "Coach Barrows",       "nickname": "Baz",    "positions": "Coach, IF, C",      "details": "The Godfather",                                     "years_on_team": 1, "photo": "" },
     { "number": "40", "name": "Chris Parello",      "nickname": "P",      "positions": "1B, P",             "details": "Started on Fridays and we bought him like the Babe","years_on_team": 1, "photo": "" },
     { "number": "8",  "name": "Brendan McCarthy",   "nickname": "BMac",   "positions": "SS, 2B, 3B, OF",   "details": "The Grandson who kept it going",                     "years_on_team": 1, "photo": "" },
     { "number": "33", "name": "Anthony Gagliano",   "nickname": "Ant",    "positions": "2B, 3B, C",         "details": "The Great Grandson who kept it together",            "years_on_team": 1, "photo": "" },
