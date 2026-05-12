@@ -22,6 +22,7 @@
     { "number": "00", "name": "Strip Club Steve",   "nickname": "SCS",    "positions": "OF, 1B, C",         "details": "The Pimp",                                          "years_on_team": 1, "photo": "" },
     { "number": "25", "name": "Joe Z.",             "nickname": "JZ",     "positions": "OF",                "details": "Rocky",                                             "years_on_team": 1, "photo": "" },
     { "number": "18", "name": "Myles",              "nickname": "Myles",  "positions": "OF, C, 2B",         "details": "Flash",                                             "years_on_team": 1, "photo": "" },
+     { "number": "99", "name": "Ryan Overberg",      "nickname": "Ry", "positions": "1B, 3B, C",            "details": "The Heat",                                          "years_on_team": 1, "photo": "" },
     { "number": "99", "name": "Assad Daaboul",      "nickname": "DaaBoo", "positions": "OF",                "details": "Invisible Man",                                     "years_on_team": 1, "photo": "" }
   ]
 }
