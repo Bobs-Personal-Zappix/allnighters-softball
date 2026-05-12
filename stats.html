@@ -31,7 +31,7 @@
 <div class="page-content">
   <div class="page-header">
     <h1 class="page-header-title">Player Stats</h1>
-    <p class="page-header-sub">Season Batting Statistics · Updated Weekly</p>
+    <p class="page-header-sub">2026 Season Statistics · Updated Weekly</p>
   </div>
 
   <section class="section">
@@ -48,33 +48,61 @@
       <!-- Last Updated -->
       <div style="margin-bottom:1.5rem;font-size:0.8rem;color:var(--text-muted);" id="lastUpdated"></div>
 
-      <!-- Team Totals -->
+      <!-- Team Batting Totals -->
       <div id="teamTotals" style="margin-bottom:2rem;"></div>
 
-      <!-- Stats Table -->
-      <div class="stats-wrapper">
+      <!-- ── BATTING STATS ── -->
+      <h2 style="font-family:'Oswald',sans-serif;font-size:1.6rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:2px solid var(--gold-dark);">⚾ Batting</h2>
+      <div class="stats-wrapper" style="margin-bottom:3rem;">
         <div id="statsTable">
           <div class="loading"><div class="spinner"></div>Loading stats...</div>
         </div>
       </div>
 
+      <!-- ── PITCHING STATS ── -->
+      <h2 style="font-family:'Oswald',sans-serif;font-size:1.6rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:2px solid var(--gold-dark);">⚾ Pitching</h2>
+      <div class="stats-wrapper" style="margin-bottom:2rem;">
+        <div id="pitchingTable">
+          <div class="loading"><div class="spinner"></div>Loading pitching stats...</div>
+        </div>
+      </div>
+
       <!-- Stat Key -->
       <div style="margin-top:1.5rem;padding:1.25rem;background:var(--card);border-radius:var(--radius);border:1px solid var(--border);">
-        <div style="font-family:'Oswald',sans-serif;font-size:0.75rem;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem;">Stat Key</div>
-        <div style="display:flex;gap:1rem;flex-wrap:wrap;font-size:0.78rem;color:var(--text-muted);">
+        <div style="font-family:'Oswald',sans-serif;font-size:0.75rem;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem;">Batting Key</div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;font-size:0.78rem;color:var(--text-muted);margin-bottom:1rem;">
           <span><strong style="color:var(--text);">GP</strong> — Games Played</span>
           <span><strong style="color:var(--text);">AB</strong> — At Bats</span>
           <span><strong style="color:var(--text);">H</strong> — Hits</span>
-          <span><strong style="color:var(--text);">BB</strong> — Walks</span>
-          <span><strong style="color:var(--text);">K</strong> — Strikeouts</span>
+          <span><strong style="color:var(--text);">AVG</strong> — Batting Average</span>
+          <span><strong style="color:var(--text);">OBP</strong> — On Base %</span>
+          <span><strong style="color:var(--text);">SLG</strong> — Slugging %</span>
+          <span><strong style="color:var(--text);">OPS</strong> — OBP + SLG</span>
           <span><strong style="color:var(--text);">1B</strong> — Singles</span>
           <span><strong style="color:var(--text);">2B</strong> — Doubles</span>
           <span><strong style="color:var(--text);">3B</strong> — Triples</span>
           <span><strong style="color:var(--text);">HR</strong> — Home Runs</span>
-          <span><strong style="color:var(--text);">GS</strong> — Grand Slams</span>
-          <span><strong style="color:var(--gold);">AVG</strong> — Batting Average (H ÷ AB)</span>
+          <span><strong style="color:var(--text);">RBI</strong> — Runs Batted In</span>
+          <span><strong style="color:var(--text);">R</strong> — Runs Scored</span>
+          <span><strong style="color:var(--text);">BB</strong> — Walks</span>
+          <span><strong style="color:var(--text);">SO</strong> — Strikeouts</span>
+        </div>
+        <div style="font-family:'Oswald',sans-serif;font-size:0.75rem;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem;">Pitching Key</div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;font-size:0.78rem;color:var(--text-muted);">
+          <span><strong style="color:var(--text);">GP</strong> — Games Pitched</span>
+          <span><strong style="color:var(--text);">GS</strong> — Games Started</span>
+          <span><strong style="color:var(--text);">IP</strong> — Innings Pitched</span>
+          <span><strong style="color:var(--text);">W</strong> — Wins</span>
+          <span><strong style="color:var(--text);">L</strong> — Losses</span>
+          <span><strong style="color:var(--text);">H</strong> — Hits Allowed</span>
+          <span><strong style="color:var(--text);">R</strong> — Runs Allowed</span>
+          <span><strong style="color:var(--text);">ER</strong> — Earned Runs</span>
+          <span><strong style="color:var(--text);">BB</strong> — Walks</span>
+          <span><strong style="color:var(--text);">SO</strong> — Strikeouts</span>
+          <span><strong style="color:var(--gold);">ERA</strong> — Earned Run Average (per 7 innings)</span>
         </div>
       </div>
+
     </div>
   </section>
 </div>
@@ -100,7 +128,7 @@
     </div>
     <div class="footer-info">
       <h4>Stats Info</h4>
-      <p>Stats are updated manually each week during the season. Batting Average is auto-calculated (H ÷ AB).</p>
+      <p>Stats updated weekly. AVG, OBP, SLG, OPS and ERA are auto-calculated.</p>
     </div>
   </div>
   <div class="footer-bottom">
@@ -113,13 +141,43 @@
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
 
-let currentSort = { col: 'ba', dir: 'desc' };
+let currentSort = { col: 'avg', dir: 'desc' };
+
+// ── Auto-calculate functions ─────────────────
+function fmtAvg(h, ab) {
+  if (!ab) return '.000';
+  return '.' + Math.round((h/ab)*1000).toString().padStart(3,'0');
+}
+function fmtOBP(h, bb, ab) {
+  const denom = ab + bb;
+  if (!denom) return '.000';
+  return '.' + Math.round(((h+bb)/denom)*1000).toString().padStart(3,'0');
+}
+function fmtSLG(singles, doubles, triples, hr, ab) {
+  if (!ab) return '.000';
+  const tb = singles + (doubles*2) + (triples*3) + (hr*4);
+  return '.' + Math.round((tb/ab)*1000).toString().padStart(3,'0');
+}
+function fmtOPS(h, bb, ab, singles, doubles, triples, hr) {
+  if (!ab) return '.000';
+  const obp = (h+bb)/(ab+bb||1);
+  const tb  = singles + (doubles*2) + (triples*3) + (hr*4);
+  const slg = tb/ab;
+  const ops = obp + slg;
+  return ops.toFixed(3).replace('0.','.');
+}
+function fmtERA(er, ip) {
+  if (!ip) return '—';
+  return ((er/ip)*7).toFixed(2);
+}
 
 async function loadStats(season) {
-  const tableDiv = document.getElementById('statsTable');
-  tableDiv.innerHTML = '<div class="loading"><div class="spinner"></div>Loading stats...</div>';
-  document.getElementById('teamTotals').innerHTML = '';
-  document.getElementById('lastUpdated').textContent = '';
+  const tableDiv   = document.getElementById('statsTable');
+  const pitchDiv   = document.getElementById('pitchingTable');
+  const recordDiv  = document.getElementById('teamTotals');
+  tableDiv.innerHTML  = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+  pitchDiv.innerHTML  = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+  recordDiv.innerHTML = '';
 
   try {
     const res  = await fetch(`/data/stats-${season}.json`);
@@ -127,105 +185,160 @@ async function loadStats(season) {
     const data = await res.json();
 
     if (data.last_updated) {
-      document.getElementById('lastUpdated').textContent =
-        `Last updated: ${formatDate(data.last_updated)}`;
+      document.getElementById('lastUpdated').textContent = `Last updated: ${formatDate(data.last_updated)}`;
     }
 
-    renderStats(data.players);
+    // Enrich players with calculated stats
+    const enriched = data.players.map(p => {
+      const h = (p.singles||0) + (p.doubles||0) + (p.triples||0) + (p.hr||0);
+      return {
+        ...p, h,
+        avg:    (p.ab > 0) ? (h/p.ab) : 0,
+        avgStr: fmtAvg(h, p.ab),
+        obpStr: fmtOBP(h, p.bb||0, p.ab),
+        slgStr: fmtSLG(p.singles||0, p.doubles||0, p.triples||0, p.hr||0, p.ab),
+        opsStr: fmtOPS(h, p.bb||0, p.ab, p.singles||0, p.doubles||0, p.triples||0, p.hr||0)
+      };
+    });
+
+    // Team totals
+    const tot = enriched.reduce((a,p) => ({
+      ab: a.ab+p.ab, h: a.h+p.h, bb: a.bb+(p.bb||0),
+      singles: a.singles+(p.singles||0), doubles: a.doubles+(p.doubles||0),
+      triples: a.triples+(p.triples||0), hr: a.hr+(p.hr||0),
+      rbi: a.rbi+(p.rbi||0), r: a.r+(p.r||0), k: a.k+(p.k||0)
+    }), {ab:0,h:0,bb:0,singles:0,doubles:0,triples:0,hr:0,rbi:0,r:0,k:0});
+
+    recordDiv.innerHTML = `
+      <div class="record-banner">
+        <div class="record-item"><div class="num" style="font-size:2rem;">${tot.ab}</div><div class="lbl">Team AB</div></div>
+        <div class="record-item"><div class="num" style="font-size:2rem;">${tot.h}</div><div class="lbl">Team Hits</div></div>
+        <div class="record-item"><div class="num" style="font-size:2rem;color:var(--gold);">${fmtAvg(tot.h,tot.ab)}</div><div class="lbl">Team AVG</div></div>
+        <div class="record-item"><div class="num" style="font-size:2rem;color:var(--gold);">${fmtOBP(tot.h,tot.bb,tot.ab)}</div><div class="lbl">Team OBP</div></div>
+        <div class="record-item"><div class="num" style="font-size:2rem;color:#ee9090;">${tot.hr}</div><div class="lbl">Home Runs</div></div>
+        <div class="record-item"><div class="num" style="font-size:2rem;color:#ee9090;">${tot.rbi}</div><div class="lbl">Team RBI</div></div>
+        <div class="record-item"><div class="num" style="font-size:2rem;">${tot.r}</div><div class="lbl">Runs Scored</div></div>
+      </div>`;
+
+    renderBatting(enriched);
+    renderPitching(data.pitchers || []);
+
   } catch(e) {
     tableDiv.innerHTML = '<div class="loading">Stats not available for this season yet.</div>';
+    pitchDiv.innerHTML = '<div class="loading">No pitching data available.</div>';
   }
 }
 
-function renderStats(players, sortCol = currentSort.col, sortDir = currentSort.dir) {
+function renderBatting(players, sortCol = currentSort.col, sortDir = currentSort.dir) {
   currentSort = { col: sortCol, dir: sortDir };
 
-  // Add computed BA
-  const enriched = players.map(p => ({
-    ...p,
-    ba: p.ab > 0 ? p.h / p.ab : 0,
-    baStr: calcBA(p.h, p.ab)
-  }));
-
-  // Sort
-  enriched.sort((a, b) => {
+  players.sort((a,b) => {
     let av = a[sortCol], bv = b[sortCol];
     if (typeof av === 'string') { av = av.toLowerCase(); bv = bv.toLowerCase(); }
     if (av === bv) return 0;
-    const cmp = av < bv ? -1 : 1;
-    return sortDir === 'asc' ? cmp : -cmp;
+    return (sortDir === 'asc' ? 1 : -1) * (av < bv ? -1 : 1);
   });
 
-  // Team totals
-  const totals = enriched.reduce((acc, p) => ({
-    gp: Math.max(acc.gp, p.gp), ab: acc.ab+p.ab, h: acc.h+p.h,
-    bb: acc.bb+p.bb, k: acc.k+p.k,
-    hr: acc.hr+p.hr, gs: acc.gs+p.gs,
-    singles: acc.singles+p.singles, doubles: acc.doubles+p.doubles, triples: acc.triples+p.triples
-  }), {gp:0,ab:0,h:0,bb:0,k:0,hr:0,gs:0,singles:0,doubles:0,triples:0});
+  function thC(col) { return col === currentSort.col ? (currentSort.dir === 'asc' ? ' sorted-asc' : ' sorted-desc') : ''; }
 
-  document.getElementById('teamTotals').innerHTML = `
-    <div class="record-banner">
-      <div class="record-item"><div class="num" style="font-size:2rem;color:var(--text);">${totals.ab}</div><div class="lbl">Team AB</div></div>
-      <div class="record-item"><div class="num" style="font-size:2rem;color:var(--text);">${totals.h}</div><div class="lbl">Team Hits</div></div>
-      <div class="record-item"><div class="num" style="font-size:2rem;color:var(--gold);">${calcBA(totals.h, totals.ab)}</div><div class="lbl">Team AVG</div></div>
-      <div class="record-item"><div class="num" style="font-size:2rem;color:#ee9090;">${totals.hr}</div><div class="lbl">Home Runs</div></div>
-      <div class="record-item"><div class="num" style="font-size:2rem;color:#ee9090;">${totals.gs}</div><div class="lbl">Grand Slams</div></div>
-    </div>`;
-
-  function thClass(col) {
-    if (col !== sortCol) return '';
-    return sortDir === 'asc' ? ' sorted-asc' : ' sorted-desc';
-  }
-
-  const rows = enriched.map((p, i) => `
+  const rows = players.map(p => `
     <tr>
-      <td style="text-align:left;"><span class="player-num">#${p.number}</span><span class="player-name">${p.name}</span></td>
+      <td style="text-align:left;white-space:nowrap;"><span class="player-num">#${p.number}</span><span class="player-name">${p.name}</span></td>
       <td>${p.gp}</td>
       <td>${p.ab}</td>
       <td>${p.h}</td>
-      <td>${p.bb}</td>
-      <td>${p.k}</td>
-      <td>${p.singles}</td>
-      <td>${p.doubles}</td>
-      <td>${p.triples}</td>
-      <td style="color:#ee9090;">${p.hr}</td>
-      <td style="color:#ee9090;font-weight:700;">${p.gs}</td>
-      <td class="ba-cell">${p.baStr}</td>
+      <td class="ba-cell">${p.avgStr}</td>
+      <td style="color:var(--gold);">${p.obpStr}</td>
+      <td style="color:var(--gold);">${p.slgStr}</td>
+      <td style="color:var(--gold);">${p.opsStr}</td>
+      <td>${p.singles||0}</td>
+      <td>${p.doubles||0}</td>
+      <td>${p.triples||0}</td>
+      <td style="color:#ee9090;">${p.hr||0}</td>
+      <td style="color:#ee9090;font-weight:700;">${p.rbi||0}</td>
+      <td>${p.r||0}</td>
+      <td>${p.bb||0}</td>
+      <td>${p.k||0}</td>
     </tr>`).join('');
 
   document.getElementById('statsTable').innerHTML = `
     <table class="stats-table">
       <thead>
         <tr>
-          <th style="text-align:left;" data-col="name" class="${thClass('name')}">Player</th>
-          <th data-col="gp" class="${thClass('gp')}">GP</th>
-          <th data-col="ab" class="${thClass('ab')}">AB</th>
-          <th data-col="h" class="${thClass('h')}">H</th>
-          <th data-col="bb" class="${thClass('bb')}">BB</th>
-          <th data-col="k" class="${thClass('k')}">K</th>
-          <th data-col="singles" class="${thClass('singles')}">1B</th>
-          <th data-col="doubles" class="${thClass('doubles')}">2B</th>
-          <th data-col="triples" class="${thClass('triples')}">3B</th>
-          <th data-col="hr" class="${thClass('hr')}">HR</th>
-          <th data-col="gs" class="${thClass('gs')}">GS</th>
-          <th data-col="ba" class="${thClass('ba')}">AVG</th>
+          <th style="text-align:left;" data-col="name" class="${thC('name')}">Player</th>
+          <th data-col="gp"      class="${thC('gp')}">GP</th>
+          <th data-col="ab"      class="${thC('ab')}">AB</th>
+          <th data-col="h"       class="${thC('h')}">H</th>
+          <th data-col="avg"     class="${thC('avg')}">AVG</th>
+          <th data-col="obpStr"  class="${thC('obpStr')}">OBP</th>
+          <th data-col="slgStr"  class="${thC('slgStr')}">SLG</th>
+          <th data-col="opsStr"  class="${thC('opsStr')}">OPS</th>
+          <th data-col="singles" class="${thC('singles')}">1B</th>
+          <th data-col="doubles" class="${thC('doubles')}">2B</th>
+          <th data-col="triples" class="${thC('triples')}">3B</th>
+          <th data-col="hr"      class="${thC('hr')}">HR</th>
+          <th data-col="rbi"     class="${thC('rbi')}">RBI</th>
+          <th data-col="r"       class="${thC('r')}">R</th>
+          <th data-col="bb"      class="${thC('bb')}">BB</th>
+          <th data-col="k"       class="${thC('k')}">SO</th>
         </tr>
       </thead>
       <tbody>${rows}</tbody>
     </table>`;
 
-  // Sort on header click
-  document.querySelectorAll('.stats-table th[data-col]').forEach(th => {
+  document.querySelectorAll('#statsTable th[data-col]').forEach(th => {
     th.addEventListener('click', function() {
       const col = this.dataset.col;
       const dir = (currentSort.col === col && currentSort.dir === 'desc') ? 'asc' : 'desc';
-      renderStats(enriched, col, dir);
+      renderBatting(players, col, dir);
     });
   });
 }
 
-// Season selector
+function renderPitching(pitchers) {
+  if (!pitchers.length) {
+    document.getElementById('pitchingTable').innerHTML = '<div class="loading">No pitching data available.</div>';
+    return;
+  }
+
+  const rows = pitchers.map(p => `
+    <tr>
+      <td style="text-align:left;white-space:nowrap;"><span class="player-num">#${p.number}</span><span class="player-name">${p.name}</span></td>
+      <td>${p.gp}</td>
+      <td>${p.gs}</td>
+      <td>${p.ip}</td>
+      <td style="color:#6bc96b;font-weight:700;">${p.w}</td>
+      <td style="color:#c96b6b;font-weight:700;">${p.l}</td>
+      <td>${p.h}</td>
+      <td>${p.r}</td>
+      <td>${p.er}</td>
+      <td>${p.bb}</td>
+      <td>${p.k}</td>
+      <td class="ba-cell">${fmtERA(p.er, p.ip)}</td>
+    </tr>`).join('');
+
+  document.getElementById('pitchingTable').innerHTML = `
+    <table class="stats-table">
+      <thead>
+        <tr>
+          <th style="text-align:left;">Pitcher</th>
+          <th>GP</th>
+          <th>GS</th>
+          <th>IP</th>
+          <th>W</th>
+          <th>L</th>
+          <th>H</th>
+          <th>R</th>
+          <th>ER</th>
+          <th>BB</th>
+          <th>SO</th>
+          <th>ERA</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
 document.querySelectorAll('.year-btn').forEach(btn => {
   btn.addEventListener('click', function() {
     document.querySelectorAll('#statsSeasonSelector .year-btn').forEach(b => b.classList.remove('active'));
