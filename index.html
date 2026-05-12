@@ -76,7 +76,18 @@
       </div>
     </div>
   </section>
+<!-- ── Weekly Highlights ─────────────────── -->
+  <section class="section" style="background:var(--dark);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <h2 class="section-title">This Week in Allnighters Baseball</h2>
 
+      <!-- Recent Results -->
+      <div id="weeklyResults" style="margin-bottom:2.5rem;"></div>
+
+      <!-- Game Highlights -->
+      <div id="weeklyHighlights"></div>
+    </div>
+  </section>
   <!-- ── Sponsors ───────────────────────────── -->
   <section style="background:var(--gold);padding:3.5rem 0;" id="sponsorsSection">
     <div class="container">
@@ -341,7 +352,81 @@ async function loadTieredSponsors() {
     console.warn('Could not load sponsors:', e);
   }
 }
+// Weekly Highlights & Results
+async function loadWeeklySection() {
+  const resultsDiv    = document.getElementById('weeklyResults');
+  const highlightsDiv = document.getElementById('weeklyHighlights');
+  if (!resultsDiv || !highlightsDiv) return;
 
+  const today = new Date(); today.setHours(0,0,0,0);
+  const weekAgo = new Date(today); weekAgo.setDate(weekAgo.getDate() - 7);
+
+  try {
+    // Load recent results
+    const schedRes  = await fetch('/data/schedule-2026.json');
+    const schedData = await schedRes.json();
+
+    const recentGames = schedData.games.filter(g => {
+      if (!g.result || g.result === '' || g.result === 'No Game') return false;
+      const [y,m,d] = g.date.split('-').map(Number);
+      const gameDate = new Date(y, m-1, d);
+      return gameDate >= weekAgo && gameDate <= today;
+    });
+
+    if (recentGames.length > 0) {
+      resultsDiv.innerHTML = `
+        <div style="margin-bottom:1.5rem;">
+          <div style="font-family:'Oswald',sans-serif;font-size:0.78rem;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1rem;">Recent Results</div>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+            ${recentGames.map(g => `
+              <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;min-width:260px;">
+                <span class="badge badge-${g.result === 'W' ? 'win' : g.result === 'L' ? 'loss' : 'tie'}" style="font-size:1rem;padding:0.3rem 0.8rem;">${g.result}</span>
+                <div>
+                  <div style="font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;">vs. ${g.opponent}</div>
+                  <div style="font-size:0.82rem;color:var(--text-muted);">${formatDateShort(g.date)} &nbsp;·&nbsp; ${g.score_us}–${g.score_them}</div>
+                </div>
+              </div>`).join('')}
+          </div>
+        </div>`;
+    } else {
+      resultsDiv.innerHTML = `
+        <div style="font-family:'Oswald',sans-serif;font-size:0.82rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.5rem;">No games played this week yet</div>`;
+    }
+
+    // Load highlights
+    const hlRes  = await fetch('/data/weekly-highlights.json');
+    const hlData = await hlRes.json();
+
+    const recentHighlights = hlData.highlights.filter(h => {
+      const [y,m,d] = h.date.split('-').map(Number);
+      const hDate = new Date(y, m-1, d);
+      return hDate >= weekAgo && hDate <= today;
+    });
+
+    if (recentHighlights.length > 0) {
+      highlightsDiv.innerHTML = `
+        <div style="font-family:'Oswald',sans-serif;font-size:0.78rem;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1rem;">Game Highlights</div>
+        ${recentHighlights.map(h => `
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:1.5rem;">
+            ${h.photo ? `<img src="${h.photo}" alt="Game highlight" style="width:100%;max-height:400px;object-fit:cover;">` : ''}
+            <div style="padding:1.5rem;">
+              <div style="font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:600;color:var(--gold);margin-bottom:0.75rem;text-transform:uppercase;letter-spacing:0.05em;">
+                ⚾ vs. ${h.opponent} &nbsp;·&nbsp; ${formatDate(h.date)}
+              </div>
+              <p style="font-size:0.92rem;color:var(--text-muted);line-height:1.8;margin:0;">${h.summary}</p>
+            </div>
+          </div>`).join('')}`;
+    } else {
+      highlightsDiv.innerHTML = `
+        <div style="font-family:'Oswald',sans-serif;font-size:0.82rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;">Game highlights coming soon!</div>`;
+    }
+
+  } catch(e) {
+    console.warn('Could not load weekly section:', e);
+  }
+}
+
+loadWeeklySection();
 loadTieredSponsors();
 </script>
 </body>
