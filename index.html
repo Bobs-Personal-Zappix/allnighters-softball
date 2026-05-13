@@ -544,7 +544,7 @@ async function loadLineupBanner() {
     const eh1 = p.EH1 && p.EH1.name;
     const eh2 = p.EH2 && p.EH2.name;
 
-    const svg = `<svg width="100%" viewBox="0 0 680 760" xmlns="http://www.w3.org/2000/svg" style="border-radius:8px;overflow:hidden;">
+    const svg = `<svg width="100%" viewBox="0 0 680 800" xmlns="http://www.w3.org/2000/svg" style="border-radius:8px;overflow:hidden;">
       <rect width="680" height="760" fill="#080808"/>
       <path d="M 340,625 L 0,291 L 0,0 L 680,0 L 680,291 Z" fill="#152b15"/>
       <polygon points="0,0 0,291 340,625 0,760" fill="#0c150c"/>
@@ -575,20 +575,20 @@ async function loadLineupBanner() {
       ${posCircle('LC', 220, 165, 'below')}
       ${posCircle('RC', 460, 165, 'below')}
       ${posCircle('RF', 600, 255, 'below')}
-      <circle cx="590" cy="578" r="32" fill="#0d0d0d" stroke="${eh1?'#c9a84c':'#2c2c2c'}" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <circle cx="590" cy="610" r="32" fill="#0d0d0d" stroke="${eh1?'#c9a84c':'#2c2c2c'}" stroke-width="1.5" stroke-dasharray="5,3"/>
       <text x="590" y="572" text-anchor="middle" fill="${eh1?'#c9a84c':'#444'}" font-family="Oswald,Arial" font-size="10" font-weight="700">EH1</text>
       <text x="590" y="586" text-anchor="middle" fill="${eh1?'#e8c970':'#444'}" font-family="Oswald,Arial" font-size="9">${p.EH1&&p.EH1.order?p.EH1.order+'·':''}${eh1?p.EH1.name.split(' ').pop():'—'}</text>
-      <circle cx="90" cy="578" r="32" fill="#0d0d0d" stroke="${eh2?'#c9a84c':'#2c2c2c'}" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <circle cx="90" cy="610" r="32" fill="#0d0d0d" stroke="${eh2?'#c9a84c':'#2c2c2c'}" stroke-width="1.5" stroke-dasharray="5,3"/>
       <text x="90" y="572" text-anchor="middle" fill="${eh2?'#c9a84c':'#444'}" font-family="Oswald,Arial" font-size="10" font-weight="700">EH2</text>
       <text x="90" y="586" text-anchor="middle" fill="${eh2?'#e8c970':'#444'}" font-family="Oswald,Arial" font-size="9">${p.EH2&&p.EH2.order?p.EH2.order+'·':''}${eh2?p.EH2.name.split(' ').pop():'—'}</text>
-      <rect x="0" y="695" width="680" height="65" fill="#111111"/>
+      <rect x="0" y="730" width="680" height="65" fill="#111111"/>
       <line x1="0" y1="695" x2="680" y2="695" stroke="#c9a84c" stroke-width="1" opacity="0.6"/>
-      <text x="340" y="712" text-anchor="middle" fill="#c9a84c" font-family="Oswald,Arial" font-size="10" font-weight="700" letter-spacing="3">BENCH</text>
+      <text x="340" y="747" text-anchor="middle" fill="#c9a84c" font-family="Oswald,Arial" font-size="10" font-weight="700" letter-spacing="3">BENCH</text>
       ${b.map((pl, i) => {
         const x = 12 + i * 134;
         const hasP = pl && pl.name;
-        return `<rect x="${x}" y="720" width="122" height="28" rx="4" fill="#191919" stroke="${hasP?'#2c2c2c':'#1a1a1a'}" stroke-width="1"/>
-          <text x="${x+10}" y="738" fill="${hasP?'#e8c970':'#333'}" font-family="Oswald,Arial" font-size="10">${hasP?(pl.order?pl.order+'·':'')+pl.name.split(' ').pop():'—'}</text>`;
+        return `<rect x="${x}" y="755" width="122" height="28" rx="4" fill="#191919" stroke="${hasP?'#2c2c2c':'#1a1a1a'}" stroke-width="1"/>
+          <text x="${x+10}" y="773" fill="${hasP?'#e8c970':'#333'}" font-family="Oswald,Arial" font-size="10">${hasP?(pl.order?pl.order+'·':'')+pl.name.split(' ').pop():'—'}</text>`;
       }).join('')}
     </svg>`;
 
