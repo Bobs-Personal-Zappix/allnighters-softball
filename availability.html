@@ -261,7 +261,7 @@ async function loadGames() {
       if (g.result === 'No Game') return false;
       const [y,m,d] = g.date.split('-').map(Number);
       return new Date(y,m-1,d) >= today;
-    }).slice(0, 8);
+    });
 
     if (!upcoming.length) {
       gameList.innerHTML = '<div class="loading">No upcoming games — see you next season! ⚾</div>';
