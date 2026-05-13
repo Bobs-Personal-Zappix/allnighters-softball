@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set Lineup | Allnighters Coach</title>
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    .lineup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.5rem; }
+    .pos-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; }
+    .pos-card.filled { border-color: var(--gold-dark); }
+    .pos-label { font-family: 'Oswald', sans-serif; font-size: 0.75rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem; }
+    .pos-inputs { display: flex; gap: 0.5rem; }
+    .pos-inputs select { flex: 1; padding: 0.5rem; background: var(--dark); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-family: 'Open Sans', sans-serif; font-size: 0.85rem; }
+    .pos-inputs input { width: 55px; padding: 0.5rem; background: var(--dark); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-family: 'Oswald', sans-serif; font-size: 0.85rem; text-align: center; }
+    .pos-inputs select:focus, .pos-inputs input:focus { outline: none; border-color: var(--gold-dark); }
+    .section-divider { font-family: 'Oswald', sans-serif; font-size: 0.8rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.15em; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin: 1.5rem 0 1rem; }
+    select option { background: var(--dark); }
+    input[type="password"] { width: 100%; padding: 0.75rem 1rem; background: var(--dark); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 1rem; margin-bottom: 1rem; }
+    input[type="password"]:focus { outline: none; border-color: var(--gold-dark); }
+    .save-bar { position: sticky; bottom: 0; background: var(--dark); border-top: 2px solid var(--gold-dark); padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; z-index: 100; }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-brand">
+      <img src="/images/logo.png" alt="Allnighters Logo">
+      <div class="nav-brand-text">Allnighters<span>Coach Panel</span></div>
+    </a>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="page-content">
+  <div class="page-header">
+    <h1 class="page-header-title">Set Lineup</h1>
+    <p class="page-header-sub">Coach Access · Allnighters Softball</p>
+  </div>
+
+  <section class="section">
+    <div class="container" style="max-width:700px;">
+
+      <!-- Password Screen -->
+      <div id="passwordScreen">
+        <div style="text-align:center;padding:2rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);max-width:400px;margin:0 auto;">
+          <div style="font-size:3rem;margin-bottom:1rem;">⚾</div>
+          <h2 style="font-family:'Oswald',sans-serif;color:var(--gold);font-size:1.4rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem;">Coach Access</h2>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.5rem;">Enter the coach password to set the lineup.</p>
+          <input type="password" id="passwordInput" placeholder="Password..." onkeydown="if(event.key==='Enter')checkPassword()">
+          <button class="btn btn-gold" style="width:100%;" onclick="checkPassword()">Enter</button>
+          <div id="passwordError" style="color:#C62828;font-size:0.82rem;margin-top:0.75rem;display:none;">Incorrect password.</div>
+        </div>
+      </div>
+
+      <!-- Admin App -->
+      <div id="adminApp" style="display:none;">
+
+        <!-- Game Info -->
+        <div class="section-divider">Game Details</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1rem;">
+          <div>
+            <div class="pos-label">Next Opponent</div>
+            <select id="gameOpponent" style="width:100%;padding:0.5rem;background:var(--dark);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'Open Sans',sans-serif;">
+              <option value="">Select opponent...</option>
+              <option>Franchise</option>
+              <option>Pocket 9s</option>
+              <option>Wolfpack</option>
+              <option>Paddy Kelleys</option>
+              <option>Holden Station</option>
+              <option>Goonies</option>
+              <option>A's</option>
+            </select>
+          </div>
+          <div>
+            <div class="pos-label">Game Date</div>
+            <input type="date" id="gameDate" style="width:100%;padding:0.5rem;background:var(--dark);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'Open Sans',sans-serif;">
+          </div>
+        </div>
+
+        <!-- Field Positions -->
+        <div class="section-divider">⚾ Field Positions</div>
+        <div class="lineup-grid" id="fieldGrid"></div>
+
+        <!-- EH -->
+        <div class="section-divider">🟡 Extra Hitters</div>
+        <div class="lineup-grid" id="ehGrid"></div>
+
+        <!-- Bench -->
+        <div class="section-divider">🪑 Bench</div>
+        <div id="benchGrid"></div>
+
+        <!-- Save Bar -->
+        <div class="save-bar">
+          <div id="saveStatus" style="font-size:0.85rem;color:var(--text-muted);"></div>
+          <div style="display:flex;gap:0.75rem;">
+            <a href="/lineup.html" target="_blank" class="btn btn-outline" style="font-size:0.8rem;padding:0.5rem 1rem;">Preview ↗</a>
+            <button class="btn btn-gold" onclick="saveLineup()">💾 Save Lineup</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="/js/utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const TEAM_PASSWORD  = 'allnighters2026';
+const SUPABASE_URL   = 'https://gvydowpbvaunpabjwzzr.supabase.co';
+const SUPABASE_KEY   = 'sb_publishable_1ZRZFjRbNb5K3c6ecxc4Mg_d_PP_PrG';
+const GITHUB_OWNER   = 'Bobs-Personal-Zappix';
+const GITHUB_REPO    = 'allnighters-softball';
+const GITHUB_FILE    = 'data/lineup.json';
+
+const { createClient } = supabase;
+const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const FIELD_POSITIONS = ['P','C','1B','2B','SS','3B','LF','LC','RC','RF'];
+const EH_POSITIONS    = ['EH1','EH2'];
+let roster = [];
+let currentSha = '';
+
+function checkPassword() {
+  if (document.getElementById('passwordInput').value === TEAM_PASSWORD) {
+    document.getElementById('passwordScreen').style.display = 'none';
+    document.getElementById('adminApp').style.display = 'block';
+    sessionStorage.setItem('coach_auth', 'true');
+    initAdmin();
+  } else {
+    document.getElementById('passwordError').style.display = 'block';
+  }
+}
+
+if (sessionStorage.getItem('coach_auth') === 'true') {
+  document.getElementById('passwordScreen').style.display = 'none';
+  document.getElementById('adminApp').style.display = 'block';
+  initAdmin();
+}
+
+async function initAdmin() {
+  // Load roster
+  try {
+    const res  = await fetch('/data/roster-2026.json');
+    const data = await res.json();
+    roster = data.players.filter(p => p.name !== 'Player Name');
+  } catch(e) { roster = []; }
+
+  // Load current lineup from GitHub
+  try {
+    const res  = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`);
+    const meta = await res.json();
+    currentSha = meta.sha;
+    const content = JSON.parse(atob(meta.content.replace(/\n/g,'')));
+    buildGrids(content);
+  } catch(e) {
+    buildGrids(null);
+  }
+}
+
+function playerOptions(selectedName) {
+  return `<option value="">— Empty —</option>` +
+    roster.map(p =>
+      `<option value="${p.name}" ${p.name === selectedName ? 'selected' : ''}>#${p.number} ${p.name}</option>`
+    ).join('');
+}
+
+function posCard(pos, current) {
+  const pl = current && current[pos];
+  return `
+    <div class="pos-card${pl && pl.name ? ' filled' : ''}" id="card-${pos}">
+      <div class="pos-label">${pos}</div>
+      <div class="pos-inputs">
+        <select onchange="updateCard('${pos}')" id="sel-${pos}">
+          ${playerOptions(pl ? pl.name : '')}
+        </select>
+        <input type="number" id="ord-${pos}" min="1" max="17" placeholder="#"
+          value="${pl && pl.order ? pl.order : ''}" title="Batting order">
+      </div>
+    </div>`;
+}
+
+function buildGrids(data) {
+  const positions = data ? data.positions : {};
+  const bench     = data ? data.bench : [];
+
+  document.getElementById('fieldGrid').innerHTML =
+    FIELD_POSITIONS.map(pos => posCard(pos, positions)).join('');
+
+  document.getElementById('ehGrid').innerHTML =
+    EH_POSITIONS.map(pos => posCard(pos, positions)).join('');
+
+  document.getElementById('benchGrid').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+      ${[0,1,2,3,4].map(i => {
+        const pl = bench && bench[i];
+        return `
+          <div class="pos-card${pl && pl.name ? ' filled' : ''}">
+            <div class="pos-label">Bench ${i+1}</div>
+            <div class="pos-inputs">
+              <select id="bench-sel-${i}">
+                ${playerOptions(pl ? pl.name : '')}
+              </select>
+              <input type="number" id="bench-ord-${i}" min="1" max="17" placeholder="#"
+                value="${pl && pl.order ? pl.order : ''}" title="Batting order">
+            </div>
+          </div>`;
+      }).join('')}
+    </div>`;
+
+  if (data && data.opponent) document.getElementById('gameOpponent').value = data.opponent;
+  if (data && data.game_date) document.getElementById('gameDate').value = data.game_date;
+}
+
+function updateCard(pos) {
+  const sel  = document.getElementById(`sel-${pos}`);
+  const card = document.getElementById(`card-${pos}`);
+  if (card) card.className = `pos-card${sel.value ? ' filled' : ''}`;
+}
+
+async function saveLineup() {
+  const saveBtn    = document.querySelector('.btn-gold');
+  const saveStatus = document.getElementById('saveStatus');
+  saveBtn.textContent = '⏳ Saving...';
+  saveBtn.disabled = true;
+
+  const positions = {};
+  [...FIELD_POSITIONS, ...EH_POSITIONS].forEach(pos => {
+    const sel = document.getElementById(`sel-${pos}`);
+    const ord = document.getElementById(`ord-${pos}`);
+    const pl  = roster.find(r => r.name === sel.value);
+    positions[pos] = {
+      number: pl ? pl.number : '',
+      name:   sel.value || '',
+      order:  parseInt(ord.value) || 0
+    };
+  });
+
+  const bench = [0,1,2,3,4].map(i => {
+    const sel = document.getElementById(`bench-sel-${i}`);
+    const ord = document.getElementById(`bench-ord-${i}`);
+    const pl  = roster.find(r => r.name === sel.value);
+    return {
+      number: pl ? pl.number : '',
+      name:   sel.value || '',
+      order:  parseInt(ord.value) || 0
+    };
+  });
+
+  const payload = {
+    game_date:    document.getElementById('gameDate').value,
+    opponent:     document.getElementById('gameOpponent').value,
+    last_updated: new Date().toISOString().split('T')[0],
+    positions,
+    bench
+  };
+
+  try {
+    // Save to GitHub via API
+    const token = await getGitHubToken();
+    if (!token) {
+      saveStatus.textContent = '❌ Not authenticated with GitHub';
+      saveBtn.textContent = '💾 Save Lineup';
+      saveBtn.disabled = false;
+      return;
+    }
+
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
+    const body = { message: 'Update lineup', content, sha: currentSha };
+
+    const res = await fetch(
+      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`,
+      { method: 'PUT', headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }
+    );
+
+    if (res.ok) {
+      const data = await res.json();
+      currentSha = data.content.sha;
+      saveStatus.textContent = '✅ Saved! Site updates in ~60 seconds.';
+      saveBtn.textContent = '💾 Save Lineup';
+      saveBtn.disabled = false;
+    } else {
+      throw new Error('GitHub API error');
+    }
+  } catch(e) {
+    console.error(e);
+    saveStatus.textContent = '❌ Error saving. Check console.';
+    saveBtn.textContent = '💾 Save Lineup';
+    saveBtn.disabled = false;
+  }
+}
+
+async function getGitHubToken() {
+  // Use Supabase to store/retrieve GitHub token
+  try {
+    const { data } = await db.from('coach_tokens').select('token').eq('id', 1).single();
+    return data ? data.token : null;
+  } catch(e) { return null; }
+}
+</script>
+</body>
+</html>
