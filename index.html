@@ -260,14 +260,11 @@ async function loadNextGame() {
     const res  = await fetch('/data/schedule-2026.json');
     const data = await res.json();
     const today = new Date(); today.setHours(0,0,0,0);
-
-    // Find next game
     const upcoming = data.games.filter(g => {
       if (g.result === 'No Game') return false;
       const [y,m,d] = g.date.split('-').map(Number);
       return new Date(y, m-1, d) >= today;
     });
-
     const banner = document.getElementById('nextGameBanner');
     if (!upcoming.length) {
       banner.innerHTML = `<p style="color:var(--text-muted);font-size:0.9rem;letter-spacing:0.1em;text-transform:uppercase;">Season Complete — See you next year! ⚾</p>`;
@@ -279,6 +276,28 @@ async function loadNextGame() {
     const isToday = dt.getTime() === today.getTime();
     const dateStr = dt.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' });
     const tag = isToday ? '🔴 GAME DAY' : '⚾ NEXT GAME';
+
+    // Load availability from Supabase
+    let inCount = 0, outCount = 0, maybeCount = 0, rosterTotal = 0;
+    try {
+      const SUPABASE_URL = 'https://gvydowpbvaunpabjwzzr.supabase.co';
+      const SUPABASE_KEY = 'sb_publishable_1ZRZFjRbNb5K3c6ecxc4Mg_d_PP_PrG';
+      const { createClient } = supabase;
+      const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+      const rosterRes  = await fetch('/data/roster-2026.json');
+      const rosterData = await rosterRes.json();
+      rosterTotal = rosterData.players.filter(p => p.name !== 'Player Name').length;
+      const { data: avData } = await db.from('availability').select('*').eq('game_date', g.date);
+      const av = avData || [];
+      inCount    = av.filter(a => a.status === 'in').length;
+      outCount   = av.filter(a => a.status === 'out').length;
+      maybeCount = av.filter(a => a.status === 'maybe').length;
+    } catch(e) {
+      console.warn('Could not load availability:', e);
+    }
+
+    const noResponse = rosterTotal - inCount - outCount - maybeCount;
+
     banner.innerHTML = `
       <div style="display:inline-flex;align-items:center;gap:2rem;flex-wrap:wrap;justify-content:center;background:var(--card);border:1px solid var(--gold-dark);border-radius:10px;padding:1.25rem 2rem;">
         <div style="font-family:'Oswald',sans-serif;font-size:0.75rem;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;">${tag}</div>
@@ -286,7 +305,28 @@ async function loadNextGame() {
           <div style="font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:700;color:var(--text);">vs. ${g.opponent}</div>
           <div style="font-size:0.82rem;color:var(--text-muted);margin-top:0.2rem;">${dateStr} &nbsp;·&nbsp; ${g.time} &nbsp;·&nbsp; ${g.field} &nbsp;·&nbsp; <span style="color:${g.home_away==='Home'?'var(--gold)':'#8888cc'}">${g.home_away}</span></div>
         </div>
-        <a href="/schedule.html" class="btn btn-outline" style="padding:0.5rem 1.2rem;font-size:0.78rem;">Full Schedule</a>
+        <div style="display:flex;gap:1.25rem;align-items:center;border-left:1px solid var(--border);padding-left:2rem;">
+          <div style="text-align:center;">
+            <div style="font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:700;color:#4CAF50;">${inCount}</div>
+            <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;">In</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:700;color:#F44336;">${outCount}</div>
+            <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;">Out</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:700;color:#FF9800;">${maybeCount}</div>
+            <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;">Maybe</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:700;color:var(--text-muted);">${noResponse}</div>
+            <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;">No Response</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="/schedule.html" class="btn btn-outline" style="padding:0.5rem 1.2rem;font-size:0.78rem;">Full Schedule</a>
+          <a href="/availability.html" class="btn btn-gold" style="padding:0.5rem 1.2rem;font-size:0.78rem;">✅ Set Availability</a>
+        </div>
       </div>`;
   } catch(e) {
     document.getElementById('nextGameBanner').innerHTML = '';
@@ -423,5 +463,6 @@ async function loadWeeklySection() {
 loadWeeklySection();
 loadTieredSponsors();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </body>
 </html>
