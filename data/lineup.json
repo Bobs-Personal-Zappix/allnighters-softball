@@ -16,12 +16,12 @@
     "1B": {
       "number": "99",
       "name": "Ryan Overberg",
-      "order": 5
+      "order": 9
     },
     "2B": {
       "number": "33",
       "name": "Anthony Gagliano",
-      "order": 9
+      "order": 10
     },
     "SS": {
       "number": "10",
@@ -61,7 +61,7 @@
     "EH2": {
       "number": "25",
       "name": "Joe Z.",
-      "order": 10
+      "order": 5
     }
   },
   "bench": [
@@ -76,8 +76,8 @@
       "order": 0
     },
     {
-      "number": "18",
-      "name": "Myles",
+      "number": "",
+      "name": "",
       "order": 0
     },
     {
