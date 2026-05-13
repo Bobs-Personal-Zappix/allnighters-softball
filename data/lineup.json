@@ -1,26 +1,94 @@
 {
-  "game_date": "",
-  "opponent": "",
-  "last_updated": "",
+  "game_date": "2026-05-13",
+  "opponent": "Pocket 9s",
+  "last_updated": "2026-05-13",
   "positions": {
-    "P":  { "number": "", "name": "", "order": 0 },
-    "C":  { "number": "", "name": "", "order": 0 },
-    "1B": { "number": "", "name": "", "order": 0 },
-    "2B": { "number": "", "name": "", "order": 0 },
-    "SS": { "number": "", "name": "", "order": 0 },
-    "3B": { "number": "", "name": "", "order": 0 },
-    "LF": { "number": "", "name": "", "order": 0 },
-    "LC": { "number": "", "name": "", "order": 0 },
-    "RC": { "number": "", "name": "", "order": 0 },
-    "RF": { "number": "", "name": "", "order": 0 },
-    "EH1": { "number": "", "name": "", "order": 0 },
-    "EH2": { "number": "", "name": "", "order": 0 }
+    "P": {
+      "number": "53",
+      "name": "Mike Russo",
+      "order": 12
+    },
+    "C": {
+      "number": "16",
+      "name": "Thomas Evans",
+      "order": 6
+    },
+    "1B": {
+      "number": "99",
+      "name": "Ryan Overberg",
+      "order": 5
+    },
+    "2B": {
+      "number": "33",
+      "name": "Anthony Gagliano",
+      "order": 9
+    },
+    "SS": {
+      "number": "10",
+      "name": "Darren McDermott",
+      "order": 3
+    },
+    "3B": {
+      "number": "11",
+      "name": "Eric Moody",
+      "order": 7
+    },
+    "LF": {
+      "number": "2",
+      "name": "Tommy Dembowski",
+      "order": 1
+    },
+    "LC": {
+      "number": "69",
+      "name": "Brendan Trohon",
+      "order": 4
+    },
+    "RC": {
+      "number": "24",
+      "name": "Pat Hosman",
+      "order": 2
+    },
+    "RF": {
+      "number": "17",
+      "name": "Mike Stoico",
+      "order": 8
+    },
+    "EH1": {
+      "number": "99",
+      "name": "Assad Daaboul",
+      "order": 11
+    },
+    "EH2": {
+      "number": "18",
+      "name": "Myles",
+      "order": 10
+    }
   },
   "bench": [
-    { "number": "", "name": "", "order": 0 },
-    { "number": "", "name": "", "order": 0 },
-    { "number": "", "name": "", "order": 0 },
-    { "number": "", "name": "", "order": 0 },
-    { "number": "", "name": "", "order": 0 }
+    {
+      "number": "7",
+      "name": "Coach Barrows",
+      "order": 0
+    },
+    {
+      "number": "00",
+      "name": "Strip Club Steve",
+      "order": 0
+    },
+    {
+      "number": "",
+      "name": "",
+      "order": 0
+    },
+    {
+      "number": "",
+      "name": "",
+      "order": 0
+    },
+    {
+      "number": "",
+      "name": "",
+      "order": 0
+    }
   ]
 }
