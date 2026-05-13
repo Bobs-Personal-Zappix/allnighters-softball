@@ -501,6 +501,30 @@ async function loadWeeklySection() {
 
 loadWeeklySection();
 loadTieredSponsors();
+
+async function loadLineupBanner() {
+  try {
+    const res  = await fetch('/data/lineup.json?t=' + Date.now());
+    const data = await res.json();
+    if (!data.opponent) return;
+    const banner  = document.getElementById('lineupBanner');
+    const details = document.getElementById('lineupBannerDetails');
+    const names   = document.getElementById('lineupBannerNames');
+    if (!banner) return;
+    banner.style.display = 'block';
+    if (details) details.textContent = `vs. ${data.opponent}`;
+    if (names && data.positions) {
+      const order = Object.values(data.positions)
+        .filter(p => p.name)
+        .sort((a,b) => (a.order||99) - (b.order||99));
+      names.innerHTML = order.map(p =>
+        `<span style="font-size:0.75rem;color:var(--text-muted);background:var(--dark);padding:0.1rem 0.5rem;border-radius:3px;white-space:nowrap;">${p.order ? p.order+'.' : ''}${p.name.split(' ').pop()}</span>`
+      ).join('');
+    }
+  } catch(e) { }
+}
+
+loadLineupBanner();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </body>
