@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Availability | Allnighters Softball</title>
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    .avail-btn {
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      background: transparent;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text-muted);
+    }
+    .avail-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .avail-btn.in    { background: #2E7D32; border-color: #2E7D32; color: #fff; }
+    .avail-btn.out   { background: #C62828; border-color: #C62828; color: #fff; }
+    .avail-btn.maybe { background: #F57F17; border-color: #F57F17; color: #fff; }
+    .player-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .player-row:last-child { border-bottom: none; }
+    .player-row-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .player-row-num {
+      color: var(--gold);
+      margin-right: 0.5rem;
+    }
+    .status-dots {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .game-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .game-card:hover { border-color: var(--gold-dark); background: var(--card-hover); }
+    .game-card.selected { border-color: var(--gold); background: rgba(201,168,76,0.06); }
+    .summary-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-in    { background: #4CAF50; }
+    .dot-out   { background: #F44336; }
+    .dot-maybe { background: #FF9800; }
+    .dot-none  { background: #444; }
+    input[type="password"], input[type="text"] {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 1rem;
+      font-family: 'Open Sans', sans-serif;
+      margin-bottom: 1rem;
+    }
+    input:focus { outline: none; border-color: var(--gold-dark); }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-brand">
+      <img src="/images/logo.png" alt="Allnighters Logo">
+      <div class="nav-brand-text">Allnighters<span>Softball · Est. 1992</span></div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/schedule.html">Schedule</a></li>
+      <li><a href="/roster.html">Roster</a></li>
+      <li><a href="/stats.html">Stats</a></li>
+      <li><a href="/gallery.html">Gallery</a></li>
+      <li><a href="/history.html">History</a></li>
+      <li><a href="/proshop.html">Pro Shop</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="page-content">
+  <div class="page-header">
+    <h1 class="page-header-title">Game Availability</h1>
+    <p class="page-header-sub">Let the team know if you're in or out ⚾</p>
+  </div>
+
+  <section class="section">
+    <div class="container" style="max-width:700px;">
+
+      <!-- ── Password Screen ── -->
+      <div id="passwordScreen">
+        <div style="text-align:center;padding:2rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);max-width:400px;margin:0 auto;">
+          <div style="font-size:3rem;margin-bottom:1rem;">🔒</div>
+          <h2 style="font-family:'Oswald',sans-serif;color:var(--gold);font-size:1.4rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem;">Team Access</h2>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.5rem;">Enter the team password to view and update availability.</p>
+          <input type="password" id="passwordInput" placeholder="Team password..." onkeydown="if(event.key==='Enter')checkPassword()">
+          <button class="btn btn-gold" style="width:100%;" onclick="checkPassword()">Enter</button>
+          <div id="passwordError" style="color:#C62828;font-size:0.82rem;margin-top:0.75rem;display:none;">Incorrect password. Try again!</div>
+        </div>
+      </div>
+
+      <!-- ── Main App ── -->
+      <div id="mainApp" style="display:none;">
+
+        <!-- Welcome -->
+        <div style="margin-bottom:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+          <div>
+            <h2 style="font-family:'Oswald',sans-serif;font-size:1.4rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.06em;">Select a Game</h2>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">Click a game to update your availability</p>
+          </div>
+          <button class="btn btn-outline" style="font-size:0.75rem;padding:0.4rem 1rem;" onclick="logout()">Log Out</button>
+        </div>
+
+        <!-- Game List -->
+        <div id="gameList">
+          <div class="loading"><div class="spinner"></div>Loading games...</div>
+        </div>
+
+        <!-- Availability Panel -->
+        <div id="availabilityPanel" style="display:none;margin-top:2rem;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+            <div>
+              <h3 style="font-family:'Oswald',sans-serif;font-size:1.2rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.06em;" id="selectedGameTitle"></h3>
+              <div style="font-size:0.82rem;color:var(--text-muted);" id="selectedGameDetails"></div>
+            </div>
+            <button class="btn btn-outline" style="font-size:0.75rem;padding:0.4rem 1rem;" onclick="closePanel()">← Back to Games</button>
+          </div>
+
+          <!-- Summary counts -->
+          <div id="availSummary" style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem;padding:1rem;background:var(--card);border-radius:var(--radius);border:1px solid var(--border);"></div>
+
+          <!-- Player list -->
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;" id="playerList">
+            <div class="loading"><div class="spinner"></div>Loading players...</div>
+          </div>
+
+          <p style="font-size:0.75rem;color:var(--text-dim);margin-top:1rem;text-align:center;">Tap your name and select your status. Changes save instantly.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="/images/logo.png" alt="Allnighters">
+      <div class="footer-brand-name">Allnighters Softball</div>
+      <div class="footer-tagline">Peabody, MA · Est. 1992</div>
+    </div>
+    <div class="footer-nav">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/schedule.html">Schedule &amp; Results</a></li>
+        <li><a href="/roster.html">Roster</a></li>
+        <li><a href="/stats.html">Player Stats</a></li>
+        <li><a href="/gallery.html">Photo Gallery</a></li>
+        <li><a href="/history.html">Team History</a></li>
+        <li><a href="/proshop.html">Pro Shop</a></li>
+      </ul>
+    </div>
+    <div class="footer-info">
+      <h4>Availability</h4>
+      <p>Use this page to let the team know if you can make each game. Updates save instantly.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; <span id="yr"></span> Allnighters Softball · allnighterssoftball.com</p>
+    <p class="est">EST. 1992</p>
+  </div>
+</footer>
+
+<script src="/js/utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// ── Config ───────────────────────────────────
+const TEAM_PASSWORD = 'allnighters2026';
+const SUPABASE_URL  = 'https://gvydowpbvaunpabjwzzr.supabase.co';
+const SUPABASE_KEY  = 'sb_publishable_1ZRZFjRbNb5K3c6ecxc4Mg_d_PP_PrG';
+const { createClient } = supabase;
+const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let selectedGame = null;
+let roster       = [];
+let availability = [];
+
+// ── Password ─────────────────────────────────
+function checkPassword() {
+  const val = document.getElementById('passwordInput').value;
+  if (val === TEAM_PASSWORD) {
+    document.getElementById('passwordScreen').style.display = 'none';
+    document.getElementById('mainApp').style.display = 'block';
+    sessionStorage.setItem('allnighters_auth', 'true');
+    loadGames();
+  } else {
+    document.getElementById('passwordError').style.display = 'block';
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem('allnighters_auth');
+  document.getElementById('mainApp').style.display = 'none';
+  document.getElementById('passwordScreen').style.display = 'block';
+  document.getElementById('passwordInput').value = '';
+}
+
+// Auto-login if already authenticated this session
+if (sessionStorage.getItem('allnighters_auth') === 'true') {
+  document.getElementById('passwordScreen').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
+  loadGames();
+}
+
+// ── Load Games ───────────────────────────────
+async function loadGames() {
+  const gameList = document.getElementById('gameList');
+  try {
+    const schedRes  = await fetch('/data/schedule-2026.json');
+    const schedData = await schedRes.json();
+    const today = new Date(); today.setHours(0,0,0,0);
+
+    // Show upcoming games only
+    const upcoming = schedData.games.filter(g => {
+      if (g.result === 'No Game') return false;
+      const [y,m,d] = g.date.split('-').map(Number);
+      return new Date(y,m-1,d) >= today;
+    }).slice(0, 8);
+
+    if (!upcoming.length) {
+      gameList.innerHTML = '<div class="loading">No upcoming games — see you next season! ⚾</div>';
+      return;
+    }
+
+    // Load roster
+    const rosterRes  = await fetch('/data/roster-2026.json');
+    const rosterData = await rosterRes.json();
+    roster = rosterData.players.filter(p => p.name !== 'Player Name');
+
+    // Load all availability from Supabase
+    const { data: avData } = await db.from('availability').select('*');
+    availability = avData || [];
+
+    gameList.innerHTML = upcoming.map(g => {
+      const gameAvail = availability.filter(a => a.game_date === g.date);
+      const inCount    = gameAvail.filter(a => a.status === 'in').length;
+      const outCount   = gameAvail.filter(a => a.status === 'out').length;
+      const maybeCount = gameAvail.filter(a => a.status === 'maybe').length;
+      const [y,m,d]    = g.date.split('-').map(Number);
+      const dt         = new Date(y,m-1,d);
+      const dateStr    = dt.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' });
+
+      return `
+        <div class="game-card" onclick="selectGame('${g.date}', '${g.opponent}', '${dateStr}', '${g.field}', '${g.time}', '${g.home_away}')">
+          <div>
+            <div style="font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:600;">vs. ${g.opponent}</div>
+            <div style="font-size:0.82rem;color:var(--text-muted);margin-top:0.2rem;">${dateStr} · ${g.time} · ${g.field} · <span style="color:${g.home_away==='Home'?'var(--gold)':'#8888cc'}">${g.home_away}</span></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <div style="text-align:center;">
+              <div style="font-family:'Oswald',sans-serif;font-size:1.1rem;color:#4CAF50;font-weight:700;">${inCount}</div>
+              <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;">In</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-family:'Oswald',sans-serif;font-size:1.1rem;color:#F44336;font-weight:700;">${outCount}</div>
+              <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;">Out</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-family:'Oswald',sans-serif;font-size:1.1rem;color:#FF9800;font-weight:700;">${maybeCount}</div>
+              <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;">Maybe</div>
+            </div>
+            <div style="color:var(--text-muted);font-size:1.2rem;">›</div>
+          </div>
+        </div>`;
+    }).join('');
+
+  } catch(e) {
+    gameList.innerHTML = '<div class="loading">Could not load games. Please try again.</div>';
+    console.error(e);
+  }
+}
+
+// ── Select Game ──────────────────────────────
+async function selectGame(date, opponent, dateStr, field, time, homeAway) {
+  selectedGame = { date, opponent, dateStr, field, time, homeAway };
+
+  document.getElementById('gameList').style.display = 'none';
+  document.getElementById('availabilityPanel').style.display = 'block';
+  document.getElementById('selectedGameTitle').textContent = `vs. ${opponent}`;
+  document.getElementById('selectedGameDetails').textContent = `${dateStr} · ${time} · ${field} · ${homeAway}`;
+  document.getElementById('playerList').innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+
+  // Refresh availability for this game
+  const { data: avData } = await db.from('availability')
+    .select('*')
+    .eq('game_date', date);
+  availability = avData || [];
+
+  renderPlayers();
+  renderSummary();
+}
+
+function closePanel() {
+  document.getElementById('availabilityPanel').style.display = 'none';
+  document.getElementById('gameList').style.display = 'block';
+  loadGames(); // refresh counts
+}
+
+// ── Render Players ───────────────────────────
+function renderPlayers() {
+  const playerList = document.getElementById('playerList');
+  playerList.innerHTML = roster.map(p => {
+    const existing = availability.find(a => a.player_number === p.number);
+    const status   = existing ? existing.status : 'pending';
+    return `
+      <div class="player-row" id="row-${p.number}">
+        <div class="player-row-name">
+          <span class="player-row-num">#${p.number}</span>${p.name}
+          ${p.nickname ? `<span style="font-size:0.75rem;color:var(--text-muted);margin-left:0.4rem;">(${p.nickname})</span>` : ''}
+        </div>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="avail-btn ${status==='in'?'in':''}" onclick="setStatus('${p.number}','${p.name}','in')">✅ In</button>
+          <button class="avail-btn ${status==='out'?'out':''}" onclick="setStatus('${p.number}','${p.name}','out')">❌ Out</button>
+          <button class="avail-btn ${status==='maybe'?'maybe':''}" onclick="setStatus('${p.number}','${p.name}','maybe')">🤔 Maybe</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ── Set Status ───────────────────────────────
+async function setStatus(playerNumber, playerName, status) {
+  // Update UI immediately
+  const row     = document.getElementById(`row-${playerNumber}`);
+  const buttons = row.querySelectorAll('.avail-btn');
+  buttons.forEach(b => { b.classList.remove('in','out','maybe'); });
+  buttons[0].classList.toggle('in',     status==='in');
+  buttons[1].classList.toggle('out',    status==='out');
+  buttons[2].classList.toggle('maybe',  status==='maybe');
+
+  // Upsert to Supabase
+  const { error } = await db.from('availability').upsert({
+    game_date:     selectedGame.date,
+    opponent:      selectedGame.opponent,
+    player_name:   playerName,
+    player_number: playerNumber,
+    status,
+    updated_at:    new Date().toISOString()
+  }, { onConflict: 'game_date,player_number' });
+
+  if (error) {
+    console.error('Save error:', error);
+    alert('Could not save. Please try again.');
+    return;
+  }
+
+  // Update local availability array
+  const idx = availability.findIndex(a => a.player_number === playerNumber && a.game_date === selectedGame.date);
+  if (idx >= 0) availability[idx].status = status;
+  else availability.push({ game_date: selectedGame.date, player_number: playerNumber, player_name: playerName, status });
+
+  renderSummary();
+}
+
+// ── Summary ──────────────────────────────────
+function renderSummary() {
+  const gameAvail  = availability.filter(a => a.game_date === selectedGame.date);
+  const inPlayers  = gameAvail.filter(a => a.status === 'in').map(a => a.player_name);
+  const outPlayers = gameAvail.filter(a => a.status === 'out').map(a => a.player_name);
+  const maybe      = gameAvail.filter(a => a.status === 'maybe').map(a => a.player_name);
+  const total      = roster.length;
+  const responded  = gameAvail.length;
+
+  document.getElementById('availSummary').innerHTML = `
+    <div style="flex:1;min-width:80px;text-align:center;">
+      <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#4CAF50;">${inPlayers.length}</div>
+      <div style="font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;">In</div>
+    </div>
+    <div style="flex:1;min-width:80px;text-align:center;">
+      <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#F44336;">${outPlayers.length}</div>
+      <div style="font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;">Out</div>
+    </div>
+    <div style="flex:1;min-width:80px;text-align:center;">
+      <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#FF9800;">${maybe.length}</div>
+      <div style="font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;">Maybe</div>
+    </div>
+    <div style="flex:1;min-width:80px;text-align:center;">
+      <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:var(--text-muted);">${total-responded}</div>
+      <div style="font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;">No Response</div>
+    </div>`;
+}
+</script>
+</body>
+</html>
