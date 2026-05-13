@@ -1,0 +1,26 @@
+{
+  "game_date": "",
+  "opponent": "",
+  "last_updated": "",
+  "positions": {
+    "P":  { "number": "", "name": "", "order": 0 },
+    "C":  { "number": "", "name": "", "order": 0 },
+    "1B": { "number": "", "name": "", "order": 0 },
+    "2B": { "number": "", "name": "", "order": 0 },
+    "SS": { "number": "", "name": "", "order": 0 },
+    "3B": { "number": "", "name": "", "order": 0 },
+    "LF": { "number": "", "name": "", "order": 0 },
+    "LC": { "number": "", "name": "", "order": 0 },
+    "RC": { "number": "", "name": "", "order": 0 },
+    "RF": { "number": "", "name": "", "order": 0 },
+    "EH1": { "number": "", "name": "", "order": 0 },
+    "EH2": { "number": "", "name": "", "order": 0 }
+  },
+  "bench": [
+    { "number": "", "name": "", "order": 0 },
+    { "number": "", "name": "", "order": 0 },
+    { "number": "", "name": "", "order": 0 },
+    { "number": "", "name": "", "order": 0 },
+    { "number": "", "name": "", "order": 0 }
+  ]
+}
