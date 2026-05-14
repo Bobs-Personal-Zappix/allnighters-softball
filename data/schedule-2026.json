@@ -28,9 +28,9 @@
       "home_away": "Away",
       "field": "Murphy Park",
       "time": "6:30 PM",
-      "result": "",
-      "score_us": null,
-      "score_them": null,
+      "result": "L",
+      "score_us": 4,
+      "score_them": 5,
       "notes": ""
     },
     {
