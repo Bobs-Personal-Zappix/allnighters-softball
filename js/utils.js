@@ -255,4 +255,8 @@ function initVoiceAssistant() {
   document.head.appendChild(script);
 }
 
-document.addEventListener('DOMContentLoaded', initVoiceAssistant);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initVoiceAssistant);
+} else {
+  initVoiceAssistant();
+}
