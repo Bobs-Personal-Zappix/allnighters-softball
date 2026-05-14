@@ -103,156 +103,89 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 // ── VAPI Voice Assistant ─────────────────────
 function initVoiceAssistant() {
-  const VAPI_KEY       = '387fdeb5-3789-4fe1-bb7b-205e5f6e6949'; // ← We'll fill this in next
-  const ASSISTANT_ID   = '3201c158-3daa-4efa-89bb-3f11642165ed';
+  if (document.getElementById('vapiBtn')) return; // prevent duplicates
 
-  // Inject VAPI script
+  const VAPI_KEY     = '387fdeb5-3789-4fe1-bb7b-205e5f6e6949';
+  const ASSISTANT_ID = '3201c158-3daa-4efa-89bb-3f11642165ed';
+
+  // Create button immediately without waiting for VAPI to load
+  const btn = document.createElement('div');
+  btn.id = 'vapiBtn';
+  btn.style.cssText = 'position:fixed;bottom:2rem;right:2rem;z-index:9999;';
+  btn.innerHTML = `
+    <div id="vapiBtnInner" style="width:64px;height:64px;border-radius:50%;background:#c9a84c;border:3px solid #8a6e28;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(201,168,76,0.4);transition:all 0.25s ease;flex-direction:column;gap:2px;">
+      <span style="font-size:1.6rem;line-height:1;">⚾</span>
+      <span style="font-size:0.5rem;font-family:Oswald,sans-serif;font-weight:700;color:#080808;letter-spacing:0.08em;text-transform:uppercase;">NIGHTY</span>
+    </div>
+    <div id="vapiStatus" style="position:absolute;bottom:72px;right:0;background:#191919;border:1px solid #c9a84c;border-radius:8px;padding:0.6rem 1rem;font-family:Oswald,sans-serif;font-size:0.78rem;color:#c9a84c;white-space:nowrap;display:none;text-align:center;min-width:180px;">Connecting...</div>`;
+  document.body.appendChild(btn);
+
+  const btnInner  = document.getElementById('vapiBtnInner');
+  const statusBox = document.getElementById('vapiStatus');
+  let vapi = null;
+  let isCallActive = false;
+
+  // Load VAPI SDK
   const script = document.createElement('script');
-  script.src = 'https://unpkg.com/@vapi-ai/web@latest/dist/vapi.umd.js';
+  script.src = 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.1.1/dist/vapi.umd.js';
   script.onload = () => {
-    const vapi = new window.Vapi(VAPI_KEY);
-    let isCallActive = false;
+    try {
+      vapi = new window.Vapi(VAPI_KEY);
 
-    // Create floating button
-    const btn = document.createElement('div');
-    btn.id = 'vapiBtn';
-    btn.innerHTML = `
-      <div id="vapiBtnInner" title="Talk to Nighty — Allnighters AI Assistant" style="
-        position:fixed;
-        bottom:2rem;
-        right:2rem;
-        width:64px;
-        height:64px;
-        border-radius:50%;
-        background:var(--gold);
-        border:3px solid #8a6e28;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        cursor:pointer;
-        z-index:9999;
-        box-shadow:0 4px 20px rgba(201,168,76,0.4);
-        transition:all 0.25s ease;
-        flex-direction:column;
-        gap:2px;
-      ">
-        <span style="font-size:1.6rem;line-height:1;">⚾</span>
-        <span style="font-size:0.5rem;font-family:'Oswald',sans-serif;font-weight:700;color:#080808;letter-spacing:0.08em;text-transform:uppercase;">NIGHTY</span>
-      </div>
-      <div id="vapiTooltip" style="
-        position:fixed;
-        bottom:7.5rem;
-        right:2rem;
-        background:var(--card);
-        border:1px solid var(--gold-dark);
-        border-radius:8px;
-        padding:0.6rem 1rem;
-        font-family:'Oswald',sans-serif;
-        font-size:0.78rem;
-        color:var(--gold);
-        letter-spacing:0.08em;
-        text-transform:uppercase;
-        white-space:nowrap;
-        display:none;
-        z-index:9998;
-        pointer-events:none;
-      ">Ask Nighty ⚾</div>
-      <div id="vapiStatus" style="
-        position:fixed;
-        bottom:6.5rem;
-        right:1rem;
-        background:var(--card);
-        border:1px solid var(--gold-dark);
-        border-radius:8px;
-        padding:0.75rem 1.25rem;
-        font-family:'Oswald',sans-serif;
-        font-size:0.8rem;
-        color:var(--text);
-        letter-spacing:0.06em;
-        display:none;
-        z-index:9998;
-        text-align:center;
-        min-width:180px;
-      ">Connecting...</div>`;
-    document.body.appendChild(btn);
-
-    const btnInner  = document.getElementById('vapiBtnInner');
-    const tooltip   = document.getElementById('vapiTooltip');
-    const statusBox = document.getElementById('vapiStatus');
-
-    // Hover tooltip
-    btnInner.addEventListener('mouseenter', () => {
-      if (!isCallActive) tooltip.style.display = 'block';
-    });
-    btnInner.addEventListener('mouseleave', () => {
-      tooltip.style.display = 'none';
-    });
-
-    // Click to start/stop
-    btnInner.addEventListener('click', async () => {
-      tooltip.style.display = 'none';
-      if (!isCallActive) {
-        btnInner.style.background = '#e8c970';
-        btnInner.innerHTML = `<span style="font-size:1.4rem;line-height:1;">🎙️</span><span style="font-size:0.5rem;font-family:'Oswald',sans-serif;font-weight:700;color:#080808;letter-spacing:0.08em;text-transform:uppercase;">LIVE</span>`;
-        btnInner.style.boxShadow = '0 0 0 6px rgba(201,168,76,0.3), 0 4px 20px rgba(201,168,76,0.5)';
+      vapi.on('call-start', () => {
+        isCallActive = true;
+        statusBox.innerHTML = '🎙️ Nighty is listening...';
         statusBox.style.display = 'block';
-        statusBox.innerHTML = '🎙️ Connecting to Nighty...';
-        try {
-          await vapi.start(ASSISTANT_ID);
-        } catch(e) {
-          statusBox.innerHTML = '❌ Could not connect. Try again.';
-          setTimeout(() => { statusBox.style.display = 'none'; resetBtn(); }, 3000);
-        }
-      } else {
-        vapi.stop();
-      }
-    });
-
-    // VAPI events
-    vapi.on('call-start', () => {
-      isCallActive = true;
-      statusBox.innerHTML = '🎙️ Nighty is listening...';
-      animateBtn();
-    });
-
-    vapi.on('speech-start', () => {
-      statusBox.innerHTML = '💬 Nighty is speaking...';
-    });
-
-    vapi.on('speech-end', () => {
-      statusBox.innerHTML = '🎙️ Nighty is listening...';
-    });
-
-    vapi.on('call-end', () => {
-      isCallActive = false;
-      statusBox.innerHTML = '✅ Call ended. Go Allnighters! ⚾';
-      setTimeout(() => { statusBox.style.display = 'none'; }, 3000);
-      resetBtn();
-    });
-
-    vapi.on('error', () => {
-      isCallActive = false;
-      statusBox.innerHTML = '❌ Something went wrong. Try again.';
-      setTimeout(() => { statusBox.style.display = 'none'; }, 3000);
-      resetBtn();
-    });
-
-    function resetBtn() {
-      btnInner.style.background = 'var(--gold)';
-      btnInner.style.boxShadow = '0 4px 20px rgba(201,168,76,0.4)';
-      btnInner.innerHTML = `<span style="font-size:1.6rem;line-height:1;">⚾</span><span style="font-size:0.5rem;font-family:'Oswald',sans-serif;font-weight:700;color:#080808;letter-spacing:0.08em;text-transform:uppercase;">NIGHTY</span>`;
-    }
-
-    function animateBtn() {
-      if (!isCallActive) return;
-      btnInner.style.transform = 'scale(1.05)';
-       setTimeout(() => {
-        btnInner.style.transform = 'scale(1)';
-        setTimeout(animateBtn, 1000);
-      }, 500);
+      });
+      vapi.on('speech-start', () => { statusBox.innerHTML = '💬 Nighty is speaking...'; });
+      vapi.on('speech-end',   () => { statusBox.innerHTML = '🎙️ Nighty is listening...'; });
+      vapi.on('call-end', () => {
+        isCallActive = false;
+        statusBox.innerHTML = '✅ Call ended. Go Allnighters! ⚾';
+        setTimeout(() => { statusBox.style.display = 'none'; }, 3000);
+        resetBtn();
+      });
+      vapi.on('error', () => {
+        isCallActive = false;
+        statusBox.innerHTML = '❌ Could not connect. Try again.';
+        setTimeout(() => { statusBox.style.display = 'none'; }, 3000);
+        resetBtn();
+      });
+    } catch(e) {
+      console.warn('VAPI init error:', e);
     }
   };
+  script.onerror = () => console.warn('VAPI script failed to load');
   document.head.appendChild(script);
+
+  // Button click handler
+  btnInner.addEventListener('click', async () => {
+    if (!vapi) {
+      statusBox.innerHTML = '⏳ Still loading, try again...';
+      statusBox.style.display = 'block';
+      setTimeout(() => { statusBox.style.display = 'none'; }, 2000);
+      return;
+    }
+    if (!isCallActive) {
+      btnInner.style.background = '#e8c970';
+      btnInner.innerHTML = `<span style="font-size:1.4rem;line-height:1;">🎙️</span><span style="font-size:0.5rem;font-family:Oswald,sans-serif;font-weight:700;color:#080808;letter-spacing:0.08em;text-transform:uppercase;">LIVE</span>`;
+      statusBox.innerHTML = '🎙️ Connecting to Nighty...';
+      statusBox.style.display = 'block';
+      try {
+        await vapi.start(ASSISTANT_ID);
+      } catch(e) {
+        statusBox.innerHTML = '❌ Could not connect. Try again.';
+        setTimeout(() => { statusBox.style.display = 'none'; resetBtn(); }, 3000);
+      }
+    } else {
+      vapi.stop();
+    }
+  });
+
+  function resetBtn() {
+    btnInner.style.background = '#c9a84c';
+    btnInner.innerHTML = `<span style="font-size:1.6rem;line-height:1;">⚾</span><span style="font-size:0.5rem;font-family:Oswald,sans-serif;font-weight:700;color:#080808;letter-spacing:0.08em;text-transform:uppercase;">NIGHTY</span>`;
+  }
 }
 
 if (document.readyState === 'loading') {
