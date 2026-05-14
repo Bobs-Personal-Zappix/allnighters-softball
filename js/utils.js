@@ -127,7 +127,7 @@ function initVoiceAssistant() {
 
   // Load VAPI SDK
   const script = document.createElement('script');
-  script.src = 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@1.3.0/dist/vapi.umd.js';
+ script.src = 'https://unpkg.com/@vapi-ai/web@1.3.0/dist/vapi.umd.js';
   script.onload = () => {
     try {
     vapi = new (window.Vapi || window.VapiSDK || window.vapi.default)(VAPI_KEY);
