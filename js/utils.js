@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 // ── VAPI Voice Assistant ─────────────────────
 function initVoiceAssistant() {
-  const VAPI_KEY       = 'your-vapi-public-key'; // ← We'll fill this in next
+  const VAPI_KEY       = '387fdeb5-3789-4fe1-bb7b-205e5f6e6949'; // ← We'll fill this in next
   const ASSISTANT_ID   = '3201c158-3daa-4efa-89bb-3f11642165ed';
 
   // Inject VAPI script
