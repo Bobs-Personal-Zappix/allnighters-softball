@@ -246,3 +246,13 @@ function initVoiceAssistant() {
     function animateBtn() {
       if (!isCallActive) return;
       btnInner.style.transform = 'scale(1.05)';
+       setTimeout(() => {
+        btnInner.style.transform = 'scale(1)';
+        setTimeout(animateBtn, 1000);
+      }, 500);
+    }
+  };
+  document.head.appendChild(script);
+}
+
+document.addEventListener('DOMContentLoaded', initVoiceAssistant);
