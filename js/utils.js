@@ -127,10 +127,10 @@ function initVoiceAssistant() {
 
   // Load VAPI SDK
   const script = document.createElement('script');
-  script.src = 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.1.1/dist/vapi.umd.js';
+  script.src = 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@1.3.0/dist/vapi.umd.js';
   script.onload = () => {
     try {
-      vapi = new window.Vapi(VAPI_KEY);
+    vapi = new (window.Vapi || window.VapiSDK || window.vapi.default)(VAPI_KEY);
 
       vapi.on('call-start', () => {
         isCallActive = true;
