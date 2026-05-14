@@ -108,7 +108,7 @@ function initVoiceAssistant() {
 
   // Inject VAPI script
   const script = document.createElement('script');
-  script.src = 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/dist/vapi.js';
+  script.src = 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.0.0/dist/vapi.umd.js';
   script.onload = () => {
     const vapi = new Vapi(VAPI_KEY);
     let isCallActive = false;
