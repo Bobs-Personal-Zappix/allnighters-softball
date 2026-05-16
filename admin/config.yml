@@ -188,3 +188,28 @@ collections:
               - { label: Description, name: description, widget: text,    required: false }
               - { label: Active,      name: active,      widget: boolean, default: true }
               - { label: Placeholder, name: placeholder, widget: boolean, default: false, required: false }
+
+# ── 8. Standings ────────────────────────────
+  - name: standings
+    label: League Standings
+    files:
+      - label: "2026 Division 3 Standings"
+        name: standings
+        file: data/standings.json
+        fields:
+          - { label: Season,       name: season,       widget: hidden, default: "2026" }
+          - { label: Last Updated, name: last_updated, widget: date, format: "YYYY-MM-DD" }
+          - label: Teams
+            name: teams
+            widget: list
+            summary: "{{fields.name}} — {{fields.w}}-{{fields.l}}"
+            fields:
+              - { label: Team Name, name: name,   widget: string }
+              - { label: Wins,      name: w,       widget: number, value_type: int, default: 0 }
+              - { label: Losses,    name: l,       widget: number, value_type: int, default: 0 }
+              - { label: Ties,      name: t,       widget: number, value_type: int, default: 0 }
+              - { label: Home,      name: home,    widget: string, default: "0-0" }
+              - { label: Away,      name: away,    widget: string, default: "0-0" }
+              - { label: RF,        name: rf,      widget: number, value_type: int, default: 0 }
+              - { label: RA,        name: ra,      widget: number, value_type: int, default: 0 }
+              - { label: Streak,    name: streak,  widget: string, default: "" }
