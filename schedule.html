@@ -228,6 +228,7 @@ document.querySelectorAll('.year-btn').forEach(btn => {
 });
 
 loadSchedule('2026');
+
 async function loadStandings() {
   try {
     const res  = await fetch('/data/standings.json');
