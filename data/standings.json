@@ -1,0 +1,15 @@
+{
+  "season": "2026",
+  "division": "Division 3",
+  "last_updated": "2026-05-14",
+  "teams": [
+    { "number": "7", "name": "Paddy Kelleys",  "w": 2, "l": 0, "t": 0, "home": "1-0", "away": "1-0", "rf": 37, "ra": 30, "streak": "Won 2" },
+    { "number": "8", "name": "A's",            "w": 2, "l": 0, "t": 0, "home": "1-0", "away": "1-0", "rf": 32, "ra": 28, "streak": "Won 2" },
+    { "number": "4", "name": "Pocket 9s",      "w": 2, "l": 0, "t": 0, "home": "1-0", "away": "1-0", "rf": 7,  "ra": 5,  "streak": "Won 2" },
+    { "number": "3", "name": "Allnighters",    "w": 1, "l": 1, "t": 0, "home": "1-0", "away": "0-1", "rf": 13, "ra": 10, "streak": "Lost 1" },
+    { "number": "5", "name": "Holden Station", "w": 0, "l": 1, "t": 0, "home": "0-1", "away": "0-0", "rf": 1,  "ra": 2,  "streak": "Lost 1" },
+    { "number": "2", "name": "Wolfpack",       "w": 0, "l": 1, "t": 0, "home": "0-1", "away": "0-0", "rf": 12, "ra": 17, "streak": "Lost 1" },
+    { "number": "1", "name": "Goonies",        "w": 0, "l": 2, "t": 0, "home": "0-0", "away": "0-2", "rf": 31, "ra": 34, "streak": "Lost 2" },
+    { "number": "6", "name": "Franchise",      "w": 0, "l": 2, "t": 0, "home": "0-1", "away": "0-1", "rf": 20, "ra": 27, "streak": "Lost 2" }
+  ]
+}
