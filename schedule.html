@@ -228,6 +228,75 @@ document.querySelectorAll('.year-btn').forEach(btn => {
 });
 
 loadSchedule('2026');
+async function loadStandings() {
+  try {
+    const res  = await fetch('/data/standings.json');
+    const data = await res.json();
+
+    if (data.last_updated) {
+      document.getElementById('standingsUpdated').textContent =
+        `Last updated: ${formatDate(data.last_updated)}`;
+    }
+
+    // Sort by wins desc, then losses asc
+    const sorted = [...data.teams].sort((a,b) => {
+      if (b.w !== a.w) return b.w - a.w;
+      return a.l - b.l;
+    });
+
+    // Calculate GB based on leader
+    const leader = sorted[0];
+    const leaderGP = leader.w + leader.l;
+
+    const rows = sorted.map((t, i) => {
+      const gp  = t.w + t.l + t.t;
+      const pct = gp > 0 ? (t.w / gp).toFixed(3).replace('0.', '.') : '.000';
+      const gb  = i === 0 ? '—' : (((leader.w - t.w) + (t.l - leader.l)) / 2).toFixed(1);
+      const isAllnighters = t.name.toLowerCase().includes('allnight');
+      const rowStyle = isAllnighters ? 'background:rgba(201,168,76,0.08);border-left:3px solid var(--gold);' : '';
+      const streakColor = t.streak.includes('Won') ? '#4CAF50' : t.streak.includes('Lost') ? '#F44336' : 'var(--text-muted)';
+
+      return `
+        <tr style="${rowStyle}">
+          <td style="text-align:left;font-weight:${isAllnighters?'700':'400'};color:${isAllnighters?'var(--gold)':'var(--text)'};">
+            ${isAllnighters ? '⚾ ' : ''}${t.name}
+          </td>
+          <td>${t.w}-${t.l}${t.t > 0 ? '-'+t.t : ''}</td>
+          <td style="color:var(--gold);">${pct}</td>
+          <td>${gb}</td>
+          <td style="font-size:0.8rem;color:var(--text-muted);">${t.home}</td>
+          <td style="font-size:0.8rem;color:var(--text-muted);">${t.away}</td>
+          <td>${t.rf}</td>
+          <td>${t.ra}</td>
+          <td style="color:${streakColor};font-size:0.82rem;">${t.streak}</td>
+        </tr>`;
+    }).join('');
+
+    document.getElementById('standingsTable').innerHTML = `
+      <table class="stats-table">
+        <thead>
+          <tr>
+            <th style="text-align:left;">Team</th>
+            <th>W-L</th>
+            <th>PCT</th>
+            <th>GB</th>
+            <th>Home</th>
+            <th>Away</th>
+            <th>RF</th>
+            <th>RA</th>
+            <th>Streak</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+
+  } catch(e) {
+    document.getElementById('standingsTable').innerHTML =
+      '<div class="loading">Standings not available.</div>';
+  }
+}
+
+loadStandings();
 </script>
 <style>
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
