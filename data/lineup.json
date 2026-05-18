@@ -1,7 +1,7 @@
 {
-  "game_date": "2026-05-13",
-  "opponent": "Pocket 9s",
-  "last_updated": "2026-05-14",
+  "game_date": "2026-05-15",
+  "opponent": "Wolfpack",
+  "last_updated": "2026-05-18",
   "positions": {
     "P": {
       "number": "53",
@@ -9,39 +9,39 @@
       "order": 12
     },
     "C": {
-      "number": "16",
-      "name": "Thomas Evans",
-      "order": 6
+      "number": "17",
+      "name": "Mike Stoico",
+      "order": 8
     },
     "1B": {
       "number": "99",
       "name": "Ryan Overberg",
-      "order": 9
+      "order": 10
     },
     "2B": {
       "number": "33",
       "name": "Anthony Gagliano",
-      "order": 10
+      "order": 11
     },
     "SS": {
       "number": "10",
       "name": "Darren McDermott",
-      "order": 3
+      "order": 5
     },
     "3B": {
       "number": "11",
       "name": "Eric Moody",
-      "order": 7
+      "order": 9
     },
     "LF": {
-      "number": "2",
-      "name": "Tommy Dembowski",
-      "order": 1
+      "number": "3",
+      "name": "Jason Farrell",
+      "order": 3
     },
     "LC": {
       "number": "69",
       "name": "Brendan Trohon",
-      "order": 4
+      "order": 6
     },
     "RC": {
       "number": "24",
@@ -49,30 +49,30 @@
       "order": 2
     },
     "RF": {
-      "number": "7",
-      "name": "Coach Barrows",
-      "order": 8
+      "number": "2",
+      "name": "Tommy Dembowski",
+      "order": 1
     },
     "EH1": {
-      "number": "99",
-      "name": "Assad Daaboul",
-      "order": 11
-    },
-    "EH2": {
       "number": "25",
       "name": "Joe Z.",
-      "order": 5
+      "order": 4
+    },
+    "EH2": {
+      "number": "40",
+      "name": "Chris Parello",
+      "order": 7
     }
   },
   "bench": [
     {
-      "number": "",
-      "name": "",
+      "number": "99",
+      "name": "Assad Daaboul",
       "order": 0
     },
     {
-      "number": "",
-      "name": "",
+      "number": "7",
+      "name": "Coach Barrows",
       "order": 0
     },
     {
