@@ -77,12 +77,11 @@
     </div>
   </section>
   
-  <!-- ── Next Game Banner ──────────────────── -->
-  <section class="section-sm" style="background:var(--dark);border-bottom:1px solid var(--border);">
+<!-- ── Season Record Banner ──────────────── -->
+  <section style="background:var(--black);border-bottom:1px solid var(--border);padding:1.25rem 0;">
     <div class="container">
-      <div id="nextGameBanner" style="text-align:center;">
-        <div class="loading"><div class="spinner"></div>Loading schedule...</div>
-      </div>
+      <div style="text-align:center;font-family:'Oswald',sans-serif;font-size:0.75rem;color:var(--text-muted);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.75rem;">Current Season Standing</div>
+      <div id="seasonRecordBanner" style="display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:nowrap;"></div>
     </div>
   </section>
 <!-- ── Lineup Banner ─────────────────────── -->
@@ -476,21 +475,21 @@ async function loadSeasonRecord() {
         <div style="font-family:'Oswald',sans-serif;font-size:2.5rem;font-weight:700;color:#4CAF50;line-height:1;">${wins}</div>
         <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em;margin-top:0.25rem;">Wins</div>
       </div>
-      <div style="color:var(--border);font-size:1.5rem;">·</div>
+<div style="color:var(--border);font-size:1rem;">·</div>
       <div style="text-align:center;">
-        <div style="font-family:'Oswald',sans-serif;font-size:2.5rem;font-weight:700;color:#F44336;line-height:1;">${losses}</div>
+        <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#F44336;line-height:1;">${losses}</div>
         <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em;margin-top:0.25rem;">Losses</div>
       </div>
       ${ties > 0 ? `
-      <div style="color:var(--border);font-size:1.5rem;">·</div>
+<div style="color:var(--border);font-size:1rem;">·</div>
       <div style="text-align:center;">
-        <div style="font-family:'Oswald',sans-serif;font-size:2.5rem;font-weight:700;color:var(--gold);line-height:1;">${ties}</div>
+        <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:var(--gold);line-height:1;">${ties}</div>
         <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em;margin-top:0.25rem;">Ties</div>
       </div>` : ''}
       ${streak ? `
-      <div style="color:var(--border);font-size:1.5rem;">·</div>
+<div style="color:var(--border);font-size:1rem;">·</div>
       <div style="text-align:center;">
-        <div style="font-family:'Oswald',sans-serif;font-size:2.5rem;font-weight:700;color:${streakColor};line-height:1;">${streakCount}</div>
+        <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:${streakColor};line-height:1;">${streakCount}</div>
         <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em;margin-top:0.25rem;">${streak.startsWith('Won') ? 'Win Streak' : streak.startsWith('Lost') ? 'Loss Streak' : 'Tie Streak'}</div>
       </div>` : ''}`;
   } catch(e) {
