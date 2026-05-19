@@ -41,9 +41,9 @@
       "home_away": "Home",
       "field": "Marrs Park",
       "time": "6:30 PM",
-      "result": "",
-      "score_us": null,
-      "score_them": null,
+      "result": "W",
+      "score_us": 11,
+      "score_them": 4,
       "notes": ""
     },
     {
