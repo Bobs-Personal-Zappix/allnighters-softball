@@ -535,11 +535,9 @@ async function loadWeeklySection() {
     const hlRes  = await fetch('/data/weekly-highlights.json');
     const hlData = await hlRes.json();
 
-    const recentHighlights = hlData.highlights.filter(h => {
-      const [y,m,d] = h.date.split('-').map(Number);
-      const hDate = new Date(y, m-1, d);
-      return hDate >= weekAgo && hDate <= today;
-    });
+const recentHighlights = hlData.highlights
+  .sort((a,b) => new Date(b.date) - new Date(a.date))
+  .slice(0, 2);
 
     if (recentHighlights.length > 0) {
       highlightsDiv.innerHTML = `
