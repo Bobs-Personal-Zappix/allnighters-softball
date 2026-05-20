@@ -1,7 +1,7 @@
 {
-  "game_date": "2026-05-15",
-  "opponent": "Wolfpack",
-  "last_updated": "2026-05-18",
+  "game_date": "2026-05-20",
+  "opponent": "Paddy Kelleys",
+  "last_updated": "2026-05-20",
   "positions": {
     "P": {
       "number": "53",
@@ -11,37 +11,37 @@
     "C": {
       "number": "17",
       "name": "Mike Stoico",
-      "order": 8
-    },
-    "1B": {
-      "number": "99",
-      "name": "Ryan Overberg",
       "order": 10
     },
+    "1B": {
+      "number": "40",
+      "name": "Chris Parello",
+      "order": 9
+    },
     "2B": {
-      "number": "33",
-      "name": "Anthony Gagliano",
-      "order": 11
+      "number": "8",
+      "name": "Brendan McCarthy",
+      "order": 3
     },
     "SS": {
       "number": "10",
       "name": "Darren McDermott",
-      "order": 5
+      "order": 7
     },
     "3B": {
       "number": "11",
       "name": "Eric Moody",
-      "order": 9
+      "order": 8
     },
     "LF": {
       "number": "3",
       "name": "Jason Farrell",
-      "order": 3
+      "order": 5
     },
     "LC": {
       "number": "69",
       "name": "Brendan Trohon",
-      "order": 6
+      "order": 4
     },
     "RC": {
       "number": "24",
@@ -56,12 +56,12 @@
     "EH1": {
       "number": "25",
       "name": "Joe Z.",
-      "order": 4
+      "order": 6
     },
     "EH2": {
-      "number": "40",
-      "name": "Chris Parello",
-      "order": 7
+      "number": "33",
+      "name": "Anthony Gagliano",
+      "order": 11
     }
   },
   "bench": [
@@ -71,13 +71,13 @@
       "order": 0
     },
     {
-      "number": "7",
-      "name": "Coach Barrows",
+      "number": "16",
+      "name": "Thomas Evans",
       "order": 0
     },
     {
-      "number": "",
-      "name": "",
+      "number": "7",
+      "name": "Coach Barrows",
       "order": 0
     },
     {
