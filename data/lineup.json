@@ -9,14 +9,14 @@
       "order": 12
     },
     "C": {
-      "number": "17",
-      "name": "Mike Stoico",
+      "number": "16",
+      "name": "Thomas Evans",
       "order": 10
     },
     "1B": {
       "number": "40",
       "name": "Chris Parello",
-      "order": 9
+      "order": 7
     },
     "2B": {
       "number": "8",
@@ -26,7 +26,7 @@
     "SS": {
       "number": "10",
       "name": "Darren McDermott",
-      "order": 7
+      "order": 6
     },
     "3B": {
       "number": "11",
@@ -39,24 +39,24 @@
       "order": 5
     },
     "LC": {
-      "number": "69",
-      "name": "Brendan Trohon",
-      "order": 4
-    },
-    "RC": {
       "number": "24",
       "name": "Pat Hosman",
       "order": 2
     },
-    "RF": {
+    "RC": {
       "number": "2",
       "name": "Tommy Dembowski",
       "order": 1
     },
+    "RF": {
+      "number": "17",
+      "name": "Mike Stoico",
+      "order": 9
+    },
     "EH1": {
       "number": "25",
       "name": "Joe Z.",
-      "order": 6
+      "order": 4
     },
     "EH2": {
       "number": "33",
@@ -71,8 +71,8 @@
       "order": 0
     },
     {
-      "number": "16",
-      "name": "Thomas Evans",
+      "number": "99",
+      "name": "Ryan Overberg",
       "order": 0
     },
     {
