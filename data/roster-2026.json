@@ -3,10 +3,10 @@
   "league": "Peabody Men's Intramural Softball League",
   "division": "Division 3",
   "players": [
-    { "number": "7",  "name": "Coach Barrows",       "nickname": "Baz",    "positions": "Coach, IF, C",      "details": "The Godfather",                                     "years_on_team": 1, "photo": "" },
+    { "number": "7",  "name": "Coach Barrows",       "nickname": "Baz",    "positions": "Coach, IF, OF, C, P",      "details": "The Godfather",                                     "years_on_team": 1, "photo": "" },
     { "number": "40", "name": "Chris Parello",      "nickname": "P",      "positions": "1B, P",             "details": "Started on Fridays and we bought him like the Babe","years_on_team": 1, "photo": "" },
     { "number": "8",  "name": "Brendan McCarthy",   "nickname": "BMac",   "positions": "SS, 2B, 3B, OF",   "details": "The Grandson who kept it going",                     "years_on_team": 1, "photo": "" },
-    { "number": "33", "name": "Anthony Gagliano",   "nickname": "Ant",    "positions": "2B, 3B, C",         "details": "The Great Grandson who kept it together",            "years_on_team": 1, "photo": "" },
+    { "number": "33", "name": "Anthony Gagliano",   "nickname": "Ant",    "positions": "2B, 3B, 1B, C",         "details": "The Great Grandson who kept it together",            "years_on_team": 1, "photo": "" },
     { "number": "53", "name": "Mike Russo",         "nickname": "Russo",  "positions": "P",                 "details": "Played in 1800's baseball leagues",                 "years_on_team": 1, "photo": "" },
     { "number": "5",  "name": "Joel Tomchik",       "nickname": "JT",     "positions": "OF",                "details": "The Money",                                         "years_on_team": 1, "photo": "" },
     { "number": "17", "name": "Mike Stoico",        "nickname": "Stoico", "positions": "OF, C",             "details": "The Muscle",                                        "years_on_team": 1, "photo": "" },
@@ -23,6 +23,6 @@
     { "number": "25", "name": "Joe Z.",             "nickname": "JZ",     "positions": "OF",                "details": "Rocky",                                             "years_on_team": 1, "photo": "" },
     { "number": "18", "name": "Myles",              "nickname": "Myles",  "positions": "OF, C, 2B",         "details": "Flash",                                             "years_on_team": 1, "photo": "" },
      { "number": "99", "name": "Ryan Overberg",      "nickname": "Ry", "positions": "1B, 3B, C",            "details": "The Heat",                                          "years_on_team": 1, "photo": "" },
-    { "number": "99", "name": "Assad Daaboul",      "nickname": "DaaBoo", "positions": "OF",                "details": "Invisible Man",                                     "years_on_team": 1, "photo": "" }
+    { "number": "99", "name": "Assad Daaboul",      "nickname": "DaaBoo", "positions": "C, OF",                "details": "Invisible Man",                                     "years_on_team": 1, "photo": "" }
   ]
 }
