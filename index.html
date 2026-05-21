@@ -251,8 +251,8 @@ async function loadSeasonRecord() {
       streak = (last==='W'?'Won':last==='L'?'Lost':'Tied')+' '+streakCount;
     }
     const streakColor = streak.startsWith('Won')?'#4CAF50':streak.startsWith('Lost')?'#F44336':'var(--gold)';
-    document.getElementById('seasonRecordBanner').innerHTML = `
-      <div style="display:inline-flex;align-items:center;gap:1.5rem;flex-wrap:wrap;justify-content:center;background:var(--card);border:1px solid var(--gold-dark);border-radius:10px;padding:1.25rem 2rem;width:100%;max-width:600px;">
+  document.getElementById('seasonRecordBanner').innerHTML = `
+      <div style="display:inline-flex;align-items:center;gap:1.5rem;flex-wrap:wrap;justify-content:center;width:100%;">
         <div style="text-align:center;"><div style="font-size:2rem;margin-bottom:0.2rem;">🏆</div><div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#4CAF50;line-height:1;">${wins}</div><div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em;margin-top:0.25rem;">Wins</div></div>
         <div style="color:var(--border);font-size:1rem;">·</div>
         <div style="text-align:center;"><div style="font-size:2rem;margin-bottom:0.2rem;">💔</div><div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#F44336;line-height:1;">${losses}</div><div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em;margin-top:0.25rem;">Losses</div></div>
