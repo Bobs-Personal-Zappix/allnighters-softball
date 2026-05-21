@@ -418,38 +418,18 @@ async function loadNextGame() {
 }
 
 async function loadSeasonRecord() {
-document.getElementById('seasonRecordBanner').innerHTML = `
-  <div style="display:inline-flex;align-items:center;gap:1.5rem;flex-wrap:wrap;justify-content:center;background:var(--card);border:1px solid var(--gold-dark);border-radius:10px;padding:1.25rem 2rem;width:100%;max-width:600px;">
-    <div style="text-align:center;">
-      <div style="font-size:2rem;margin-bottom:0.2rem;">🏆</div>
-      <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#4CAF50;line-height:1;">${wins}</div>
-      <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em;margin-top:0.25rem;">Wins</div>
-    </div>
-    <div style="color:var(--border);font-size:1rem;">·</div>
-    <div style="text-align:center;">
-      <div style="font-size:2rem;margin-bottom:0.2rem;">💔</div>
-      <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#F44336;line-height:1;">${losses}</div>
-      <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em;margin-top:0.25rem;">Losses</div>
-    </div>
-    ${ties > 0 ? `
-    <div style="color:var(--border);font-size:1rem;">·</div>
-    <div style="text-align:center;">
-      <div style="font-size:2rem;margin-bottom:0.2rem;">🤝</div>
-      <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:var(--gold);line-height:1;">${ties}</div>
-      <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em;margin-top:0.25rem;">Ties</div>
-    </div>` : ''}
-    ${streak ? `
-    <div style="color:var(--border);font-size:1rem;">·</div>
-    <div style="text-align:center;">
-      <div style="font-size:2rem;margin-bottom:0.2rem;">${streak.startsWith('Won') ? '🔥' : '❄️'}</div>
-      <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:${streakColor};line-height:1;">${streakCount}</div>
-      <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em;margin-top:0.25rem;">${streak.startsWith('Won') ? '🔥 Win Streak' : '❄️ Loss Streak'}</div>
-    </div>` : ''}
-    <div style="color:var(--border);font-size:1rem;">·</div>
-    <a href="/schedule.html" style="font-family:'Oswald',sans-serif;font-size:0.75rem;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--gold-dark);padding:0.4rem 1rem;border-radius:6px;white-space:nowrap;">Full Standings →</a>
-  </div>`;
+  try {
+    const res  = await fetch('/data/schedule-2026.json');
+    const data = await res.json();
+    let wins=0, losses=0, ties=0, streak='', streakCount=0;
 
-    // Calculate streak from most recent games
+    const played = data.games.filter(g => g.result === 'W' || g.result === 'L' || g.result === 'T');
+    played.forEach(g => {
+      if (g.result === 'W') wins++;
+      else if (g.result === 'L') losses++;
+      else if (g.result === 'T') ties++;
+    });
+
     if (played.length > 0) {
       const last = played[played.length - 1].result;
       for (let i = played.length - 1; i >= 0; i--) {
@@ -458,6 +438,43 @@ document.getElementById('seasonRecordBanner').innerHTML = `
       }
       streak = (last === 'W' ? 'Won' : last === 'L' ? 'Lost' : 'Tied') + ' ' + streakCount;
     }
+
+    const streakColor = streak.startsWith('Won') ? '#4CAF50' : streak.startsWith('Lost') ? '#F44336' : 'var(--gold)';
+
+    document.getElementById('seasonRecordBanner').innerHTML = `
+      <div style="display:inline-flex;align-items:center;gap:1.5rem;flex-wrap:wrap;justify-content:center;background:var(--card);border:1px solid var(--gold-dark);border-radius:10px;padding:1.25rem 2rem;width:100%;max-width:600px;">
+        <div style="text-align:center;">
+          <div style="font-size:2rem;margin-bottom:0.2rem;">🏆</div>
+          <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#4CAF50;line-height:1;">${wins}</div>
+          <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em;margin-top:0.25rem;">Wins</div>
+        </div>
+        <div style="color:var(--border);font-size:1rem;">·</div>
+        <div style="text-align:center;">
+          <div style="font-size:2rem;margin-bottom:0.2rem;">💔</div>
+          <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#F44336;line-height:1;">${losses}</div>
+          <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em;margin-top:0.25rem;">Losses</div>
+        </div>
+        ${ties > 0 ? `
+        <div style="color:var(--border);font-size:1rem;">·</div>
+        <div style="text-align:center;">
+          <div style="font-size:2rem;margin-bottom:0.2rem;">🤝</div>
+          <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:var(--gold);line-height:1;">${ties}</div>
+          <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em;margin-top:0.25rem;">Ties</div>
+        </div>` : ''}
+        ${streak ? `
+        <div style="color:var(--border);font-size:1rem;">·</div>
+        <div style="text-align:center;">
+          <div style="font-size:2rem;margin-bottom:0.2rem;">${streak.startsWith('Won') ? '🔥' : '❄️'}</div>
+          <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:${streakColor};line-height:1;">${streakCount}</div>
+          <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em;margin-top:0.25rem;">${streak.startsWith('Won') ? '🔥 Win Streak' : '❄️ Loss Streak'}</div>
+        </div>` : ''}
+        <div style="color:var(--border);font-size:1rem;">·</div>
+        <a href="/schedule.html" style="font-family:'Oswald',sans-serif;font-size:0.75rem;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--gold-dark);padding:0.4rem 1rem;border-radius:6px;white-space:nowrap;">Full Standings →</a>
+      </div>`;
+  } catch(e) {
+    console.warn('Could not load record:', e);
+  }
+}
 
     const streakColor = streak.startsWith('Won') ? '#4CAF50' : streak.startsWith('Lost') ? '#F44336' : 'var(--gold)';
 
