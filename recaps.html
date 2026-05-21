@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Recaps | Allnighters Softball</title>
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-brand">
+      <img src="/images/logo.png" alt="Allnighters Logo">
+      <div class="nav-brand-text">Allnighters<span>Softball · Est. 1992</span></div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/schedule.html">Schedule & Standings</a></li>
+      <li><a href="/roster.html">Roster</a></li>
+      <li><a href="/stats.html">Stats</a></li>
+      <li><a href="/recaps.html">Game Recaps</a></li>
+      <li><a href="/gallery.html">Gallery</a></li>
+      <li><a href="/history.html">History</a></li>
+      <li><a href="/proshop.html">Pro Shop</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="page-content">
+  <div class="page-header">
+    <h1 class="page-header-title">Game Recaps</h1>
+    <p class="page-header-sub">2026 Season · Full Game Summaries & Highlights</p>
+  </div>
+
+  <section class="section">
+    <div class="container" style="max-width:800px;">
+      <div id="recapsContainer">
+        <div class="loading"><div class="spinner"></div>Loading recaps...</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="/images/logo.png" alt="Allnighters">
+      <div class="footer-brand-name">Allnighters Softball</div>
+      <div class="footer-tagline">Peabody, MA · Est. 1992</div>
+    </div>
+    <div class="footer-nav">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/schedule.html">Schedule & Standings</a></li>
+        <li><a href="/roster.html">Roster</a></li>
+        <li><a href="/stats.html">Player Stats</a></li>
+        <li><a href="/recaps.html">Game Recaps</a></li>
+        <li><a href="/gallery.html">Photo Gallery</a></li>
+        <li><a href="/history.html">Team History</a></li>
+        <li><a href="/proshop.html">Pro Shop</a></li>
+      </ul>
+    </div>
+    <div class="footer-info">
+      <h4>Game Recaps</h4>
+      <p>Full game summaries and highlights for every Allnighters game in 2026.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; <span id="yr"></span> Allnighters Softball · allnighterssoftball.com</p>
+    <p class="est">EST. 1992</p>
+  </div>
+</footer>
+
+<script src="/js/utils.js"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+async function loadRecaps() {
+  try {
+    const [hlRes, schedRes] = await Promise.all([
+      fetch('/data/weekly-highlights.json'),
+      fetch('/data/schedule-2026.json')
+    ]);
+    const hlData   = await hlRes.json();
+    const schedData = await schedRes.json();
+
+    const highlights = hlData.highlights
+      .sort((a,b) => new Date(b.date) - new Date(a.date));
+
+    if (!highlights.length) {
+      document.getElementById('recapsContainer').innerHTML =
+        '<div class="loading">No recaps yet — check back after the first game!</div>';
+      return;
+    }
+
+    document.getElementById('recapsContainer').innerHTML = highlights.map(h => {
+      // Find matching game result
+      const game = schedData.games.find(g => g.date === h.date);
+      const result = game ? game.result : '';
+      const scoreUs = game ? game.score_us : null;
+      const scoreThem = game ? game.score_them : null;
+      const resultBadge = result === 'W'
+        ? `<span class="badge badge-win">W ${scoreUs}–${scoreThem}</span>`
+        : result === 'L'
+        ? `<span class="badge badge-loss">L ${scoreUs}–${scoreThem}</span>`
+        : result === 'T'
+        ? `<span class="badge badge-tie">T ${scoreUs}–${scoreThem}</span>`
+        : '';
+
+      return `
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:2rem;">
+          ${h.photo ? `<img src="${h.photo}" alt="${h.opponent}" style="width:100%;max-height:350px;object-fit:cover;">` : ''}
+          <div style="padding:1.5rem;">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;margin-bottom:1rem;">
+              <div>
+                <div style="font-family:'Oswald',sans-serif;font-size:1.3rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.06em;">
+                  ⚾ vs. ${h.opponent}
+                </div>
+                <div style="font-size:0.82rem;color:var(--text-muted);margin-top:0.2rem;">
+                  ${formatDate(h.date)}
+                </div>
+              </div>
+              <div>${resultBadge}</div>
+            </div>
+            <p style="font-size:0.92rem;color:var(--text-muted);line-height:1.9;margin:0;">${h.summary}</p>
+          </div>
+        </div>`;
+    }).join('');
+
+  } catch(e) {
+    document.getElementById('recapsContainer').innerHTML =
+      '<div class="loading">Could not load recaps. Try again later.</div>';
+  }
+}
+
+loadRecaps();
+</script>
+</body>
+</html>
