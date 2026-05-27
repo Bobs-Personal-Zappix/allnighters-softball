@@ -1,7 +1,7 @@
 {
   "game_date": "2026-05-20",
   "opponent": "Paddy Kelleys",
-  "last_updated": "2026-05-20",
+  "last_updated": "2026-05-27",
   "positions": {
     "P": {
       "number": "53",
@@ -11,7 +11,7 @@
     "C": {
       "number": "16",
       "name": "Thomas Evans",
-      "order": 10
+      "order": 11
     },
     "1B": {
       "number": "40",
@@ -19,24 +19,24 @@
       "order": 7
     },
     "2B": {
-      "number": "8",
-      "name": "Brendan McCarthy",
-      "order": 3
+      "number": "33",
+      "name": "Anthony Gagliano",
+      "order": 10
     },
     "SS": {
       "number": "10",
       "name": "Darren McDermott",
-      "order": 6
+      "order": 3
     },
     "3B": {
       "number": "11",
       "name": "Eric Moody",
-      "order": 8
+      "order": 5
     },
     "LF": {
       "number": "3",
       "name": "Jason Farrell",
-      "order": 5
+      "order": 1
     },
     "LC": {
       "number": "24",
@@ -46,11 +46,11 @@
     "RC": {
       "number": "2",
       "name": "Tommy Dembowski",
-      "order": 1
+      "order": 7
     },
     "RF": {
-      "number": "17",
-      "name": "Mike Stoico",
+      "number": "7",
+      "name": "Coach Barrows",
       "order": 9
     },
     "EH1": {
@@ -59,8 +59,8 @@
       "order": 4
     },
     "EH2": {
-      "number": "33",
-      "name": "Anthony Gagliano",
+      "number": "16",
+      "name": "Thomas Evans",
       "order": 11
     }
   },
