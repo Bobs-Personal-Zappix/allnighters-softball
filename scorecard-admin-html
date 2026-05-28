@@ -7,17 +7,26 @@
   <link rel="icon" type="image/png" href="/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
   <style>
-    .score-input { width:55px; padding:0.4rem 0.3rem; background:var(--dark); border:1px solid var(--border); border-radius:4px; color:var(--text); font-family:'Oswald',sans-serif; font-size:0.85rem; text-align:center; }
+    .score-input { width:52px; padding:0.4rem 0.3rem; background:var(--dark); border:1px solid var(--border); border-radius:4px; color:var(--text); font-family:'Oswald',sans-serif; font-size:0.85rem; text-align:center; }
     .score-input:focus { outline:none; border-color:var(--gold-dark); }
-    .player-row { display:grid; grid-template-columns:30px 180px repeat(10,55px); gap:4px; align-items:center; padding:4px 0; border-bottom:1px solid var(--border); }
+    .player-row { display:grid; grid-template-columns:140px repeat(10,52px) 140px 50px; gap:4px; align-items:center; padding:5px 0; border-bottom:1px solid var(--border); }
+    .player-row.is-sub { background:rgba(201,168,76,0.04); padding-left:1rem; }
     .player-row:hover { background:var(--card-hover); }
-    .col-header { font-family:'Oswald',sans-serif; font-size:0.72rem; color:var(--gold); text-transform:uppercase; letter-spacing:0.08em; text-align:center; }
-    .order-num { font-family:'Oswald',sans-serif; font-size:0.9rem; color:var(--gold); text-align:center; }
-    .player-name { font-size:0.85rem; color:var(--text); padding-left:0.5rem; }
-    .pitch-row { display:grid; grid-template-columns:180px repeat(8,65px); gap:4px; align-items:center; padding:4px 0; border-bottom:1px solid var(--border); }
-    input[type="password"], select { width:100%; padding:0.65rem 0.9rem; background:var(--dark); border:1px solid var(--border); border-radius:6px; color:var(--text); font-family:'Open Sans',sans-serif; font-size:0.9rem; }
-    input[type="password"]:focus, select:focus { outline:none; border-color:var(--gold-dark); }
+    .col-header { font-family:'Oswald',sans-serif; font-size:0.7rem; color:var(--gold); text-transform:uppercase; letter-spacing:0.08em; text-align:center; }
+    .player-name-cell { font-size:0.82rem; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .player-name-cell.is-sub { color:var(--text-muted); font-size:0.78rem; padding-left:0.75rem; }
+    .player-name-cell.is-sub::before { content:'↳ '; color:var(--gold-dark); }
+    .pitch-row { display:grid; grid-template-columns:160px repeat(8,60px); gap:4px; align-items:center; padding:5px 0; border-bottom:1px solid var(--border); }
+    .sub-select { width:100%; padding:0.3rem 0.4rem; background:var(--dark); border:1px solid var(--border); border-radius:4px; color:var(--text-muted); font-family:'Open Sans',sans-serif; font-size:0.72rem; }
+    .sub-select:focus { outline:none; border-color:var(--gold-dark); color:var(--text); }
+    .inn-input { width:100%; padding:0.3rem; background:var(--dark); border:1px solid var(--border); border-radius:4px; color:var(--text); font-family:'Oswald',sans-serif; font-size:0.78rem; text-align:center; }
+    .inn-input:focus { outline:none; border-color:var(--gold-dark); }
+    input[type="password"], select.game-sel { width:100%; padding:0.65rem 0.9rem; background:var(--dark); border:1px solid var(--border); border-radius:6px; color:var(--text); font-family:'Open Sans',sans-serif; font-size:0.9rem; }
+    input[type="password"]:focus, select.game-sel:focus { outline:none; border-color:var(--gold-dark); }
     .save-bar { position:sticky; bottom:0; background:var(--dark); border-top:2px solid var(--gold-dark); padding:1rem 1.5rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; z-index:100; }
+    .add-sub-btn { font-size:0.72rem; padding:0.25rem 0.6rem; background:transparent; border:1px solid var(--gold-dark); border-radius:4px; color:var(--gold); cursor:pointer; font-family:'Oswald',sans-serif; letter-spacing:0.06em; text-transform:uppercase; transition:all 0.2s; }
+    .add-sub-btn:hover { background:rgba(201,168,76,0.1); }
+    .section-label { font-family:'Oswald',sans-serif; font-size:0.8rem; color:var(--gold); text-transform:uppercase; letter-spacing:0.15em; border-bottom:1px solid var(--border); padding-bottom:0.5rem; margin-bottom:1rem; }
   </style>
 </head>
 <body>
@@ -37,9 +46,9 @@
   </div>
 
   <section class="section">
-    <div class="container" style="max-width:900px;">
+    <div class="container" style="max-width:1000px;">
 
-      <!-- Password Screen -->
+      <!-- Password -->
       <div id="passwordScreen">
         <div style="text-align:center;padding:2rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);max-width:400px;margin:0 auto;">
           <div style="font-size:3rem;margin-bottom:1rem;">📋</div>
@@ -56,22 +65,22 @@
 
         <!-- Game Selector -->
         <div style="margin-bottom:2rem;">
-          <div style="font-family:'Oswald',sans-serif;font-size:0.8rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.75rem;">Select Game:</div>
-          <select id="gameSelector" onchange="loadGame()">
+          <div class="section-label">Select Game</div>
+          <select class="game-sel" id="gameSelector" onchange="loadGame()">
             <option value="">— Select a game —</option>
           </select>
         </div>
 
-        <!-- Scorecard Form -->
+        <!-- Form -->
         <div id="scorecardForm" style="display:none;">
 
-          <!-- Game Result -->
+          <!-- Result -->
           <div style="margin-bottom:2rem;">
-            <div class="section-divider" style="font-family:'Oswald',sans-serif;font-size:0.8rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.15em;border-bottom:1px solid var(--border);padding-bottom:0.5rem;margin-bottom:1rem;">Game Result</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1rem;flex-wrap:wrap;">
+            <div class="section-label">Game Result</div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;">
               <div>
                 <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.4rem;">Result</div>
-                <select id="gameResult">
+                <select class="game-sel" id="gameResult" style="padding:0.5rem;">
                   <option value="">Not Played</option>
                   <option value="W">Win</option>
                   <option value="L">Loss</option>
@@ -88,7 +97,7 @@
               </div>
               <div>
                 <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.4rem;">Field</div>
-                <select id="gameField">
+                <select class="game-sel" id="gameField" style="padding:0.5rem;">
                   <option value="Marrs Park">Marrs Park</option>
                   <option value="Murphy Park">Murphy Park</option>
                 </select>
@@ -96,14 +105,14 @@
             </div>
           </div>
 
-          <!-- Batting Stats -->
+          <!-- Batting -->
           <div style="margin-bottom:2rem;">
-            <div style="font-family:'Oswald',sans-serif;font-size:0.8rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.15em;border-bottom:1px solid var(--border);padding-bottom:0.5rem;margin-bottom:1rem;">⚾ Batting Stats</div>
+            <div class="section-label">⚾ Batting Stats</div>
+            <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem;">For substitutes: set "Sub For" to the player they replaced and "Inn" to the inning they entered.</p>
             <div style="overflow-x:auto;">
-              <div style="min-width:700px;">
+              <div style="min-width:900px;">
                 <div class="player-row" style="border-bottom:2px solid var(--gold-dark);padding-bottom:6px;">
-                  <div class="col-header">#</div>
-                  <div class="col-header" style="text-align:left;padding-left:0.5rem;">Player</div>
+                  <div class="col-header" style="text-align:left;">Player</div>
                   <div class="col-header">PA</div>
                   <div class="col-header">AB</div>
                   <div class="col-header">H</div>
@@ -114,15 +123,17 @@
                   <div class="col-header">RBI</div>
                   <div class="col-header">R</div>
                   <div class="col-header">BB</div>
+                  <div class="col-header">Sub For</div>
+                  <div class="col-header">Inn</div>
                 </div>
                 <div id="battingRows"></div>
               </div>
             </div>
           </div>
 
-          <!-- Pitching Stats -->
+          <!-- Pitching -->
           <div style="margin-bottom:2rem;">
-            <div style="font-family:'Oswald',sans-serif;font-size:0.8rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.15em;border-bottom:1px solid var(--border);padding-bottom:0.5rem;margin-bottom:1rem;">⚾ Pitching Stats</div>
+            <div class="section-label">⚾ Pitching Stats</div>
             <div style="overflow-x:auto;">
               <div style="min-width:600px;">
                 <div class="pitch-row" style="border-bottom:2px solid var(--gold-dark);padding-bottom:6px;">
@@ -188,16 +199,13 @@ if (sessionStorage.getItem('coach_auth') === 'true') {
 }
 
 async function initAdmin() {
-  // Load roster
   const rRes = await fetch('/data/roster-2026.json');
   const rData = await rRes.json();
   roster = rData.players.filter(p => p.name !== 'Player Name');
 
-  // Load schedule to populate game selector
   const sRes = await fetch('/data/schedule-2026.json');
   const sData = await sRes.json();
   const played = sData.games.filter(g => g.result && g.result !== '' && g.result !== 'No Game');
-
   const sel = document.getElementById('gameSelector');
   played.reverse().forEach(g => {
     const opt = document.createElement('option');
@@ -207,139 +215,165 @@ async function initAdmin() {
   });
 }
 
+function rosterOptions(selectedName) {
+  return `<option value="">— Starter —</option>` +
+    roster.map(p => `<option value="${p.name}" ${p.name===selectedName?'selected':''}>${p.name}</option>`).join('');
+}
+
 async function loadGame() {
   const val = document.getElementById('gameSelector').value;
-  if (!val) { document.getElementById('scorecardForm').style.display = 'none'; return; }
-  
+  if (!val) { document.getElementById('scorecardForm').style.display='none'; return; }
   const [date, opponent] = val.split('|');
   currentGame = { date, opponent };
 
-  // Load lineup for this game if available
-  let lineupPlayers = [];
-  try {
-    const lRes = await fetch('/data/lineup.json');
-    const lData = await lRes.json();
-    if (lData.game_date === date) {
-      // Use saved lineup order
-      const allPos = { ...lData.positions };
-      const bench = lData.bench || [];
-      const ordered = Object.values(allPos)
-        .filter(p => p.name)
-        .sort((a,b) => (a.order||99) - (b.order||99));
-      const benchPlayers = bench.filter(p => p.name);
-      lineupPlayers = [...ordered, ...benchPlayers];
-    }
-  } catch(e) {}
-
-  // Fall back to full roster if no lineup
-  if (!lineupPlayers.length) {
-    lineupPlayers = roster.map(p => ({ name: p.name, number: p.number, order: 0 }));
-  }
-
-  // Check for existing scorecard
+  // Load existing scorecard
   const { data: existing } = await db.from('game_scorecards')
     .select('*').eq('game_date', date).eq('opponent', opponent).single();
   existingScorecard = existing;
 
-  // Populate result fields
+  // Populate result
   if (existing) {
-    document.getElementById('gameResult').value = existing.result || '';
-    document.getElementById('scoreUs').value = existing.score_us || '';
-    document.getElementById('scoreThem').value = existing.score_them || '';
-    document.getElementById('gameField').value = existing.field || 'Marrs Park';
+    document.getElementById('gameResult').value  = existing.result || '';
+    document.getElementById('scoreUs').value     = existing.score_us || '';
+    document.getElementById('scoreThem').value   = existing.score_them || '';
+    document.getElementById('gameField').value   = existing.field || 'Marrs Park';
+  } else {
+    document.getElementById('gameResult').value  = '';
+    document.getElementById('scoreUs').value     = '';
+    document.getElementById('scoreThem').value   = '';
   }
 
-  // Build batting rows
-  const battingDiv = document.getElementById('battingRows');
-  battingDiv.innerHTML = lineupPlayers.map((p, i) => {
-    const existing_p = existing ? (existing.players || []).find(ep => ep.name === p.name) : null;
-    const v = (field) => existing_p ? (existing_p[field] || 0) : 0;
-    return `
-      <div class="player-row">
-        <div class="order-num">${p.order || i+1}</div>
-        <div class="player-name">${p.name}</div>
-        <input type="number" class="score-input" data-player="${p.name}" data-field="pa" value="${v('pa')}" min="0">
-        <input type="number" class="score-input" data-player="${p.name}" data-field="ab" value="${v('ab')}" min="0">
-        <input type="number" class="score-input" data-player="${p.name}" data-field="h" value="${v('h')}" min="0">
-        <input type="number" class="score-input" data-player="${p.name}" data-field="singles" value="${v('singles')}" min="0">
-        <input type="number" class="score-input" data-player="${p.name}" data-field="doubles" value="${v('doubles')}" min="0">
-        <input type="number" class="score-input" data-player="${p.name}" data-field="triples" value="${v('triples')}" min="0">
-        <input type="number" class="score-input" data-player="${p.name}" data-field="hr" value="${v('hr')}" min="0">
-        <input type="number" class="score-input" data-player="${p.name}" data-field="rbi" value="${v('rbi')}" min="0">
-        <input type="number" class="score-input" data-player="${p.name}" data-field="r" value="${v('r')}" min="0">
-        <input type="number" class="score-input" data-player="${p.name}" data-field="bb" value="${v('bb')}" min="0">
-      </div>`;
-  }).join('');
+  buildBattingRows(existing ? (existing.players || []) : []);
+  buildPitchingRows(existing ? (existing.pitchers || []) : []);
+  document.getElementById('scorecardForm').style.display = 'block';
+}
 
-  // Build pitching rows — find pitchers from roster
+function buildBattingRows(savedPlayers) {
+  const div = document.getElementById('battingRows');
+
+  // Start with full roster, then add any saved subs not in roster
+  let players = roster.map(p => {
+    const saved = savedPlayers.find(sp => sp.name === p.name);
+    return {
+      name:    p.name,
+      number:  p.number,
+      pa:      saved ? saved.pa||0 : 0,
+      ab:      saved ? saved.ab||0 : 0,
+      h:       saved ? saved.h||0 : 0,
+      singles: saved ? saved.singles||0 : 0,
+      doubles: saved ? saved.doubles||0 : 0,
+      triples: saved ? saved.triples||0 : 0,
+      hr:      saved ? saved.hr||0 : 0,
+      rbi:     saved ? saved.rbi||0 : 0,
+      r:       saved ? saved.r||0 : 0,
+      bb:      saved ? saved.bb||0 : 0,
+      sub_for: saved ? saved.sub_for||'' : '',
+      inn_in:  saved ? saved.inn_in||'' : '',
+      is_sub:  saved ? !!saved.sub_for : false
+    };
+  });
+
+  div.innerHTML = players.map((p,i) => `
+    <div class="player-row${p.is_sub?' is-sub':''}" id="row-${i}" data-index="${i}">
+      <div class="player-name-cell${p.is_sub?' is-sub':''}">#${p.number} ${p.name}</div>
+      <input type="number" class="score-input" data-player="${p.name}" data-field="pa"      value="${p.pa}"      min="0">
+      <input type="number" class="score-input" data-player="${p.name}" data-field="ab"      value="${p.ab}"      min="0">
+      <input type="number" class="score-input" data-player="${p.name}" data-field="h"       value="${p.h}"       min="0">
+      <input type="number" class="score-input" data-player="${p.name}" data-field="singles" value="${p.singles}" min="0">
+      <input type="number" class="score-input" data-player="${p.name}" data-field="doubles" value="${p.doubles}" min="0">
+      <input type="number" class="score-input" data-player="${p.name}" data-field="triples" value="${p.triples}" min="0">
+      <input type="number" class="score-input" data-player="${p.name}" data-field="hr"      value="${p.hr}"      min="0">
+      <input type="number" class="score-input" data-player="${p.name}" data-field="rbi"     value="${p.rbi}"     min="0">
+      <input type="number" class="score-input" data-player="${p.name}" data-field="r"       value="${p.r}"       min="0">
+      <input type="number" class="score-input" data-player="${p.name}" data-field="bb"      value="${p.bb}"      min="0">
+      <select class="sub-select" data-player="${p.name}" data-field="sub_for">
+        ${rosterOptions(p.sub_for)}
+      </select>
+      <input type="number" class="inn-input" data-player="${p.name}" data-field="inn_in" value="${p.inn_in}" min="1" max="7" placeholder="Inn">
+    </div>`).join('');
+}
+
+function buildPitchingRows(savedPitchers) {
   const pitchers = roster.filter(p => p.positions && p.positions.includes('P'));
-  const pitchingDiv = document.getElementById('pitchingRows');
-  pitchingDiv.innerHTML = pitchers.map(p => {
-    const existing_p = existing ? (existing.pitchers || []).find(ep => ep.name === p.name) : null;
-    const v = (field) => existing_p ? (existing_p[field] || 0) : 0;
+  document.getElementById('pitchingRows').innerHTML = pitchers.map(p => {
+    const saved = savedPitchers.find(sp => sp.name === p.name);
+    const v = f => saved ? (saved[f]||0) : 0;
     return `
       <div class="pitch-row">
-        <div class="player-name">${p.name}</div>
-        <input type="number" class="score-input" data-pitcher="${p.name}" data-field="ip" value="${v('ip')}" min="0" step="0.1">
-        <input type="number" class="score-input" data-pitcher="${p.name}" data-field="w" value="${v('w')}" min="0">
-        <input type="number" class="score-input" data-pitcher="${p.name}" data-field="l" value="${v('l')}" min="0">
-        <input type="number" class="score-input" data-pitcher="${p.name}" data-field="h" value="${v('h')}" min="0">
-        <input type="number" class="score-input" data-pitcher="${p.name}" data-field="r" value="${v('r')}" min="0">
-        <input type="number" class="score-input" data-pitcher="${p.name}" data-field="er" value="${v('er')}" min="0">
-        <input type="number" class="score-input" data-pitcher="${p.name}" data-field="bb" value="${v('bb')}" min="0">
-        <input type="number" class="score-input" data-pitcher="${p.name}" data-field="k" value="${v('k')}" min="0">
+        <div class="player-name-cell">#${p.number} ${p.name}</div>
+        <input type="number" class="score-input" data-pitcher="${p.name}" data-field="ip"  value="${v('ip')}"  min="0" step="0.1">
+        <input type="number" class="score-input" data-pitcher="${p.name}" data-field="w"   value="${v('w')}"   min="0">
+        <input type="number" class="score-input" data-pitcher="${p.name}" data-field="l"   value="${v('l')}"   min="0">
+        <input type="number" class="score-input" data-pitcher="${p.name}" data-field="h"   value="${v('h')}"   min="0">
+        <input type="number" class="score-input" data-pitcher="${p.name}" data-field="r"   value="${v('r')}"   min="0">
+        <input type="number" class="score-input" data-pitcher="${p.name}" data-field="er"  value="${v('er')}"  min="0">
+        <input type="number" class="score-input" data-pitcher="${p.name}" data-field="bb"  value="${v('bb')}"  min="0">
+        <input type="number" class="score-input" data-pitcher="${p.name}" data-field="k"   value="${v('k')}"   min="0">
       </div>`;
   }).join('');
-
-  document.getElementById('scorecardForm').style.display = 'block';
 }
 
 async function saveScorecard() {
   if (!currentGame) return;
-  const saveBtn = document.querySelector('.btn-gold');
+  const saveBtn    = document.querySelector('.btn-gold');
   const saveStatus = document.getElementById('saveStatus');
   saveBtn.textContent = '⏳ Saving...';
   saveBtn.disabled = true;
 
-  // Collect batting stats
+  // Collect batting
   const players = [];
-  const playerNames = [...new Set([...document.querySelectorAll('[data-player]')].map(el => el.dataset.player))];
+  const playerNames = [...new Set([...document.querySelectorAll('[data-player][data-field="pa"]')].map(el => el.dataset.player))];
   playerNames.forEach(name => {
-    const getVal = (field) => parseInt(document.querySelector(`[data-player="${name}"][data-field="${field}"]`)?.value) || 0;
-    players.push({
-      name,
-      pa:      getVal('pa'),
-      ab:      getVal('ab'),
-      h:       getVal('h'),
-      singles: getVal('singles'),
-      doubles: getVal('doubles'),
-      triples: getVal('triples'),
-      hr:      getVal('hr'),
-      rbi:     getVal('rbi'),
-      r:       getVal('r'),
-      bb:      getVal('bb')
-    });
+    const get = f => {
+      const el = document.querySelector(`[data-player="${CSS.escape(name)}"][data-field="${f}"]`);
+      return el ? (parseFloat(el.value)||0) : 0;
+    };
+    const getStr = f => {
+      const el = document.querySelector(`[data-player="${CSS.escape(name)}"][data-field="${f}"]`);
+      return el ? (el.value||'') : '';
+    };
+    const pa = get('pa'), ab = get('ab');
+    if (pa > 0 || ab > 0 || getStr('sub_for')) {
+      players.push({
+        name,
+        pa,
+        ab,
+        h:       get('h'),
+        singles: get('singles'),
+        doubles: get('doubles'),
+        triples: get('triples'),
+        hr:      get('hr'),
+        rbi:     get('rbi'),
+        r:       get('r'),
+        bb:      get('bb'),
+        sub_for: getStr('sub_for'),
+        inn_in:  getStr('inn_in')
+      });
+    }
   });
 
-  // Collect pitching stats
+  // Collect pitching
   const pitchers = [];
-  const pitcherNames = [...new Set([...document.querySelectorAll('[data-pitcher]')].map(el => el.dataset.pitcher))];
+  const pitcherNames = [...new Set([...document.querySelectorAll('[data-pitcher][data-field="ip"]')].map(el => el.dataset.pitcher))];
   pitcherNames.forEach(name => {
-    const getVal = (field) => parseFloat(document.querySelector(`[data-pitcher="${name}"][data-field="${field}"]`)?.value) || 0;
-    const ip = getVal('ip');
-    const er = getVal('er');
-    const era = ip > 0 ? ((er / ip) * 7).toFixed(2) : '—';
-    pitchers.push({ name, ip, w: getVal('w'), l: getVal('l'), h: getVal('h'), r: getVal('r'), er, bb: getVal('bb'), k: getVal('k'), era });
+    const get = f => {
+      const el = document.querySelector(`[data-pitcher="${CSS.escape(name)}"][data-field="${f}"]`);
+      return el ? (parseFloat(el.value)||0) : 0;
+    };
+    const ip = get('ip');
+    if (ip > 0) {
+      const er = get('er');
+      pitchers.push({ name, ip, w: get('w'), l: get('l'), h: get('h'), r: get('r'), er, bb: get('bb'), k: get('k'), era: ip>0?((er/ip)*7).toFixed(2):'—' });
+    }
   });
 
   const payload = {
     game_date:  currentGame.date,
     opponent:   currentGame.opponent,
     result:     document.getElementById('gameResult').value,
-    score_us:   parseInt(document.getElementById('scoreUs').value) || 0,
-    score_them: parseInt(document.getElementById('scoreThem').value) || 0,
+    score_us:   parseInt(document.getElementById('scoreUs').value)||0,
+    score_them: parseInt(document.getElementById('scoreThem').value)||0,
     field:      document.getElementById('gameField').value,
-    home_away:  'Home',
     players,
     pitchers,
     updated_at: new Date().toISOString()
