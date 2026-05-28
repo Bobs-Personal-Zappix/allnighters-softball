@@ -1,42 +1,42 @@
 {
   "game_date": "2026-05-20",
   "opponent": "Holden Station",
-  "last_updated": "2026-05-27",
+  "last_updated": "2026-05-28",
   "positions": {
     "P": {
       "number": "53",
       "name": "Mike Russo",
-      "order": 12
+      "order": 11
     },
     "C": {
-      "number": "99",
-      "name": "Ryan Overberg",
-      "order": 8
+      "number": "16",
+      "name": "Thomas Evans",
+      "order": 9
     },
     "1B": {
       "number": "40",
       "name": "Chris Parello",
-      "order": 7
+      "order": 6
     },
     "2B": {
       "number": "33",
       "name": "Anthony Gagliano",
-      "order": 10
+      "order": 8
     },
     "SS": {
       "number": "10",
       "name": "Darren McDermott",
-      "order": 3
+      "order": 5
     },
     "3B": {
-      "number": "11",
-      "name": "Eric Moody",
-      "order": 5
+      "number": "7",
+      "name": "Coach Barrows",
+      "order": 7
     },
     "LF": {
       "number": "3",
       "name": "Jason Farrell",
-      "order": 1
+      "order": 3
     },
     "LC": {
       "number": "24",
@@ -46,33 +46,33 @@
     "RC": {
       "number": "2",
       "name": "Tommy Dembowski",
-      "order": 7
+      "order": 1
     },
     "RF": {
-      "number": "7",
-      "name": "Coach Barrows",
-      "order": 9
-    },
-    "EH1": {
       "number": "25",
       "name": "Joe Z.",
       "order": 4
     },
+    "EH1": {
+      "number": "99",
+      "name": "Assad Daaboul",
+      "order": 10
+    },
     "EH2": {
-      "number": "16",
-      "name": "Thomas Evans",
-      "order": 11
+      "number": "",
+      "name": "",
+      "order": 0
     }
   },
   "bench": [
     {
-      "number": "99",
-      "name": "Assad Daaboul",
+      "number": "",
+      "name": "",
       "order": 0
     },
     {
-      "number": "00",
-      "name": "Strip Club Steve",
+      "number": "",
+      "name": "",
       "order": 0
     },
     {
