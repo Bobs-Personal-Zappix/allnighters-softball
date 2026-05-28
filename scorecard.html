@@ -204,7 +204,7 @@ async function loadScorecard() {
   }
 
   display.innerHTML = '<div class="loading"><div class="spinner"></div>Loading scorecard...</div>';
-  const [date, opponent] = val.split('|');
+  const [date, opponent] = val.split('_');
 
   const { data: sc, error } = await db.from('game_scorecards')
     .select('*').eq('game_date', date).eq('opponent', opponent).single();
