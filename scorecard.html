@@ -188,9 +188,11 @@ async function initPage() {
   });
 
   // Check for URL param
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('game')) {
-    sel.value = params.get('game');
+const params = new URLSearchParams(window.location.search);
+if (params.get('game')) {
+  const gameParam = params.get('game').replace('_', '|');
+  sel.value = gameParam;
+  
     loadScorecard();
   }
 }
