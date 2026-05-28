@@ -267,9 +267,12 @@ async function loadScorecard() {
             </tr>
           </thead>
           <tbody>
-            ${players.map(p => `
-              <tr>
-                <td class="player-cell">${p.name}</td>
+
+${players.map(p => `
+              <tr style="${p.sub_for ? 'background:rgba(201,168,76,0.03);' : ''}">
+                <td class="player-cell" style="${p.sub_for ? 'padding-left:1.5rem;color:var(--text-muted);font-size:0.82rem;' : ''}">
+                  ${p.sub_for ? `↳ ${p.name} <span style="font-size:0.72rem;color:var(--gold-dark);font-weight:400;">(for ${p.sub_for}${p.inn_in ? ', inn. '+p.inn_in : ''})</span>` : p.name}
+                </td>
                 <td>${p.pa||0}</td>
                 <td>${p.ab||0}</td>
                 <td>${p.h||0}</td>
@@ -282,20 +285,7 @@ async function loadScorecard() {
                 <td>${p.r||0}</td>
                 <td>${p.bb||0}</td>
               </tr>`).join('')}
-            <tr style="background:#111;border-top:2px solid var(--gold-dark);">
-              <td style="font-family:'Oswald',sans-serif;font-size:0.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;">Team Totals</td>
-              <td style="font-weight:700;">${totals.pa}</td>
-              <td style="font-weight:700;">${totals.ab}</td>
-              <td style="font-weight:700;">${totals.h}</td>
-              <td class="highlight-cell">${fmtAvg(totals.h,totals.ab)}</td>
-              <td>${totals.singles}</td>
-              <td>${totals.doubles}</td>
-              <td>${totals.triples}</td>
-              <td style="color:#ee9090;font-weight:700;">${totals.hr}</td>
-              <td style="color:#ee9090;font-weight:700;">${totals.rbi}</td>
-              <td style="font-weight:700;">${totals.r}</td>
-              <td>${totals.bb}</td>
-            </tr>
+
           </tbody>
         </table>
       </div>
