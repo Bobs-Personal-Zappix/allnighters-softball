@@ -16,7 +16,7 @@
     { "number": "53", "name": "Mike Russo",         "gp": 5, "ab": 10, "bb": 3, "k": 0, "singles": 3, "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 0, "sac": 0, "fc": 0, "lob": 0 },
     { "number": "16", "name": "Tyler Evans",        "gp": 4, "ab": 10, "bb": 0, "k": 1, "singles": 3, "doubles": 1, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 1, "sac": 0, "fc": 0, "lob": 0 },
     { "number": "40", "name": "Chris Parello",      "gp": 3, "ab": 9,  "bb": 1, "k": 0, "singles": 2, "doubles": 1, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 1, "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "8",  "name": "Brendan McCarthy",   "gp": 3, "ab": 6,  "bb": 0, "k": 0, "singles": 5, "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 1,  "r": 2, "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "8",  "name": "Brendan McCarthy",   "gp": 3, "ab": 6,  "bb": 0, "k": 0, "singles": 5, "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 4,  "r": 2, "sac": 0, "fc": 0, "lob": 0 },
     { "number": "17", "name": "Mike Stoico",        "gp": 2, "ab": 2,  "bb": 1, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 0, "sac": 0, "fc": 0, "lob": 0 },
     { "number": "5",  "name": "Joel Tomchik",       "gp": 0, "ab": 0,  "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 0, "sac": 0, "fc": 0, "lob": 0 },
     { "number": "18", "name": "Myles Gonzalez",     "gp": 0, "ab": 0,  "bb": 0, "k": 0, "singles": 0, "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 0, "sac": 0, "fc": 0, "lob": 0 },
