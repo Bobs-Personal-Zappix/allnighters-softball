@@ -190,7 +190,7 @@ async function initPage() {
   // Check for URL param
 const params = new URLSearchParams(window.location.search);
 if (params.get('game')) {
-  const gameParam = params.get('game').replace('_', '|');
+const gameParam = params.get('game');
   sel.value = gameParam;
   
     loadScorecard();
@@ -206,7 +206,7 @@ async function loadScorecard() {
   }
 
   display.innerHTML = '<div class="loading"><div class="spinner"></div>Loading scorecard...</div>';
-  const [date, opponent] = val.split('_');
+const [date, opponent] = val.split('|');
 
   const { data: sc, error } = await db.from('game_scorecards')
     .select('*').eq('game_date', date).eq('opponent', opponent).single();
