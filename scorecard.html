@@ -278,7 +278,8 @@ const players = (sc.players || [])
 
 ${players.map(p => `
               <tr style="${p.sub_for ? 'background:rgba(201,168,76,0.03);' : ''}">
-                <td class="player-cell" style="${p.sub_for ? 'padding-left:1.5rem;color:var(--text-muted);font-size:0.82rem;' : ''}">
+<td class="player-cell" style="${p.sub_for ? 'padding-left:1.5rem;color:var(--text-muted);font-size:0.82rem;' : ''}">
+                  ${p.bat_order ? `<span style="font-family:'Oswald',sans-serif;font-size:0.75rem;color:var(--gold);margin-right:0.4rem;opacity:0.8;">${p.bat_order}.</span>` : ''}
                   ${p.sub_for ? `↳ ${p.name} <span style="font-size:0.72rem;color:var(--gold-dark);font-weight:400;">(for ${p.sub_for}${p.inn_in ? ', inn. '+p.inn_in : ''})</span>` : p.name}
                 </td>
                 <td>${p.pa||0}</td>
