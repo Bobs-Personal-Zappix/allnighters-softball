@@ -93,9 +93,9 @@
       "home_away": "Home",
       "field": "Murphy Park",
       "time": "6:30 PM",
-      "result": "",
-      "score_us": null,
-      "score_them": null,
+      "result": "L",
+      "score_us": 12,
+      "score_them": 16,
       "notes": ""
     },
     {
