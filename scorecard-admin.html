@@ -112,10 +112,10 @@
             <div style="overflow-x:auto;">
               <div style="min-width:900px;">
  <div class="player-row" style="border-bottom:2px solid var(--gold-dark);padding-bottom:6px;">
-                  <div class="col-header" style="text-align:left;">Player</div>
+<div class="col-header" style="text-align:left;">Player</div>
                   <div class="col-header">Bat#</div>
-                  <div class="col-header">PA</div>
                   <div class="col-header">AB</div>
+                  <div class="col-header">PA</div>
                   <div class="col-header">H</div>
                   <div class="col-header">1B</div>
                   <div class="col-header">2B</div>
@@ -279,8 +279,8 @@ sub_for:    saved ? saved.sub_for||'' : '',
     <div class="player-row${p.is_sub?' is-sub':''}" id="row-${i}" data-index="${i}">
 <div class="player-name-cell${p.is_sub?' is-sub':''}">#${p.number} ${p.name}</div>
       <input type="number" class="score-input" data-player="${p.name}" data-field="bat_order" value="${p.bat_order||''}" min="1" max="12" placeholder="—">
-      <input type="number" class="score-input" data-player="${p.name}" data-field="pa"
-      <input type="number" class="score-input" data-player="${p.name}" data-field="ab"      value="${p.ab}"      min="0">
+<input type="number" class="score-input" data-player="${p.name}" data-field="ab"      value="${p.ab}"      min="0">
+      <input type="number" class="score-input" data-player="${p.name}" data-field="pa"      value="${p.pa}"      min="0">
       <input type="number" class="score-input" data-player="${p.name}" data-field="h"       value="${p.h}"       min="0">
       <input type="number" class="score-input" data-player="${p.name}" data-field="singles" value="${p.singles}" min="0">
       <input type="number" class="score-input" data-player="${p.name}" data-field="doubles" value="${p.doubles}" min="0">
