@@ -220,7 +220,13 @@ const [date, opponent] = val.split('|');
   const resultText  = sc.result==='W'?'WIN':sc.result==='L'?'LOSS':sc.result==='T'?'TIE':'';
 
   // Filter players who actually played (ab > 0 or pa > 0)
-  const players = (sc.players || []).filter(p => (p.pa||0) > 0 || (p.ab||0) > 0);
+const players = (sc.players || [])
+  .filter(p => (p.pa||0) > 0 || (p.ab||0) > 0)
+  .sort((a,b) => {
+    const ao = a.bat_order || 99;
+    const bo = b.bat_order || 99;
+    return ao - bo;
+  });
   const pitchers = (sc.pitchers || []).filter(p => (p.ip||0) > 0);
 
   // Team totals
