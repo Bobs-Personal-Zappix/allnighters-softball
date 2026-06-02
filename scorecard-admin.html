@@ -9,7 +9,7 @@
   <style>
     .score-input { width:52px; padding:0.4rem 0.3rem; background:var(--dark); border:1px solid var(--border); border-radius:4px; color:var(--text); font-family:'Oswald',sans-serif; font-size:0.85rem; text-align:center; }
     .score-input:focus { outline:none; border-color:var(--gold-dark); }
-    .player-row { display:grid; grid-template-columns:140px repeat(10,52px) 140px 50px; gap:4px; align-items:center; padding:5px 0; border-bottom:1px solid var(--border); }
+.player-row { display:grid; grid-template-columns:140px 45px repeat(10,52px) 140px 50px; gap:4px; align-items:center; padding:5px 0; border-bottom:1px solid var(--border); }
     .player-row.is-sub { background:rgba(201,168,76,0.04); padding-left:1rem; }
     .player-row:hover { background:var(--card-hover); }
     .col-header { font-family:'Oswald',sans-serif; font-size:0.7rem; color:var(--gold); text-transform:uppercase; letter-spacing:0.08em; text-align:center; }
@@ -111,8 +111,9 @@
             <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem;">For substitutes: set "Sub For" to the player they replaced and "Inn" to the inning they entered.</p>
             <div style="overflow-x:auto;">
               <div style="min-width:900px;">
-                <div class="player-row" style="border-bottom:2px solid var(--gold-dark);padding-bottom:6px;">
+ <div class="player-row" style="border-bottom:2px solid var(--gold-dark);padding-bottom:6px;">
                   <div class="col-header" style="text-align:left;">Player</div>
+                  <div class="col-header">Bat#</div>
                   <div class="col-header">PA</div>
                   <div class="col-header">AB</div>
                   <div class="col-header">H</div>
@@ -267,16 +268,18 @@ function buildBattingRows(savedPlayers) {
       rbi:     saved ? saved.rbi||0 : 0,
       r:       saved ? saved.r||0 : 0,
       bb:      saved ? saved.bb||0 : 0,
-      sub_for: saved ? saved.sub_for||'' : '',
-      inn_in:  saved ? saved.inn_in||'' : '',
-      is_sub:  saved ? !!saved.sub_for : false
+sub_for:    saved ? saved.sub_for||'' : '',
+      inn_in:     saved ? saved.inn_in||'' : '',
+      bat_order:  saved ? saved.bat_order||'' : '',
+      is_sub:     saved ? !!saved.sub_for : false
     };
   });
 
   div.innerHTML = players.map((p,i) => `
     <div class="player-row${p.is_sub?' is-sub':''}" id="row-${i}" data-index="${i}">
-      <div class="player-name-cell${p.is_sub?' is-sub':''}">#${p.number} ${p.name}</div>
-      <input type="number" class="score-input" data-player="${p.name}" data-field="pa"      value="${p.pa}"      min="0">
+<div class="player-name-cell${p.is_sub?' is-sub':''}">#${p.number} ${p.name}</div>
+      <input type="number" class="score-input" data-player="${p.name}" data-field="bat_order" value="${p.bat_order||''}" min="1" max="12" placeholder="—">
+      <input type="number" class="score-input" data-player="${p.name}" data-field="pa"
       <input type="number" class="score-input" data-player="${p.name}" data-field="ab"      value="${p.ab}"      min="0">
       <input type="number" class="score-input" data-player="${p.name}" data-field="h"       value="${p.h}"       min="0">
       <input type="number" class="score-input" data-player="${p.name}" data-field="singles" value="${p.singles}" min="0">
@@ -346,8 +349,9 @@ async function saveScorecard() {
         rbi:     get('rbi'),
         r:       get('r'),
         bb:      get('bb'),
-        sub_for: getStr('sub_for'),
-        inn_in:  getStr('inn_in')
+sub_for:   getStr('sub_for'),
+        inn_in:    getStr('inn_in'),
+        bat_order: get('bat_order')
       });
     }
   });
