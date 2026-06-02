@@ -114,7 +114,7 @@ async function loadRecaps() {
 
       return `
         <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:2rem;">
-          ${h.photo ? `<img src="${h.photo}" alt="${h.opponent}" style="width:100%;max-height:350px;object-fit:cover;">` : ''}
+${h.photo ? `<img src="${h.photo}" alt="${h.opponent}" style="width:100%;height:auto;display:block;">` : ''}
           <div style="padding:1.5rem;">
             <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;margin-bottom:1rem;">
               <div>
