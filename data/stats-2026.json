@@ -1,30 +1,30 @@
 {
   "season": "2026",
-  "last_updated": "2026-06-10",
+  "last_updated": "2026-06-24",
   "players": [
-    { "number": "2",  "name": "Thomas Dembowski",  "gp": 7, "ab": 23, "bb": 3, "k": 1, "singles": 10, "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 5,  "r": 3,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "24", "name": "Pat Hosman",         "gp": 9, "ab": 31, "bb": 2, "k": 0, "singles": 12, "doubles": 2, "triples": 0, "hr": 3, "gs": 0, "rbi": 8,  "r": 10, "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "3",  "name": "Jason Farrell",      "gp": 7, "ab": 21, "bb": 3, "k": 0, "singles": 7,  "doubles": 1, "triples": 1, "hr": 0, "gs": 0, "rbi": 3,  "r": 4,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "69", "name": "Brendan Trohon",     "gp": 6, "ab": 15, "bb": 2, "k": 0, "singles": 5,  "doubles": 1, "triples": 2, "hr": 0, "gs": 0, "rbi": 6,  "r": 6,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "27", "name": "Joe Zametjis",       "gp": 9, "ab": 30, "bb": 1, "k": 0, "singles": 9,  "doubles": 5, "triples": 0, "hr": 1, "gs": 0, "rbi": 14, "r": 11, "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "10", "name": "Darren McDermott",   "gp": 8, "ab": 27, "bb": 0, "k": 0, "singles": 14, "doubles": 3, "triples": 0, "hr": 0, "gs": 0, "rbi": 7,  "r": 5,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "11", "name": "Eric Moody",         "gp": 9, "ab": 25, "bb": 2, "k": 0, "singles": 12, "doubles": 0, "triples": 1, "hr": 0, "gs": 0, "rbi": 6,  "r": 6,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "1",  "name": "Ryan Overberg",      "gp": 6, "ab": 16, "bb": 1, "k": 0, "singles": 10, "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 4,  "r": 3,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "7",  "name": "Baz Rob Bobby Bob Barrows",        "gp": 8, "ab": 16, "bb": 1, "k": 0, "singles": 8,  "doubles": 3, "triples": 0, "hr": 0, "gs": 0, "rbi": 4,  "r": 3,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "39", "name": "Assad Daaboul",      "gp": 8, "ab": 16, "bb": 0, "k": 2, "singles": 4,  "doubles": 1, "triples": 0, "hr": 0, "gs": 0, "rbi": 1,  "r": 1,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "33", "name": "Anthony Gagliano",   "gp": 8, "ab": 24, "bb": 0, "k": 0, "singles": 6,  "doubles": 1, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 0,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "53", "name": "Mike Russo",         "gp": 9, "ab": 20, "bb": 3, "k": 0, "singles": 5,  "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 2,  "r": 3,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "16", "name": "Thomas Rocky Evans",        "gp": 7, "ab": 19, "bb": 1, "k": 1, "singles": 7,  "doubles": 3, "triples": 0, "hr": 0, "gs": 0, "rbi": 2,  "r": 5,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "40", "name": "Chris Parello",      "gp": 7, "ab": 23, "bb": 1, "k": 0, "singles": 5,  "doubles": 2, "triples": 0, "hr": 0, "gs": 0, "rbi": 2,  "r": 4,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "8",  "name": "Brendan McCarthy",   "gp": 6, "ab": 16, "bb": 1, "k": 0, "singles": 7,  "doubles": 2, "triples": 0, "hr": 0, "gs": 0, "rbi": 6,  "r": 4,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "17", "name": "Mike Stoico",        "gp": 2, "ab": 2,  "bb": 1, "k": 0, "singles": 0,  "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 0,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "5",  "name": "Joel Tomchik",       "gp": 0, "ab": 0,  "bb": 0, "k": 0, "singles": 0,  "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 0,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "18", "name": "Myles Gonzalez",     "gp": 0, "ab": 0,  "bb": 0, "k": 0, "singles": 0,  "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 0,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "12", "name": "Dale Harvey",        "gp": 0, "ab": 0,  "bb": 0, "k": 0, "singles": 0,  "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 0,  "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "00", "name": "Strip Club Steve",   "gp": 0, "ab": 0,  "bb": 0, "k": 0, "singles": 0,  "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 0,  "sac": 0, "fc": 0, "lob": 0 }
+    { "number": "2",  "name": "Thomas Dembowski",  "gp": 10, "ab": 36, "bb": 4, "k": 1, "singles": 17, "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 8,  "r": 3,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "24", "name": "Pat Hosman",         "gp": 12, "ab": 42, "bb": 4, "k": 0, "singles": 18, "doubles": 2, "triples": 0, "hr": 3, "gs": 0, "rbi": 15, "r": 12, "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "3",  "name": "Jason Farrell",      "gp": 10, "ab": 33, "bb": 4, "k": 0, "singles": 13, "doubles": 2, "triples": 1, "hr": 0, "gs": 0, "rbi": 5,  "r": 5,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "69", "name": "Brendan Trohon",     "gp": 8,  "ab": 24, "bb": 2, "k": 0, "singles": 8,  "doubles": 1, "triples": 2, "hr": 1, "gs": 0, "rbi": 13, "r": 9,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "27", "name": "Joe Zametjis",       "gp": 12, "ab": 39, "bb": 3, "k": 0, "singles": 11, "doubles": 6, "triples": 0, "hr": 2, "gs": 0, "rbi": 18, "r": 13, "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "10", "name": "Darren McDermott",   "gp": 9,  "ab": 31, "bb": 0, "k": 0, "singles": 17, "doubles": 3, "triples": 0, "hr": 0, "gs": 0, "rbi": 8,  "r": 7,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "11", "name": "Eric Moody",         "gp": 11, "ab": 32, "bb": 2, "k": 0, "singles": 14, "doubles": 0, "triples": 1, "hr": 0, "gs": 0, "rbi": 7,  "r": 6,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "01", "name": "Ryan Overberg",      "gp": 8,  "ab": 21, "bb": 3, "k": 0, "singles": 12, "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 5,  "r": 5,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "7",  "name": "Coach Rob Bob Bobby Baz Barrows",        "gp": 11, "ab": 24, "bb": 1, "k": 0, "singles": 13, "doubles": 3, "triples": 0, "hr": 0, "gs": 0, "rbi": 5,  "r": 4,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "39", "name": "Assad Daaboul",      "gp": 10, "ab": 23, "bb": 0, "k": 2, "singles": 7,  "doubles": 1, "triples": 0, "hr": 0, "gs": 0, "rbi": 2,  "r": 2,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "33", "name": "Anthony Gagliano",   "gp": 10, "ab": 29, "bb": 2, "k": 0, "singles": 10, "doubles": 1, "triples": 0, "hr": 0, "gs": 0, "rbi": 1,  "r": 2,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "53", "name": "Mike Russo",         "gp": 12, "ab": 30, "bb": 3, "k": 0, "singles": 9,  "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 3,  "r": 4,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "16", "name": "Thomas Rocky Evans",        "gp": 8,  "ab": 21, "bb": 2, "k": 1, "singles": 7,  "doubles": 3, "triples": 0, "hr": 0, "gs": 0, "rbi": 2,  "r": 5,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "40", "name": "Chris Parello",      "gp": 10, "ab": 33, "bb": 1, "k": 0, "singles": 9,  "doubles": 4, "triples": 0, "hr": 0, "gs": 0, "rbi": 4,  "r": 5,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "8",  "name": "Brendan McCarthy",   "gp": 8,  "ab": 22, "bb": 2, "k": 1, "singles": 11, "doubles": 2, "triples": 0, "hr": 0, "gs": 0, "rbi": 10, "r": 6,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "17", "name": "Mike Stoico",        "gp": 2,  "ab": 2,  "bb": 1, "k": 0, "singles": 0,  "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 0,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "5",  "name": "Joel Tomchik",       "gp": 0,  "ab": 0,  "bb": 0, "k": 0, "singles": 0,  "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 0,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "18", "name": "Myles Gonzalez",     "gp": 0,  "ab": 0,  "bb": 0, "k": 0, "singles": 0,  "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 0,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "12", "name": "Dale Harvey",        "gp": 0,  "ab": 0,  "bb": 0, "k": 0, "singles": 0,  "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 0,  "sac": 0, "fc": 0, "lob": 0 },
+    { "number": "00", "name": "Strip Club Steve",   "gp": 0,  "ab": 0,  "bb": 0, "k": 0, "singles": 0,  "doubles": 0, "triples": 0, "hr": 0, "gs": 0, "rbi": 0,  "r": 0,  "sac": 0, "fc": 0, "lob": 0 }
   ],
   "pitchers": [
-    { "number": "53", "name": "Mike Russo",    "gp": 9, "gs": 9, "ip": 61, "w": 4, "l": 4, "h": 78, "r": 64, "er": 34, "bb": 9, "k": 1, "era": 3.90 },
-    { "number": "40", "name": "Chris Parello", "gp": 1, "gs": 0, "ip": 2,  "w": 0, "l": 1, "h": 4,  "r": 4,  "er": 2,  "bb": 0, "k": 1, "era": 7.00 }
+    { "number": "53", "name": "Mike Russo",    "gp": 12, "gs": 12, "ip": 80, "w": 6, "l": 5, "h": 116, "r": 82, "er": 48, "bb": 10, "k": 3, "era": 4.20 },
+    { "number": "40", "name": "Chris Parello", "gp": 1,  "gs": 0,  "ip": 2,  "w": 0, "l": 1, "h": 4,   "r": 4,  "er": 2,  "bb": 0,  "k": 1, "era": 7.00 }
   ]
 }
