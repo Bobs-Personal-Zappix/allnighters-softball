@@ -145,9 +145,9 @@
       "home_away": "Away",
       "field": "Marrs Park",
       "time": "7:45 PM",
-      "result": "",
-      "score_us": null,
-      "score_them": null,
+      "result": "W",
+      "score_us": 11,
+      "score_them": 6,
       "notes": ""
     },
     {
@@ -158,9 +158,9 @@
       "home_away": "Away",
       "field": "Murphy Park",
       "time": "6:30 PM",
-      "result": "",
-      "score_us": null,
-      "score_them": null,
+      "result": "L",
+      "score_us": 6,
+      "score_them": 10,
       "notes": ""
     },
     {
@@ -184,9 +184,9 @@
       "home_away": "Away",
       "field": "Murphy Park",
       "time": "6:30 PM",
-      "result": "",
-      "score_us": null,
-      "score_them": null,
+      "result": "W",
+      "score_us": 15,
+      "score_them": 3,
       "notes": ""
     },
     {
