@@ -217,14 +217,22 @@ window.addEventListener('load', function() {
   let isCallActive = false;
   const btn = document.createElement('div');
   btn.style.cssText = 'position:fixed;bottom:2rem;right:2rem;z-index:9999;';
-  btn.innerHTML = `<div id="vapiBtnInner" style="width:64px;height:64px;border-radius:50%;background:#c9a84c;border:3px solid #8a6e28;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(201,168,76,0.4);flex-direction:column;gap:2px;"><span style="font-size:1.6rem;line-height:1;">⚾</span><span style="font-size:0.5rem;font-family:Oswald,sans-serif;font-weight:700;color:#080808;letter-spacing:0.08em;text-transform:uppercase;">NIGHTY</span></div><div id="vapiStatus" style="position:absolute;bottom:72px;right:0;background:#191919;border:1px solid #c9a84c;border-radius:8px;padding:0.6rem 1rem;font-family:Oswald,sans-serif;font-size:0.78rem;color:#c9a84c;white-space:nowrap;display:none;text-align:center;min-width:180px;"></div>`;
+  btn.innerHTML = `<div style="display:flex;gap:0.5rem;align-items:flex-end;"><div id="vapiMuteBtn" style="width:44px;height:44px;border-radius:50%;background:#191919;border:2px solid #c9a84c;display:none;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;">🎤</div><div id="vapiBtnInner" style="width:64px;height:64px;border-radius:50%;background:#c9a84c;border:3px solid #8a6e28;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(201,168,76,0.4);flex-direction:column;gap:2px;"><span style="font-size:1.6rem;line-height:1;">⚾</span><span style="font-size:0.5rem;font-family:Oswald,sans-serif;font-weight:700;color:#080808;letter-spacing:0.08em;text-transform:uppercase;">NIGHTY</span></div></div><div id="vapiStatus" style="position:absolute;bottom:72px;right:0;background:#191919;border:1px solid #c9a84c;border-radius:8px;padding:0.6rem 1rem;font-family:Oswald,sans-serif;font-size:0.78rem;color:#c9a84c;white-space:nowrap;display:none;text-align:center;min-width:180px;"></div>`;
   document.body.appendChild(btn);
   const btnInner = document.getElementById('vapiBtnInner');
   const statusBox = document.getElementById('vapiStatus');
-  vapiInstance.on('call-start', () => { isCallActive=true; statusBox.innerHTML='🎙️ Nighty is listening...'; statusBox.style.display='block'; });
+  const muteBtn = document.getElementById('vapiMuteBtn');
+  let isMuted = false;
+  muteBtn.addEventListener('click', () => {
+    isMuted = !isMuted;
+    vapiInstance.setMuted(isMuted);
+    muteBtn.style.background = isMuted ? '#c62828' : '#191919';
+    muteBtn.textContent = isMuted ? '🔇' : '🎤';
+  });
+  vapiInstance.on('call-start', () => { isCallActive=true; statusBox.innerHTML='🎙️ Nighty is listening...'; statusBox.style.display='block'; muteBtn.style.display='flex'; });
   vapiInstance.on('speech-start', () => { statusBox.innerHTML='💬 Nighty is speaking...'; });
   vapiInstance.on('speech-end', () => { statusBox.innerHTML='🎙️ Nighty is listening...'; });
-  vapiInstance.on('call-end', () => { isCallActive=false; statusBox.innerHTML='✅ Call ended. Go Allnighters! ⚾'; setTimeout(()=>{statusBox.style.display='none';},3000); resetBtn(); });
+  vapiInstance.on('call-end', () => { isCallActive=false; statusBox.innerHTML='✅ Call ended. Go Allnighters! ⚾'; setTimeout(()=>{statusBox.style.display='none';},3000); resetBtn(); muteBtn.style.display='none'; isMuted=false; muteBtn.style.background='#191919'; muteBtn.textContent='🎤'; });
   vapiInstance.on('error', () => { isCallActive=false; statusBox.innerHTML='❌ Could not connect.'; setTimeout(()=>{statusBox.style.display='none';},3000); resetBtn(); });
   btnInner.addEventListener('click', async () => {
     if (!isCallActive) {
