@@ -4,9 +4,9 @@
   "last_updated": "2026-06-29",
   "teams": [
     { "number": "7", "name": "Paddy Kelleys",  "w": 10, "l": 2, "t": 0, "home": "5-0", "away": "5-2", "rf": 171, "ra": 146, "streak": "Won 4" },
-    { "number": "8", "name": "As",             "w": 10, "l": 2, "t": 0, "home": "5-1", "away": "5-1", "rf": 174, "ra": 120, "streak": "Won 3" },
+    { "number": "8", "name": "As",             "w": 10, "l": 3, "t": 0, "home": "5-1", "away": "5-1", "rf": 182, "ra": 135, "streak": "Lost 1" },
     { "number": "1", "name": "Goonies",        "w": 8,  "l": 4, "t": 0, "home": "4-2", "away": "4-2", "rf": 198, "ra": 141, "streak": "Lost 1" },
-    { "number": "3", "name": "Allnighters",    "w": 6,  "l": 6, "t": 0, "home": "4-3", "away": "2-3", "rf": 115, "ra": 97,  "streak": "Won 1" },
+    { "number": "3", "name": "Allnighters",    "w": 7,  "l": 6, "t": 0, "home": "4-3", "away": "3-3", "rf": 130, "ra": 105,  "streak": "Won 2" },
     { "number": "4", "name": "Pocket 9s",      "w": 6,  "l": 6, "t": 0, "home": "4-3", "away": "2-3", "rf": 97,  "ra": 133, "streak": "Won 1" },
     { "number": "6", "name": "Franchise",      "w": 4,  "l": 8, "t": 0, "home": "3-2", "away": "1-6", "rf": 170, "ra": 183, "streak": "Lost 1" },
     { "number": "5", "name": "Holden Station", "w": 3,  "l": 9, "t": 0, "home": "2-4", "away": "1-5", "rf": 126, "ra": 183, "streak": "Lost 4" },
