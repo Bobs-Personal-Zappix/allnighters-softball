@@ -6,7 +6,7 @@
     { "number": "24", "name": "Pat Hosman",         "gp": 13, "ab": 46, "bb": 4, "k": 0, "singles": 20, "doubles": 3, "triples": 0, "hr": 3, "gs": 0, "rbi": 16, "r": 13, "sac": 0, "fc": 0, "lob": 0 },
     { "number": "3",  "name": "Jason Farrell",      "gp": 11, "ab": 37, "bb": 4, "k": 0, "singles": 15, "doubles": 2, "triples": 1, "hr": 0, "gs": 0, "rbi": 6,  "r": 5,  "sac": 0, "fc": 0, "lob": 0 },
     { "number": "69", "name": "Brendan Trohon",     "gp": 9,  "ab": 28, "bb": 2, "k": 0, "singles": 9,  "doubles": 1, "triples": 3, "hr": 1, "gs": 0, "rbi": 13, "r": 11, "sac": 0, "fc": 0, "lob": 0 },
-    { "number": "27", "name": "Joe Zametjis",       "gp": 13, "ab": 43, "bb": 3, "k": 0, "singles": 11, "doubles": 6, "triples": 0, "hr": 3, "gs": 0, "rbi": 18, "r": 14, "sac": 0, "fc": 0, "lob": 0 },
+{ "number": "27", "name": "Joe Zametjis",       "gp": 13, "ab": 43, "bb": 3, "k": 0, "singles": 11, "doubles": 6, "triples": 1, "hr": 2, "gs": 0, "rbi": 18, "r": 14, "sac": 0, "fc": 0, "lob": 0 },
     { "number": "10", "name": "Darren McDermott",   "gp": 10, "ab": 35, "bb": 0, "k": 0, "singles": 19, "doubles": 3, "triples": 0, "hr": 0, "gs": 0, "rbi": 10, "r": 9,  "sac": 0, "fc": 0, "lob": 0 },
     { "number": "11", "name": "Eric Moody",         "gp": 11, "ab": 32, "bb": 2, "k": 0, "singles": 14, "doubles": 0, "triples": 1, "hr": 0, "gs": 0, "rbi": 7,  "r": 6,  "sac": 0, "fc": 0, "lob": 0 },
     { "number": "01", "name": "Ryan Overberg",      "gp": 9,  "ab": 25, "bb": 3, "k": 0, "singles": 13, "doubles": 1, "triples": 0, "hr": 0, "gs": 0, "rbi": 6,  "r": 6,  "sac": 0, "fc": 0, "lob": 0 },
